@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>Hexo</title>
+    <link href="/pumpkin/2022/05/20/Tools/Hexo/"/>
+    <url>/pumpkin/2022/05/20/Tools/Hexo/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><h2 id="Hexo-搭建"><a href="#Hexo-搭建" class="headerlink" title="Hexo 搭建"></a>Hexo 搭建</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul><li>Node.js</li><li>Git</li></ul><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">npm install -g hexo-cli<br></code></pre></td></tr></table></figure><h3 id="启动本地项目"><a href="#启动本地项目" class="headerlink" title="启动本地项目"></a>启动本地项目</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 初始化Hexo项目</span><br>hexo init demo<br><span class="hljs-built_in">cd</span> demo<br>npm install<br><span class="hljs-comment"># 启动本地Hexo项目</span><br>hexo server<br></code></pre></td></tr></table></figure><h3 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h3><ol><li>在Github上创建仓库 demo</li><li>安装插件</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">npm install hexo-deployer-git --save<br></code></pre></td></tr></table></figure><ol start="3"><li>修改配置文件<code>_config.yml</code> 配置远程部署仓库</li></ol><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repo:</span> <span class="hljs-string">https://github.com/rongkezan/demo.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">gh-pages</span><br></code></pre></td></tr></table></figure><ol start="4"><li>修改配置文件<code>_config.yml</code> 配置根目录</li></ol><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">url:</span> <span class="hljs-string">https://rongkezan.github.io/demo</span><br></code></pre></td></tr></table></figure><ol start="5"><li>部署</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">hexo deploy<br></code></pre></td></tr></table></figure><h2 id="Hexo-主题-–-Fluid"><a href="#Hexo-主题-–-Fluid" class="headerlink" title="Hexo 主题 – Fluid"></a>Hexo 主题 – Fluid</h2><ol><li><p>Fluid官方文档：<a href="https://hexo.fluid-dev.com/docs">https://hexo.fluid-dev.com/docs</a></p></li><li><p>拉取Fluid主题</p></li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">git <span class="hljs-built_in">clone</span> https://github.com/fluid-dev/hexo-theme-fluid.git themes/fluid<br></code></pre></td></tr></table></figure><ol start="3"><li>修改配置文件<code>_config.yml</code> 主题配置</li></ol><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">theme:</span> <span class="hljs-string">fluid</span><br></code></pre></td></tr></table></figure><ol start="4"><li>创建关于页</li></ol><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">hexo new page about<br></code></pre></td></tr></table></figure><ol start="5"><li>覆盖配置</li></ol><p>复制官方配置文件到博客目录下： <code>_config.fluid.yml</code></p><p>官方配置文件：<a href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Tools</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Java 集合</title>
     <link href="/pumpkin/2022/05/20/Java/Java%E9%9B%86%E5%90%88/"/>
     <url>/pumpkin/2022/05/20/Java/Java%E9%9B%86%E5%90%88/</url>
