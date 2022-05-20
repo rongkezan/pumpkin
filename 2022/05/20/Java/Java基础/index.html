@@ -1,0 +1,841 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pumpkin/img/fluid.png">
+  <link rel="icon" href="/pumpkin/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Keith">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java 基础类加载顺序 类初始化：静态方法 -&gt; 静态代码块，先初始化父类再初始化子类 实例初始化 ：顺序: 非静态实例变量、非静态代码块、构造器代码 子类覆写了父类的方法，初始化时只会执行子类的方法，若父类方法没被覆写，则执行父类方法  1234567891011121314151617181920212223242526272829303132public class Parent &amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 基础">
+<meta property="og:url" content="https://rongkezan.github.io/pumpkin/2022/05/20/Java/Java%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Pumpkin">
+<meta property="og:description" content="Java 基础类加载顺序 类初始化：静态方法 -&gt; 静态代码块，先初始化父类再初始化子类 实例初始化 ：顺序: 非静态实例变量、非静态代码块、构造器代码 子类覆写了父类的方法，初始化时只会执行子类的方法，若父类方法没被覆写，则执行父类方法  1234567891011121314151617181920212223242526272829303132public class Parent &amp;">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2021011712102443.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2022-05-20T06:39:56.931Z">
+<meta property="article:modified_time" content="2022-05-20T06:47:43.662Z">
+<meta property="article:author" content="Keith">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2021011712102443.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+  
+  
+  
+  <title>Java 基础 - Pumpkin</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/pumpkin/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/pumpkin/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/pumpkin/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rongkezan.github.io","root":"/pumpkin/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/pumpkin/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/pumpkin/js/utils.js" ></script>
+  <script  src="/pumpkin/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/pumpkin/">
+      <strong>Pumpkin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/pumpkin/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java 基础"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-20 14:39" pubdate>
+          May 20, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.8k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          82 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Java 基础</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Java-基础"><a href="#Java-基础" class="headerlink" title="Java 基础"></a>Java 基础</h1><h2 id="类加载顺序"><a href="#类加载顺序" class="headerlink" title="类加载顺序"></a>类加载顺序</h2><ol>
+<li>类初始化：静态方法 -&gt; 静态代码块，先初始化父类再初始化子类</li>
+<li>实例初始化 ：顺序: 非静态实例变量、非静态代码块、构造器代码</li>
+<li>子类覆写了父类的方法，初始化时只会执行子类的方法，若父类方法没被覆写，则执行父类方法</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Parent</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> param();<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> paramParent();<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> staticParam();<br><br>    <span class="hljs-keyword">static</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;父类静态代码块&quot;</span>);<br>    &#125;<br><br>    Parent()&#123;<br>        System.out.println(<span class="hljs-string">&quot;父类构造方法&quot;</span>);<br>    &#125;<br><br>    &#123;<br>        System.out.println(<span class="hljs-string">&quot;父类代码块&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">param</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;父类实例变量1&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">paramParent</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;父类实例变量2&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">staticParam</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;父类静态实例变量&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Child</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Parent</span> &#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> param();<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> staticParam();<br><br>    <span class="hljs-keyword">static</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;子类静态代码块&quot;</span>);<br>    &#125;<br><br>    Child()&#123;<br>        System.out.println(<span class="hljs-string">&quot;子类构造方法&quot;</span>);<br>    &#125;<br><br>    &#123;<br>        System.out.println(<span class="hljs-string">&quot;子类代码块&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">param</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;子类实例变量&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">staticParam</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;子类静态实例变量&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Client</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Child</span> <span class="hljs-variable">c1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Child</span>();<br>        System.out.println();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>执行结果：</p>
+<p>父类静态实例变量</p>
+<p>父类静态代码块</p>
+<p>子类静态实例变量</p>
+<p>子类静态代码块</p>
+<p>子类实例变量</p>
+<p>父类实例变量2</p>
+<p>父类代码块</p>
+<p>父类构造方法</p>
+<p>子类实例变量</p>
+<p>子类代码块</p>
+<p>子类构造方法</p>
+<h2 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h2><p>静态变量作用在类层面，所有实例都会共享</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StaticVariableDemo</span> &#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> num;<br><br>    &#123;<br>        num++;<br>    &#125;<br><br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">plus</span><span class="hljs-params">()</span>&#123;<br>        num++;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">StaticVariableDemo</span> <span class="hljs-variable">d1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StaticVariableDemo</span>();<br>        <span class="hljs-type">StaticVariableDemo</span> <span class="hljs-variable">d2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StaticVariableDemo</span>();<br>        d1.plus();<br>        d2.plus();<br>        System.out.println(num);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><table>
+<thead>
+<tr>
+<th>静态内部类</th>
+<th>非静态内部类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可以有静态成员(方法，属性)</td>
+<td>不能有静态成员(方法，属性)</td>
+</tr>
+<tr>
+<td>实例化<br />OutClassTest.InnerStaticClass inner &#x3D; new OutClassTest.InnerStaticClass();</td>
+<td>实例化<br />OutClassTest oc1 &#x3D; new OutClassTest();<br />OutClassTest.InnerClass inner &#x3D; oc1.new InnerClass();</td>
+</tr>
+<tr>
+<td>调用方法或静态变量，通过类名直接调用<br />OutClassTest.InnerStaticClass.staticValue<br />OutClassTest.InnerStaticClass.method()</td>
+<td>实例化出来之后正常调用<br />inner.method()</td>
+</tr>
+</tbody></table>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>String中的intern()方法</p>
+<p>如果字符串常量池中已经包含一个等于此String对象的字符串，则返回代表池中这个字符串的String对象的引用，否则会将此String对象包含的字符串添加到常量池中，并且返回此String对象的引用。</p>
+<p>例题：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(<span class="hljs-string">&quot;Hello&quot;</span>).append(<span class="hljs-string">&quot;World&quot;</span>).toString();<br>System.out.println(str1 == str1.intern());      <span class="hljs-comment">// true</span><br><span class="hljs-type">String</span> <span class="hljs-variable">str2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StringBuilder</span>(<span class="hljs-string">&quot;ja&quot;</span>).append(<span class="hljs-string">&quot;va&quot;</span>).toString();<br>System.out.println(str2 == str2.intern());      <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure>
+
+<p>解释：有一个JDK自带的初始化的字符串”java”在加载sun.misc.Version这个类的时候进入了常量池</p>
+<h2 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h2><ul>
+<li>基本数据类型：传递值</li>
+<li>引用数据类型：传地址</li>
+</ul>
+<p>String、包装类等属于引用数据类型，同时是<strong>不可变对象</strong></p>
+<blockquote>
+<p>《Effective Java》<br>不可变对象(Immutable Object)：对象一旦被创建后，对象所有的状态及属性在其生命周期内不会发生任何变化。<br>由于ImmutableObject不提供任何setter方法，并且成员变量value是基本数据类型，getter方法返回的是value的拷贝，所以一旦ImmutableObject实例被创建后，该实例的状态无法再进行更改，因此该类具备不可变性。</p>
+</blockquote>
+<h2 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h2><p>对象的序列化主要有两种用途：</p>
+<ol>
+<li>把对象的字节序列永久地保存到硬盘上，通常存放在一个文件中</li>
+<li>在网络上传送对象的字节序列</li>
+</ol>
+<p>serialVersionUID作用：序列化时为了保持版本的兼容性，即在版本升级时反序列化仍保持对象的唯一性。</p>
+<p>有两种生成方式：</p>
+<ol>
+<li>默认的1L，比如：private static final long serialVersionUID &#x3D; 1L</li>
+<li>根据类名、接口名、成员方法及属性等来生成一个64位的哈希字段，比如：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">long</span> <span class="hljs-variable">serialVersionUID</span> <span class="hljs-operator">=</span> xxxxL;<br></code></pre></td></tr></table></figure>
+
+<h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><blockquote>
+<p>JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法。对于任意一个对象，都能够调用它的任意方法和属性。</p>
+</blockquote>
+<p>获取 Class 对象的方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 获取 User 对象的Class</span><br>Class&lt;User&gt; clazz = User.class;<br>Class&lt;User&gt; clazz = user.getClass();<br>Class&lt;?&gt; clazz = Class.forName(<span class="hljs-string">&quot;com.demo.entity.User&quot;</span>);<br>Class&lt;?&gt; clazz = classLoader.loadClass(<span class="hljs-string">&quot;com.demo.entity.User&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>利用反射创建对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// User 需要有无参构造</span><br><span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> clazz.newInstance();<br><span class="hljs-comment">// 利用 User 的有参构造创建</span><br><span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> clazz.getConstructor(String.class).newInstance(<span class="hljs-string">&quot;name&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>利用反射操作属性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 根据属性名获取属性值</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Object <span class="hljs-title function_">getFieldValue</span><span class="hljs-params">(String fieldName, Object object)</span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-type">Field</span> <span class="hljs-variable">field</span> <span class="hljs-operator">=</span> object.getClass().getDeclaredField(fieldName);<br>        field.setAccessible(<span class="hljs-literal">true</span>);<br>        <span class="hljs-keyword">return</span> field.get(object);<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>        log.warn(<span class="hljs-string">&quot;反射获取数据异常&quot;</span>, e);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>&#125;<br><br><span class="hljs-comment">// 根据属性名设置属性值</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setFieldValue</span><span class="hljs-params">(String fieldName, Object object, Object value)</span> &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>        Class&lt;?&gt; c = object.getClass();<br>        <span class="hljs-type">Field</span> <span class="hljs-variable">f</span> <span class="hljs-operator">=</span> c.getDeclaredField(fieldName);<br>        f.setAccessible(<span class="hljs-literal">true</span>);<br>        f.set(object, value);<br>    &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>        log.warn(<span class="hljs-string">&quot;反射设置数据异常&quot;</span>, e);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>反射中Class.forName和ClassLoader.loadClass的区别</strong></p>
+<ol>
+<li><p>class.forName除了将类的class文件加载到jvm中之外，还会对类进行解释，执行类中的static块，还会执行给静态变量赋值的静态方法</p>
+</li>
+<li><p>classLoader只干一件事情，就是将class文件加载到jvm中，不会执行static中的内容,只有在newInstance才会去执行static块。</p>
+</li>
+</ol>
+<h2 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h2><p>可以通过注解来获取相关属性，通过这些属性再配合反射实现相应业务。</p>
+<p>案例：通过反射获取全类名，再通过全类名实例化对应的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Target(&#123;ElementType.TYPE, ElementType.METHOD&#125;)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-meta">@interface</span> Channel&#123;<br>    String <span class="hljs-title function_">value</span><span class="hljs-params">()</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/* 连接接口 */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Connection</span> &#123;<br>    <span class="hljs-type">boolean</span> <span class="hljs-title function_">build</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CloudConnection</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Connection</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">build</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Connect to cloud&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DatabaseConnection</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Connection</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">build</span><span class="hljs-params">()</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Connect to database&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Channel(&quot;com.demo.basic.annotation.DatabaseConnection&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Message</span>&#123;<br><br>    <span class="hljs-keyword">private</span> Connection conn;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">Message</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Channel</span> <span class="hljs-variable">channel</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.getClass().getAnnotation(Channel.class);<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 通过反射获取到Connection对象实例</span><br>            conn = (Connection) Class.forName(channel.value()).newInstance();<br>        &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">send</span><span class="hljs-params">(String msg)</span>&#123;<br>        <span class="hljs-comment">// 执行build方法，实际上执行的是Connection接口的实现类</span><br>        <span class="hljs-keyword">if</span> (conn.build())&#123;<br>            System.out.println(<span class="hljs-string">&quot;消息发送:&quot;</span> + msg);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Client</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">Message</span> <span class="hljs-variable">msg</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Message</span>();<br>        msg.send(<span class="hljs-string">&quot;Hello World&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Stream-Api"><a href="#Stream-Api" class="headerlink" title="Stream Api"></a>Stream Api</h2><p>Stream 是数据渠道，用于操作数据源所生成的元素序列。</p>
+<ol>
+<li>Stream 不存储元素</li>
+<li>Stream 不改变源对象，他们会返回一个持有结果的新的 Stream</li>
+<li>Stream 操作是延迟执行的，这意味着他们会等到需要结果的时候执行</li>
+</ol>
+<p>Stream 操作步骤：创建流 -&gt; 中间操作 -&gt; 终止操作</p>
+<p><strong>Stream Create</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1.集合类</span><br>Collection.stream();<br><span class="hljs-comment">// 2.数组</span><br>Arrays.stream(T[]);<br><span class="hljs-comment">// 3.of</span><br>Stream.of(T... values);<br><span class="hljs-comment">// 4.创建无限流</span><br><span class="hljs-comment">// 4.1.迭代，案例：获取前10个偶数</span><br>Stream.iterate(<span class="hljs-keyword">final</span> T seed, <span class="hljs-keyword">final</span> UnaryOperator&lt;T&gt; f);<br>Stream.iterate(<span class="hljs-number">0</span>, x -&gt; x + <span class="hljs-number">2</span>).limit(<span class="hljs-number">10</span>).forEach(System.out::println);<br><span class="hljs-comment">// 4.2.生成，案例：获取前10个随机数</span><br>Stream.genrate(Supplier&lt;T&gt; s);<br>Stream.generate(Math::random).limit(<span class="hljs-number">10</span>).forEach(System.out::println);<br></code></pre></td></tr></table></figure>
+
+<p><strong>Stream Middle Operation</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 筛选和切片</span><br><span class="hljs-comment"> * - filter     接收lambda，从流冲排除某些元素</span><br><span class="hljs-comment"> * - limit      截断流，使其元素不超过给定数量</span><br><span class="hljs-comment"> * - skip(n)    跳过元素，返回一个扔掉了前n个元素的流，若流中元素不足n个，则返回一个空流，与limit互补</span><br><span class="hljs-comment"> * - distinct   筛选，通过流所生成元素的hashCode()和equals()去除重复元素</span><br><span class="hljs-comment"> */</span><br>emps.stream().filter(e -&gt; e.getSalary() &gt;= <span class="hljs-number">100</span>).limit(<span class="hljs-number">3</span>).forEach(System.out::println);<br>emps.stream().filter(e -&gt; e.getSalary() &gt;= <span class="hljs-number">100</span>).skip(<span class="hljs-number">1</span>).forEach(System.out::println);<br>emps.stream().filter(e -&gt; e.getSalary() &gt;= <span class="hljs-number">100</span>).distinct().forEach(System.out::println);<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 映射</span><br><span class="hljs-comment"> * map      接收lambda，将元素转换成其它形式或提取信息。接收另一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新元素。</span><br><span class="hljs-comment"> * flatMap  接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流，类似于list.allAll()</span><br><span class="hljs-comment"> * mapToDouble</span><br><span class="hljs-comment"> * mapToInt</span><br><span class="hljs-comment"> * mapToLong</span><br><span class="hljs-comment"> */</span><br>list.stream().map(String::toUpperCase).forEach(System.out::println);<br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 排序</span><br><span class="hljs-comment"> * sorted()                 自然排序(Comparable)</span><br><span class="hljs-comment"> * sorted(Comparator com)   定制排序(Comparator)</span><br><span class="hljs-comment"> */</span><br>list.stream().sorted().forEach(System.out::println);<br></code></pre></td></tr></table></figure>
+
+<p><strong>Stream Termination</strong></p>
+<p>匹配和查找</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 是否匹配所有元素 allMatch</span><br><span class="hljs-type">boolean</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> emps.stream().allMatch(e -&gt; e.getStatus().equals(Employee.Status.BUSY));<br><br><span class="hljs-comment">// 至少匹配一个元素 anyMatch</span><br><span class="hljs-type">boolean</span> <span class="hljs-variable">b1</span> <span class="hljs-operator">=</span> emps.stream().anyMatch(e -&gt; e.getStatus().equals(Employee.Status.BUSY));<br><br><span class="hljs-comment">// 检查是否没有匹配所有元素 noneMatch</span><br><span class="hljs-type">boolean</span> <span class="hljs-variable">b2</span> <span class="hljs-operator">=</span> emps.stream().noneMatch(e -&gt; e.getStatus().equals(Employee.Status.BUSY));<br><br><span class="hljs-comment">// 倒排后返回第一个元素 findFirst</span><br>Optional&lt;Employee&gt; op = emps.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).findFirst();<br>System.out.println(op.get());<br><br><span class="hljs-comment">// 返回任意元素的值 findAny</span><br>Optional&lt;Employee&gt; op1 = emps.stream().filter(e -&gt; e.getStatus().equals(Employee.Status.FREE)).findAny();<br>System.out.println(op1.get());<br><br><span class="hljs-comment">// 返回元素总个数 count</span><br><span class="hljs-type">long</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> emps.stream().count();<br><br><span class="hljs-comment">// 返回流中最大值 max</span><br>Optional&lt;Employee&gt; max = emps.stream().max(Comparator.comparingDouble(Employee::getSalary));<br>System.out.println(max.get());<br><br><span class="hljs-comment">// 返回流中最小值 min</span><br>Optional&lt;Double&gt; min = emps.stream().map(Employee::getSalary).min(Double::compare);<br>System.out.println(min.get());<br></code></pre></td></tr></table></figure>
+
+<p>归约：可以将流中的元素反复结合起来，得到一个值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">reduce(T identity, BinaryOperator);<br>reduce(BinaryOperator);<br><span class="hljs-comment">// 案例：求和</span><br>List&lt;Integer&gt; list = Arrays.asList(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>);<br><span class="hljs-type">Integer</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> list.stream().reduce(<span class="hljs-number">0</span>, Integer::sum);<br></code></pre></td></tr></table></figure>
+
+<p>收集：将流转换为其它形式，接收一个Collector接口的实现，用于给Stream中元素做汇总的方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 收集为List</span><br>List&lt;String&gt; list = emps.stream().map(Employee::getName).collect(Collectors.toList());<br><span class="hljs-comment">// 分组</span><br>Map&lt;Employee.Status, List&lt;Employee&gt;&gt; map = emps.stream()<br>    .collect(Collectors.groupingBy(Employee::getStatus));<br><span class="hljs-comment">// 多级分组</span><br>Map&lt;Employee.Status, Map&lt;String, List&lt;Employee&gt;&gt;&gt; map = emps.stream()<br>    .collect(Collectors.groupingBy(Employee::getStatus, Collectors.groupingBy(e -&gt; &#123;<br>        <span class="hljs-keyword">if</span> (e.getAge() &lt;= <span class="hljs-number">35</span>) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;青年&quot;</span>;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;老年&quot;</span>;<br>        &#125;<br>    &#125;)));<br><span class="hljs-comment">// 分区</span><br>Map&lt;Boolean, List&lt;Employee&gt;&gt; map = emps.stream()<br>    .collect(Collectors.partitioningBy(e -&gt; e.getSalary() &gt; <span class="hljs-number">8000</span>));<br><span class="hljs-comment">// 统计</span><br><span class="hljs-type">DoubleSummaryStatistics</span> <span class="hljs-variable">summary</span> <span class="hljs-operator">=</span> emps.stream()<br>    .collect(Collectors.summarizingDouble(Employee::getSalary));<br>System.out.println(summary.getSum());<br>System.out.println(summary.getAverage());<br>System.out.println(summary.getMax());<br><span class="hljs-comment">// 拼接</span><br><span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> emps.stream().map(Employee::getName).collect(Collectors.joining(<span class="hljs-string">&quot;,&quot;</span>));<br></code></pre></td></tr></table></figure>
+
+<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><h3 id="对象的创建过程"><a href="#对象的创建过程" class="headerlink" title="对象的创建过程"></a>对象的创建过程</h3><ol>
+<li><p>class loading</p>
+</li>
+<li><p>class linking (verification preparation resolution)</p>
+</li>
+<li><p>class initializing：静态变量赋值，执行静态语句块</p>
+</li>
+<li><p>申请内存对象</p>
+</li>
+<li><p>成员变量赋值</p>
+</li>
+<li><p>调用构造方法</p>
+<ol>
+<li>成员变量顺序赋初始值</li>
+<li>执行构造方法语句</li>
+</ol>
+</li>
+</ol>
+<h3 id="对象在内存中的存储布局"><a href="#对象在内存中的存储布局" class="headerlink" title="对象在内存中的存储布局"></a>对象在内存中的存储布局</h3><p>一个Object对象占16个字节</p>
+<h4 id="普通对象"><a href="#普通对象" class="headerlink" title="普通对象"></a>普通对象</h4><ol>
+<li><p>对象头 markdown 8</p>
+</li>
+<li><p>ClassPoniter指针：开启-XX:+UseCompressedClassPoiners 为4字节，不开启为8字节</p>
+</li>
+<li><p>实例数据</p>
+<p>引用类型：开启-XX:+UseCompressedOops为4字节 不开启为8字节</p>
+</li>
+<li><p>Padding对齐：8的倍数</p>
+</li>
+</ol>
+<h4 id="数组对象"><a href="#数组对象" class="headerlink" title="数组对象"></a>数组对象</h4><ol>
+<li>对象头 markdown 8</li>
+<li>ClassPoniter指针：开启-XX:+UseCompressedClassPoiners 为4字节，不开启为8字节</li>
+<li>数组长度：4字节</li>
+<li>数组数据</li>
+<li>Padding对齐：8的倍数</li>
+</ol>
+<h3 id="对象头信息"><a href="#对象头信息" class="headerlink" title="对象头信息"></a>对象头信息</h3><p>对象头信息包括：对象的HashCode，锁标志位、GC标记（分代的年龄）等</p>
+<p>markword 64位</p>
+<p><img src="https://img-blog.csdnimg.cn/2021011712102443.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h3 id="对象定位"><a href="#对象定位" class="headerlink" title="对象定位"></a>对象定位</h3><ol>
+<li>句柄池：间接指针，一个指向对象，另一个指向了.class</li>
+<li>直接指针（HotSpot）：直接指向对象，对象再指向.class</li>
+</ol>
+<h3 id="对象分配"><a href="#对象分配" class="headerlink" title="对象分配"></a>对象分配</h3><p>首先new一个对象的时候尝试往栈上分配，如可以分配下，就分配到栈上，栈一弹出对象就没了。</p>
+<p>如果对象过大，栈分配不下，直接分配到堆内存（老年代）。</p>
+<p>如果对象不大，先进行线程本地分配，分配不下找伊甸区，然后进行GC的过程，年龄到了进入老年代。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/pumpkin/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java 基础</div>
+      <div>https://rongkezan.github.io/pumpkin/2022/05/20/Java/Java基础/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Keith</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 20, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/pumpkin/2022/05/20/Java/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" title="Java 多线程">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java 多线程</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/pumpkin/2022/05/20/Java/JavaJVM/" title="Java JVM">
+                        <span class="hidden-mobile">Java JVM</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/pumpkin/js/events.js" ></script>
+<script  src="/pumpkin/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/pumpkin/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/pumpkin/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/pumpkin/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
