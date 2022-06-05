@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pumpkin/img/fluid.png">
+  <link rel="icon" href="/pumpkin/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Keith">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Kong的安装 Docker方式  1. 创建网络1docker network create kong-net  2. 新建挂载卷1docker volume create kong-volume  3. 启动Kong数据库容器12345678docker run -d --name kong-database \  --network&#x3D;kong-net \  -p 5432:5432 \  -">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kong">
+<meta property="og:url" content="https://rongkezan.github.io/pumpkin/2022/05/20/Ohters/Kong/index.html">
+<meta property="og:site_name" content="Pumpkin">
+<meta property="og:description" content="Kong的安装 Docker方式  1. 创建网络1docker network create kong-net  2. 新建挂载卷1docker volume create kong-volume  3. 启动Kong数据库容器12345678docker run -d --name kong-database \  --network&#x3D;kong-net \  -p 5432:5432 \  -">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3a92f6cf363d4a809c0376c98a4217bf.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/facdd2627c274f7d909135dfd6e29667.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f4c6e213e4bb4beeb1ef2e0a0ead5a62.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f40ace592054492faa81bc9b22a7d4c7.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4e8be530d4b240968d8984fa17576705.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/0afdec090b744d008b55799ac5cf27f6.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/49542558f67c4ec38ac991bc5b6fd7bb.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/437efb2e227a43cd947521e55d7ea7bb.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/fe688259069f4a95adc9532b7dafbaa3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/be52d6b72f1d496baf03b143393a2776.png">
+<meta property="article:published_time" content="2022-05-20T07:01:20.475Z">
+<meta property="article:modified_time" content="2022-06-05T02:42:13.041Z">
+<meta property="article:author" content="Keith">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/3a92f6cf363d4a809c0376c98a4217bf.png">
+  
+  
+  
+  <title>Kong - Pumpkin</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/pumpkin/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/pumpkin/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/pumpkin/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rongkezan.github.io","root":"/pumpkin/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/pumpkin/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/pumpkin/js/utils.js" ></script>
+  <script  src="/pumpkin/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/pumpkin/">
+      <strong>Pumpkin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/pumpkin/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Kong"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-20 15:01" pubdate>
+          May 20, 2022 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.2k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          27 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Kong</h1>
+            
+            <div class="markdown-body">
+              
+              <h2 id="Kong的安装"><a href="#Kong的安装" class="headerlink" title="Kong的安装"></a>Kong的安装</h2><blockquote>
+<p>Docker方式</p>
+</blockquote>
+<h3 id="1-创建网络"><a href="#1-创建网络" class="headerlink" title="1. 创建网络"></a>1. 创建网络</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker network create kong-net<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-新建挂载卷"><a href="#2-新建挂载卷" class="headerlink" title="2. 新建挂载卷"></a>2. 新建挂载卷</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker volume create kong-volume<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-启动Kong数据库容器"><a href="#3-启动Kong数据库容器" class="headerlink" title="3. 启动Kong数据库容器"></a>3. 启动Kong数据库容器</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker run -d --name kong-database \<br>  --network=kong-net \<br>  -p 5432:5432 \<br>  -v kong-volume:/var/lib/postgresql/data \<br>  -e <span class="hljs-string">&quot;POSTGRES_USER=kong&quot;</span> \<br>  -e <span class="hljs-string">&quot;POSTGRES_DB=kong&quot;</span> \<br>  -e <span class="hljs-string">&quot;POSTGRES_PASSWORD=kongpass&quot;</span> \<br>  postgres:9.6<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-初始化Kong数据"><a href="#4-初始化Kong数据" class="headerlink" title="4. 初始化Kong数据"></a>4. 初始化Kong数据</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker run --<span class="hljs-built_in">rm</span> --network=kong-net \<br>  -e <span class="hljs-string">&quot;KONG_DATABASE=postgres&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_PG_HOST=kong-database&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_PG_PASSWORD=kongpass&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_PASSWORD=test&quot;</span> \<br> kong/kong-gateway:2.8.1.1-alpine kong migrations bootstrap<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-启动kong-gateway容器"><a href="#5-启动kong-gateway容器" class="headerlink" title="5. 启动kong-gateway容器"></a>5. 启动kong-gateway容器</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker run -d --name kong-gateway \<br>  --network=kong-net \<br>  -e <span class="hljs-string">&quot;KONG_DATABASE=postgres&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_PG_HOST=kong-database&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_PG_USER=kong&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_PG_PASSWORD=kongpass&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_PROXY_ACCESS_LOG=/dev/stdout&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_ADMIN_ACCESS_LOG=/dev/stdout&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_PROXY_ERROR_LOG=/dev/stderr&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_ADMIN_ERROR_LOG=/dev/stderr&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_ADMIN_LISTEN=0.0.0.0:8001&quot;</span> \<br>  -e <span class="hljs-string">&quot;KONG_ADMIN_GUI_URL=http://localhost:8002&quot;</span> \<br>  -e KONG_LICENSE_DATA \<br>  -p 8000:8000 \<br>  -p 8443:8443 \<br>  -p 8001:8001 \<br>  -p 8444:8444 \<br>  -p 8002:8002 \<br>  -p 8445:8445 \<br>  -p 8003:8003 \<br>  -p 8004:8004 \<br>  kong/kong-gateway:2.8.1.1-alpine<br></code></pre></td></tr></table></figure>
+
+<h3 id="6-测试是否安装成功"><a href="#6-测试是否安装成功" class="headerlink" title="6. 测试是否安装成功"></a>6. 测试是否安装成功</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">浏览器访问<br>http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8001</span><br>http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8002</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Kong管理后台Konga安装"><a href="#Kong管理后台Konga安装" class="headerlink" title="Kong管理后台Konga安装"></a>Kong管理后台Konga安装</h2><h3 id="1-新建挂载卷"><a href="#1-新建挂载卷" class="headerlink" title="1. 新建挂载卷"></a>1. 新建挂载卷</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker volume create konga-volume<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-启动Konga数据库容器"><a href="#2-启动Konga数据库容器" class="headerlink" title="2. 启动Konga数据库容器"></a>2. 启动Konga数据库容器</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker run -d --name konga-database \<br>  --network=kong-net \<br>  -p 5433:5432 \<br>  -v konga-volume:/var/lib/postgresql/data \<br>  -e <span class="hljs-string">&quot;POSTGRES_USER=konga&quot;</span> \<br>  -e <span class="hljs-string">&quot;POSTGRES_DB=konga&quot;</span> \<br>  -e <span class="hljs-string">&quot;POSTGRES_PASSWORD=konga&quot;</span> \<br>  postgres:9.6<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-初始Konga数据"><a href="#3-初始Konga数据" class="headerlink" title="3. 初始Konga数据"></a>3. 初始Konga数据</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker run --<span class="hljs-built_in">rm</span> --network=kong-net \<br>pantsel/konga:latest -c prepare -a postgres -u postgres://konga:konga@konga-database:5432/konga<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-启动Konga容器"><a href="#4-启动Konga容器" class="headerlink" title="4. 启动Konga容器"></a>4. 启动Konga容器</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sh">docker run -d -p 1337:1337 \<br>	--network kong-net \<br>	--name konga \<br>	-e <span class="hljs-string">&quot;DB_ADAPTER=postgres&quot;</span> \<br>	-e <span class="hljs-string">&quot;DB_URI=postgres://konga:konga@konga-database:5432&quot;</span> \<br>	-e <span class="hljs-string">&quot;NODE_ENV=production&quot;</span> \<br>	-e <span class="hljs-string">&quot;DB_PASSWORD=konga&quot;</span> \<br>	pantsel/konga<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-注册登陆后建立连接并激活"><a href="#5-注册登陆后建立连接并激活" class="headerlink" title="5. 注册登陆后建立连接并激活"></a>5. 注册登陆后建立连接并激活</h3><p><img src="https://img-blog.csdnimg.cn/3a92f6cf363d4a809c0376c98a4217bf.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/facdd2627c274f7d909135dfd6e29667.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="动态负载均衡配置"><a href="#动态负载均衡配置" class="headerlink" title="动态负载均衡配置"></a>动态负载均衡配置</h2><h3 id="组件说明"><a href="#组件说明" class="headerlink" title="组件说明"></a>组件说明</h3><p>service：服务，可以直接指向一个API服务节点（host参数设置为ip+port），也可以指定一个upstream实现负载均衡。简单来说，服务用于映射被转发的后端API的节点集合。</p>
+<p>route：路由，它负责匹配实际请求，映射到service中。</p>
+<p>upstream：对应一组API节点，实现负载均衡。</p>
+<p>target：对应一个API节点。</p>
+<img src="https://img-blog.csdnimg.cn/f4c6e213e4bb4beeb1ef2e0a0ead5a62.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述" style="zoom:50%;" />
+
+<h3 id="1-配置upstreams"><a href="#1-配置upstreams" class="headerlink" title="1. 配置upstreams"></a>1. 配置upstreams</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">curl -X POST http://127.0.0.1:8001/upstreams --data <span class="hljs-string">&quot;name=my-upstream&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-配置target"><a href="#2-配置target" class="headerlink" title="2. 配置target"></a>2. 配置target</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">curl -X POST http://127.0.0.1:8001/upstreams/my-upstream/targets --data <span class="hljs-string">&quot;target=192.168.0.108:14251&quot;</span> --data <span class="hljs-string">&quot;weight=100&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="3-配置service"><a href="#3-配置service" class="headerlink" title="3. 配置service"></a>3. 配置service</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># name: service的名称</span><br><span class="hljs-comment"># host: upstream的名称</span><br>curl -X POST http://127.0.0.1:8001/services --data <span class="hljs-string">&quot;name=my-service&quot;</span> --data <span class="hljs-string">&quot;host=my-upstream&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="4-配置route"><a href="#4-配置route" class="headerlink" title="4. 配置route"></a>4. 配置route</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">curl -X POST http://127.0.0.1:8001/services/my-service/routes --data <span class="hljs-string">&quot;name=my-route&quot;</span> --data <span class="hljs-string">&quot;paths[]=/pms&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="鉴权配置"><a href="#鉴权配置" class="headerlink" title="鉴权配置"></a>鉴权配置</h2><h3 id="Basic-Auth"><a href="#Basic-Auth" class="headerlink" title="Basic Auth"></a>Basic Auth</h3><h4 id="1-在service中增加一个插件basic-auth"><a href="#1-在service中增加一个插件basic-auth" class="headerlink" title="1. 在service中增加一个插件basic-auth"></a>1. 在service中增加一个插件basic-auth</h4><blockquote>
+<p>service维度的鉴权</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/f40ace592054492faa81bc9b22a7d4c7.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h4 id="2-增加一个consumer"><a href="#2-增加一个consumer" class="headerlink" title="2. 增加一个consumer"></a>2. 增加一个consumer</h4><p><img src="https://img-blog.csdnimg.cn/4e8be530d4b240968d8984fa17576705.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h4 id="3-在登陆时增加basic-auth"><a href="#3-在登陆时增加basic-auth" class="headerlink" title="3. 在登陆时增加basic-auth"></a>3. 在登陆时增加basic-auth</h4><p><img src="https://img-blog.csdnimg.cn/0afdec090b744d008b55799ac5cf27f6.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h3 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h3><h4 id="1-添加JWT插件"><a href="#1-添加JWT插件" class="headerlink" title="1. 添加JWT插件"></a>1. 添加JWT插件</h4><p><img src="https://img-blog.csdnimg.cn/49542558f67c4ec38ac991bc5b6fd7bb.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h4 id="2-消费者配置JWT"><a href="#2-消费者配置JWT" class="headerlink" title="2. 消费者配置JWT"></a>2. 消费者配置JWT</h4><p><img src="https://img-blog.csdnimg.cn/437efb2e227a43cd947521e55d7ea7bb.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h4 id="3-生成JWT密文"><a href="#3-生成JWT密文" class="headerlink" title="3. 生成JWT密文"></a>3. 生成JWT密文</h4><p><a target="_blank" rel="noopener" href="https://jwt.io/">https://jwt.io/</a></p>
+<p>key作为iss，secret作为盐</p>
+<p><img src="https://img-blog.csdnimg.cn/fe688259069f4a95adc9532b7dafbaa3.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h4 id="4-构造请求头"><a href="#4-构造请求头" class="headerlink" title="4. 构造请求头"></a>4. 构造请求头</h4><p>请求时加上请求头Authorization，内容为 <code>Bearer 密文</code></p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smali">Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJpc3MiOiJjb3JTUTRteGM3QWlIUUVGaERPOEtzb043NXlXZnA3NSJ9._p2YA2v1oieEGWWcfHHJSqBhl5nAppfZHkBAGNDFZQA<br></code></pre></td></tr></table></figure>
+
+<h2 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h2><h3 id="添加插件Rate-limiting"><a href="#添加插件Rate-limiting" class="headerlink" title="添加插件Rate-limiting"></a>添加插件Rate-limiting</h3><p>可以配置秒、分钟、小时、天等多个维度，可以接受多少请求</p>
+<p><img src="https://img-blog.csdnimg.cn/be52d6b72f1d496baf03b143393a2776.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/pumpkin/categories/Others/" class="category-chain-item">Others</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Kong</div>
+      <div>https://rongkezan.github.io/pumpkin/2022/05/20/Ohters/Kong/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Keith</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 20, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/pumpkin/2022/05/23/Java/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" title="Java位运算">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Java位运算</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/pumpkin/2022/05/20/Tools/Hexo/" title="Hexo">
+                        <span class="hidden-mobile">Hexo</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/pumpkin/js/events.js" ></script>
+<script  src="/pumpkin/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/pumpkin/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/pumpkin/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/pumpkin/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

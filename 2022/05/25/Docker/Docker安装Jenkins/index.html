@@ -16,21 +16,32 @@
   <meta name="author" content="Keith">
   <meta name="keywords" content="">
   
-    <meta name="description" content="HexoHexo 搭建环境准备 Node.js Git  安装Hexo1npm install -g hexo-cli  启动本地项目123456# 初始化Hexo项目hexo init democd demonpm install# 启动本地Hexo项目hexo server  部署到Github 在Github上创建仓库 demo 安装插件  1npm install hexo-deploye">
+    <meta name="description" content="服务器域名以 192.168.25.100 为例  安装 Jenkins 镜像拉取镜像 jenkinsci&#x2F;blueocean 官方推荐使用的镜像是jenkinsci&#x2F;blueocean，该镜像包含当前的长期支持 (LTS) 的 Jenkins 版本 (可以生产使用) ，并捆绑了所有 Blue Ocean 插件和功能。 1docker pull jenkinsci&#x2F;blueo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://rongkezan.github.io/pumpkin/2022/05/20/Tools/Hexo/index.html">
+<meta property="og:title" content="Docker安装Jenkins">
+<meta property="og:url" content="https://rongkezan.github.io/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Jenkins/index.html">
 <meta property="og:site_name" content="Pumpkin">
-<meta property="og:description" content="HexoHexo 搭建环境准备 Node.js Git  安装Hexo1npm install -g hexo-cli  启动本地项目123456# 初始化Hexo项目hexo init democd demonpm install# 启动本地Hexo项目hexo server  部署到Github 在Github上创建仓库 demo 安装插件  1npm install hexo-deploye">
+<meta property="og:description" content="服务器域名以 192.168.25.100 为例  安装 Jenkins 镜像拉取镜像 jenkinsci&#x2F;blueocean 官方推荐使用的镜像是jenkinsci&#x2F;blueocean，该镜像包含当前的长期支持 (LTS) 的 Jenkins 版本 (可以生产使用) ，并捆绑了所有 Blue Ocean 插件和功能。 1docker pull jenkinsci&#x2F;blueo">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-05-20T07:01:20.475Z">
-<meta property="article:modified_time" content="2022-05-20T07:36:33.430Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210305234455971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210307122414262.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210307124810429.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="c:/Users/a/AppData/Roaming/Typora/typora-user-images/image-20210307125014378.png">
+<meta property="og:image" content="c:/Users/a/AppData/Roaming/Typora/typora-user-images/image-20210307125029794.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210307131950770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210307132120544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210307155434803.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210307161531768.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210307161629421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2022-05-25T09:09:28.470Z">
+<meta property="article:modified_time" content="2022-05-25T09:10:44.840Z">
 <meta property="article:author" content="Keith">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210305234455971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
   
   
   
-  <title>Hexo - Pumpkin</title>
+  <title>Docker安装Jenkins - Pumpkin</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -193,7 +204,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hexo"></span>
+            <span id="subtitle" data-typed-text="Docker安装Jenkins"></span>
           
         </div>
 
@@ -204,8 +215,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-05-20 15:01" pubdate>
-          May 20, 2022 pm
+        <time datetime="2022-05-25 17:09" pubdate>
+          May 25, 2022 pm
         </time>
       </span>
     
@@ -216,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          657 words
+          1.5k words
         
       </span>
     
@@ -227,7 +238,7 @@
         
         
         
-          6 mins
+          13 mins
         
       </span>
     
@@ -265,62 +276,63 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Hexo</h1>
+            <h1 style="display: none">Docker安装Jenkins</h1>
             
             <div class="markdown-body">
               
-              <h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><h2 id="Hexo-搭建"><a href="#Hexo-搭建" class="headerlink" title="Hexo 搭建"></a>Hexo 搭建</h2><h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><ul>
-<li>Node.js</li>
-<li>Git</li>
-</ul>
-<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">npm install -g hexo-cli<br></code></pre></td></tr></table></figure>
+              <blockquote>
+<p>服务器域名以 192.168.25.100 为例</p>
+</blockquote>
+<h2 id="安装-Jenkins-镜像"><a href="#安装-Jenkins-镜像" class="headerlink" title="安装 Jenkins 镜像"></a>安装 Jenkins 镜像</h2><p><strong>拉取镜像 jenkinsci&#x2F;blueocean</strong></p>
+<p>官方推荐使用的镜像是jenkinsci&#x2F;blueocean，该镜像包含当前的长期支持 (LTS) 的 Jenkins 版本 (可以生产使用) ，并捆绑了所有 Blue Ocean 插件和功能。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker pull jenkinsci/blueocean<br></code></pre></td></tr></table></figure>
 
-<h3 id="启动本地项目"><a href="#启动本地项目" class="headerlink" title="启动本地项目"></a>启动本地项目</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 初始化Hexo项目</span><br>hexo init demo<br><span class="hljs-built_in">cd</span> demo<br>npm install<br><span class="hljs-comment"># 启动本地Hexo项目</span><br>hexo server<br></code></pre></td></tr></table></figure>
+<p><strong>修改目录权限</strong></p>
+<p>因为当映射本地数据卷时，&#x2F;docker&#x2F;jenkins目录的拥有者为root用户，而容器中jenkins user的uid为1000</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">chown -R 1000:1000 /docker/jenkins<br></code></pre></td></tr></table></figure>
+<p><strong>运行 Jenkins 容器</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell">docker run \<br>  --name jenkins \<br>  -d \<br>  -p 8000:8080 \<br>  -p 50000:50000 \<br>  -v /docker/jenkins:/var/jenkins_home \<br>  -e JAVA_OPTS=-Duser.timezone=Asia/Shanghai \<br>  jenkinsci/blueocean<br></code></pre></td></tr></table></figure>
+<h2 id="配置-Jenkins-安装插件国内地址"><a href="#配置-Jenkins-安装插件国内地址" class="headerlink" title="配置 Jenkins 安装插件国内地址"></a>配置 Jenkins 安装插件国内地址</h2><p><strong>在 jenkins 安装目录下找 default.json</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">find . -name default.json<br></code></pre></td></tr></table></figure>
 
-<h3 id="部署到Github"><a href="#部署到Github" class="headerlink" title="部署到Github"></a>部署到Github</h3><ol>
-<li>在Github上创建仓库 demo</li>
-<li>安装插件</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">npm install hexo-deployer-git --save<br></code></pre></td></tr></table></figure>
+<p><strong>替换 default.json 中的内容</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">sed -i &#x27;s/www.google.com/www.baidu.com/g&#x27; default.json<br>sed -i &#x27;s/updates.jenkins-ci.org\/download/mirrors.tuna.tsinghua.edu.cn\/jenkins/g&#x27; default.json<br></code></pre></td></tr></table></figure>
 
-<ol start="3">
-<li>修改配置文件<code>_config.yml</code> 配置远程部署仓库</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repo:</span> <span class="hljs-string">https://github.com/rongkezan/demo.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">gh-pages</span><br></code></pre></td></tr></table></figure>
+<p><strong>重启 jenkins</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">http://192.168.25.100:8000/restart<br></code></pre></td></tr></table></figure>
 
-<ol start="4">
-<li>修改配置文件<code>_config.yml</code> 配置根目录</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">url:</span> <span class="hljs-string">https://rongkezan.github.io/demo</span><br></code></pre></td></tr></table></figure>
+<h2 id="登陆-Jenkins"><a href="#登陆-Jenkins" class="headerlink" title="登陆 Jenkins"></a>登陆 Jenkins</h2><p><strong>访问 Jenkins 页面</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">http://192.168.25.100:8000<br></code></pre></td></tr></table></figure>
 
-<ol start="5">
-<li>部署</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">hexo deploy<br></code></pre></td></tr></table></figure>
+<p><strong>输入管理员密码</strong></p>
+<p>获取 Docker 映射地址的密码</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">cat /docker/jenkins/secrets/initialAdminPassword<br>85770376692448b7b6a8e301fb437848<br></code></pre></td></tr></table></figure>
 
-<h2 id="Hexo-主题-–-Fluid"><a href="#Hexo-主题-–-Fluid" class="headerlink" title="Hexo 主题 – Fluid"></a>Hexo 主题 – Fluid</h2><ol>
-<li><p>Fluid官方文档：<a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs">https://hexo.fluid-dev.com/docs</a></p>
-</li>
-<li><p>拉取Fluid主题</p>
-</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">git <span class="hljs-built_in">clone</span> https://github.com/fluid-dev/hexo-theme-fluid.git themes/fluid<br></code></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>修改配置文件<code>_config.yml</code> 主题配置</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">theme:</span> <span class="hljs-string">fluid</span><br></code></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>创建关于页</li>
-</ol>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">hexo new page about<br></code></pre></td></tr></table></figure>
-
-<ol start="5">
-<li>覆盖配置</li>
-</ol>
-<p>复制官方配置文件到博客目录下： <code>_config.fluid.yml</code></p>
-<p>官方配置文件：<a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml">https://github.com/fluid-dev/hexo-theme-fluid/blob/master/_config.yml</a></p>
+<p><img src="https://img-blog.csdnimg.cn/20210305234455971.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="配置-maven-jdk-git"><a href="#配置-maven-jdk-git" class="headerlink" title="配置 maven jdk git"></a>配置 maven jdk git</h2><p><strong>安装插件 Maven Integration，重启 Jenkins</strong></p>
+<p>Manage Jenkins -&gt; Manage Plugins -&gt; Maven Intergration -&gt; Download now and install after restart</p>
+<p><img src="https://img-blog.csdnimg.cn/20210307122414262.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><strong>进入容器查询 jdk 和 git 的路径</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">进入容器</span><br>docker exec -it jenkins bash<br><span class="hljs-meta prompt_"># </span><span class="language-bash">获取jdk的路径</span><br>echo $JAVA_HOME<br><span class="hljs-meta prompt_"># </span><span class="language-bash">获取git的路径</span><br>which git<br></code></pre></td></tr></table></figure>
+<p><strong>配置路径</strong></p>
+<p>Manage Jenkins -&gt; Global Tool Configuration -&gt; Update -&gt; Save</p>
+<p><img src="https://img-blog.csdnimg.cn/20210307124810429.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="JDK"></p>
+<p><img src="C:\Users\a\AppData\Roaming\Typora\typora-user-images\image-20210307125014378.png" srcset="/pumpkin/img/loading.gif" lazyload alt="image-20210307125014378"></p>
+<p><img src="C:\Users\a\AppData\Roaming\Typora\typora-user-images\image-20210307125029794.png" srcset="/pumpkin/img/loading.gif" lazyload alt="image-20210307125029794"></p>
+<h2 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h2><p>New Item -&gt; 构建一个maven项目<br><img src="https://img-blog.csdnimg.cn/20210307131950770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>配置 Git 仓库地址</p>
+<p><img src="https://img-blog.csdnimg.cn/20210307132120544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>Build Now</p>
+<p>构建完成后，源码路径：&#x2F;docker&#x2F;jenkins&#x2F;workspace&#x2F;Test</p>
+<h2 id="配置-Gitee"><a href="#配置-Gitee" class="headerlink" title="配置 Gitee"></a>配置 Gitee</h2><p><strong>安装 Gitee 插件</strong></p>
+<p>Manage Jenkins -&gt; Plugin Manager -&gt; Search gitee -&gt; Download now and install after restart</p>
+<p><strong>配置 Gitee</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20210307155434803.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><strong>配置构建任务</strong></p>
+<p>General -&gt; gitee链接</p>
+<p><img src="https://img-blog.csdnimg.cn/20210307161531768.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>Source Code Management -&gt; 选择 Git -&gt; 配置 Repository URL 和 Credentials</p>
+<p><img src="https://img-blog.csdnimg.cn/20210307161629421.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
 
               
             </div>
@@ -338,7 +350,7 @@
     
       <span class="category-chain">
         
-  <a href="/pumpkin/categories/Tools/" class="category-chain-item">Tools</a>
+  <a href="/pumpkin/categories/Docker/" class="category-chain-item">Docker</a>
   
   
 
@@ -358,8 +370,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hexo</div>
-      <div>https://rongkezan.github.io/pumpkin/2022/05/20/Tools/Hexo/</div>
+      <div>Docker安装Jenkins</div>
+      <div>https://rongkezan.github.io/pumpkin/2022/05/25/Docker/Docker安装Jenkins/</div>
     </div>
     <div class="license-meta">
       
@@ -371,7 +383,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>May 20, 2022</div>
+          <div>May 25, 2022</div>
         </div>
       
       
@@ -401,9 +413,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/pumpkin/2022/05/20/Ohters/Kong/" title="Kong">
+                      <a href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85RabbitMq/" title="Docker安装RabbitMq">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Kong</span>
+                        <span class="hidden-mobile">Docker安装RabbitMq</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -411,8 +423,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/pumpkin/2022/05/20/Java/Java%E9%9B%86%E5%90%88/" title="Java 集合">
-                        <span class="hidden-mobile">Java 集合</span>
+                      <a href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Mysql/" title="Docker安装Mysql">
+                        <span class="hidden-mobile">Docker安装Mysql</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
