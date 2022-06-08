@@ -309,3 +309,104 @@ kubectl apply -f dash.yaml
 kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
 ```
 
+## Mac安装Kubernetes
+
+### 1. 启动Kubernetes
+
+安装好Docker For Mac之后，会携带Kubernetes
+
+在Preferences中：
+
+1. 修改Docker Engine
+
+   ```json
+     "registry-mirrors": [
+       "https://docker.mirrors.ustc.edu.cn",
+       "https://cr.console.aliyun.com/"
+     ]
+   ```
+
+2. 启动Kubernetes
+
+   Kubernetes -> Enable Kubernetes -> Apply & Restart
+
+### 2. 验证是否启动成功
+
+```sh
+kubectl cluster-info
+kubectl get nodes
+kubectl describe node
+```
+
+### 3. 部署Dashboard
+
+部署Dashboard
+
+```sh
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+```
+
+通过命令行代理访问
+
+```sh
+kubectl proxy
+```
+
+访问控制台
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+### 4. 登陆Dashboard
+
+1. 新建文件`dashboard-adminuser.yaml`
+
+```yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
+---
+
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
+```
+
+2. 应用文件
+
+```sh
+kubectl apply -f dashboard-adminuser.yaml
+```
+
+3. 生成登陆的Token
+
+```sh
+kubectl -n kubernetes-dashboard create token admin-user
+```
+
+4. 得到如下格式的Token
+
+```
+eyJhbGciOiJSUzI1NiIsImtpZCI6ImVsb2s5NlluYWtYMDJNWmVPZFBZNmo5MU11el82VGZwR2gtVUE0OTlhY1UifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxNjU0Njg2MzM1LCJpYXQiOjE2NTQ2ODI3MzUsImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsInNlcnZpY2VhY2NvdW50Ijp7Im5hbWUiOiJhZG1pbi11c2VyIiwidWlkIjoiYWExY2Y0MTAtODdlNS00MDY2LWI4ODgtMTg1MmE4NTg5NzFjIn19LCJuYmYiOjE2NTQ2ODI3MzUsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlcm5ldGVzLWRhc2hib2FyZDphZG1pbi11c2VyIn0.UCSlwuNnIVQnsopHXG8PvLMDmcbtig3S8TCtN716xD4yITdpc4RqwmxzKJx1QI2L2bHKEnwMD38u96Q4qQnGWzcJ1R8MDtZc7gGtFWk51bgoie6lOtTyf4n1WSkSBzd2UFppMfDB6jiZ2vDR02crhazFgOO0dVtRGUfclDLOm2x1pTemdZJDQcR9TywKDXyQeLvGJXEi_N_a43AhnZmbI_OcadiRCc-hCwlWXWLEZSf0405t_nrXwA8NwzWjT1qJ8gDsAWHDoifS_2xoAETeP0ubhRK9HmrYa20aMHRc_M1HBiwbossNNET_iKdUqLYUNrac2r5SYQ72ia_qG4inRA
+```
+
+5. 使用Token登陆Dashboard
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/a4010b6b0b024cf59734eaded23817b5.png)
+
+6. 测试完成删除用户
+
+```sh
+kubectl -n kubernetes-dashboard delete serviceaccount admin-user
+```
+
