@@ -25,8 +25,9 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/1cfcb57a0f52484893e46cc6c14a2596.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/c4ba56cff1784250b99e92b9ec7fb304.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a4010b6b0b024cf59734eaded23817b5.png">
 <meta property="article:published_time" content="2022-05-25T09:09:28.473Z">
-<meta property="article:modified_time" content="2022-06-01T07:46:58.928Z">
+<meta property="article:modified_time" content="2022-06-08T10:06:54.919Z">
 <meta property="article:author" content="Keith">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/1cfcb57a0f52484893e46cc6c14a2596.png">
@@ -219,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.9k words
+          8k words
         
       </span>
     
@@ -230,7 +231,7 @@
         
         
         
-          50 mins
+          67 mins
         
       </span>
     
@@ -411,6 +412,55 @@
 <li>令牌访问</li>
 </ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment">#获取访问令牌</span><br>kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath=<span class="hljs-string">&quot;&#123;.secrets[0].name&#125;&quot;</span>) -o go-template=<span class="hljs-string">&quot;&#123;&#123;.data.token | base64decode&#125;&#125;&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Mac安装Kubernetes"><a href="#Mac安装Kubernetes" class="headerlink" title="Mac安装Kubernetes"></a>Mac安装Kubernetes</h2><h3 id="1-启动Kubernetes"><a href="#1-启动Kubernetes" class="headerlink" title="1. 启动Kubernetes"></a>1. 启动Kubernetes</h3><p>安装好Docker For Mac之后，会携带Kubernetes</p>
+<p>在Preferences中：</p>
+<ol>
+<li><p>修改Docker Engine</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>  <span class="hljs-string">&quot;https://docker.mirrors.ustc.edu.cn&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-string">&quot;https://cr.console.aliyun.com/&quot;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>启动Kubernetes</p>
+<p>Kubernetes -&gt; Enable Kubernetes -&gt; Apply &amp; Restart</p>
+</li>
+</ol>
+<h3 id="2-验证是否启动成功"><a href="#2-验证是否启动成功" class="headerlink" title="2. 验证是否启动成功"></a>2. 验证是否启动成功</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sh">kubectl cluster-info<br>kubectl get nodes<br>kubectl describe node<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-部署Dashboard"><a href="#3-部署Dashboard" class="headerlink" title="3. 部署Dashboard"></a>3. 部署Dashboard</h3><p>部署Dashboard</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml<br></code></pre></td></tr></table></figure>
+
+<p>通过命令行代理访问</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">kubectl proxy<br></code></pre></td></tr></table></figure>
+
+<p>访问控制台</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/">http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/</a></p>
+<h3 id="4-登陆Dashboard"><a href="#4-登陆Dashboard" class="headerlink" title="4. 登陆Dashboard"></a>4. 登陆Dashboard</h3><ol>
+<li>新建文件<code>dashboard-adminuser.yaml</code></li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">v1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">ServiceAccount</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">admin-user</span><br>  <span class="hljs-attr">namespace:</span> <span class="hljs-string">kubernetes-dashboard</span><br><span class="hljs-meta">---</span><br><span class="hljs-meta"></span><br><span class="hljs-attr">apiVersion:</span> <span class="hljs-string">rbac.authorization.k8s.io/v1beta1</span><br><span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterRoleBinding</span><br><span class="hljs-attr">metadata:</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">admin-user</span><br><span class="hljs-attr">roleRef:</span><br>  <span class="hljs-attr">apiGroup:</span> <span class="hljs-string">rbac.authorization.k8s.io</span><br>  <span class="hljs-attr">kind:</span> <span class="hljs-string">ClusterRole</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">cluster-admin</span><br><span class="hljs-attr">subjects:</span><br><span class="hljs-bullet">-</span> <span class="hljs-attr">kind:</span> <span class="hljs-string">ServiceAccount</span><br>  <span class="hljs-attr">name:</span> <span class="hljs-string">admin-user</span><br>  <span class="hljs-attr">namespace:</span> <span class="hljs-string">kubernetes-dashboard</span><br></code></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>应用文件</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">kubectl apply -f dashboard-adminuser.yaml<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>生成登陆的Token</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">kubectl -n kubernetes-dashboard create token admin-user<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>得到如下格式的Token</li>
+</ol>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">eyJhbGciOiJSUzI<span class="hljs-number">1</span>NiIsImtpZCI<span class="hljs-number">6</span>ImVsb<span class="hljs-number">2</span>s<span class="hljs-number">5</span>NlluYWtYMDJNWmVPZFBZNmo<span class="hljs-number">5</span>MU<span class="hljs-number">11</span>el<span class="hljs-number">82</span>VGZwR<span class="hljs-number">2</span>gtVUE<span class="hljs-number">0</span>OTlhY<span class="hljs-number">1</span>UifQ.eyJhdWQiOlsiaHR<span class="hljs-number">0</span>cHM<span class="hljs-number">6</span>Ly<span class="hljs-number">9</span>rdWJlcm<span class="hljs-number">5</span>ldGVzLmRlZmF<span class="hljs-number">1</span>bHQuc<span class="hljs-number">3</span>ZjLmNsdXN<span class="hljs-number">0</span>ZXIubG<span class="hljs-number">9</span>jYWwiXSwiZXhwIjoxNjU<span class="hljs-number">0</span>Njg<span class="hljs-number">2</span>MzM<span class="hljs-number">1</span>LCJpYXQiOjE<span class="hljs-number">2</span>NTQ<span class="hljs-number">2</span>ODI<span class="hljs-number">3</span>MzUsImlzcyI<span class="hljs-number">6</span>Imh<span class="hljs-number">0</span>dHBzOi<span class="hljs-number">8</span>va<span class="hljs-number">3</span>ViZXJuZXRlcy<span class="hljs-number">5</span>kZWZhdWx<span class="hljs-number">0</span>LnN<span class="hljs-number">2</span>Yy<span class="hljs-number">5</span>jbHVzdGVyLmxvY<span class="hljs-number">2</span>FsIiwia<span class="hljs-number">3</span>ViZXJuZXRlcy<span class="hljs-number">5</span>pbyI<span class="hljs-number">6</span>eyJuYW<span class="hljs-number">1</span>lc<span class="hljs-number">3</span>BhY<span class="hljs-number">2</span>UiOiJrdWJlcm<span class="hljs-number">5</span>ldGVzLWRhc<span class="hljs-number">2</span>hib<span class="hljs-number">2</span>FyZCIsInNlcnZpY<span class="hljs-number">2</span>VhY<span class="hljs-number">2</span>NvdW<span class="hljs-number">50</span>Ijp<span class="hljs-number">7</span>Im<span class="hljs-number">5</span>hbWUiOiJhZG<span class="hljs-number">1</span>pbi<span class="hljs-number">11</span><span class="hljs-keyword">c</span><span class="hljs-number">2</span>VyIiwidWlkIjoiYWExY<span class="hljs-number">2</span>Y<span class="hljs-number">0</span>MTAtODdlNS<span class="hljs-number">00</span>MDY<span class="hljs-number">2</span>LWI<span class="hljs-number">4</span>ODgtMTg<span class="hljs-number">1</span>MmE<span class="hljs-number">4</span>NTg<span class="hljs-number">5</span>NzFjIn<span class="hljs-number">19</span>LCJuYmYiOjE<span class="hljs-number">2</span>NTQ<span class="hljs-number">2</span>ODI<span class="hljs-number">3</span>MzUsInN<span class="hljs-number">1</span>YiI<span class="hljs-number">6</span>InN<span class="hljs-number">5</span><span class="hljs-keyword">c</span><span class="hljs-number">3</span>RlbTpzZXJ<span class="hljs-number">2</span>aWNlYWNjb<span class="hljs-number">3</span>VudDprdWJlcm<span class="hljs-number">5</span>ldGVzLWRhc<span class="hljs-number">2</span>hib<span class="hljs-number">2</span>FyZDphZG<span class="hljs-number">1</span>pbi<span class="hljs-number">11</span><span class="hljs-keyword">c</span><span class="hljs-number">2</span>VyIn<span class="hljs-number">0</span>.UCSlwuNnIVQnsopHXG<span class="hljs-number">8</span>PvLMDmcbtig<span class="hljs-number">3</span>S<span class="hljs-number">8</span>TCtN<span class="hljs-number">716</span>xD<span class="hljs-number">4</span>yITdpc<span class="hljs-number">4</span>RqwmxzKJx<span class="hljs-number">1</span>QI<span class="hljs-number">2</span>L<span class="hljs-number">2</span>bHKEnwMD<span class="hljs-number">38</span>u<span class="hljs-number">96</span>Q<span class="hljs-number">4</span>qQnGWzcJ<span class="hljs-number">1</span>R<span class="hljs-number">8</span>MDtZc<span class="hljs-number">7</span>gGtFWk<span class="hljs-number">51</span>bgoie<span class="hljs-number">6</span>lOtTyf<span class="hljs-number">4</span>n<span class="hljs-number">1</span>WSkSBzd<span class="hljs-number">2</span>UFppMfDB<span class="hljs-number">6</span>jiZ<span class="hljs-number">2</span>vDR<span class="hljs-number">02</span>crhazFgOO<span class="hljs-number">0</span>dVtRGUfclDLOm<span class="hljs-number">2</span><span class="hljs-keyword">x</span><span class="hljs-number">1</span>pTemdZJDQcR<span class="hljs-number">9</span>TywKDXyQeLvGJXEi_N_a<span class="hljs-number">43</span>AhnZmbI_OcadiRCc-hCwlWXWLEZSf<span class="hljs-number">0405</span>t_nrXwA<span class="hljs-number">8</span>NwzWjT<span class="hljs-number">1</span>qJ<span class="hljs-number">8</span>gDsAWHDoifS_<span class="hljs-number">2</span>xoAETeP<span class="hljs-number">0</span>ubhRK<span class="hljs-number">9</span>HmrYa<span class="hljs-number">20</span>aMHRc_M<span class="hljs-number">1</span>HBiwbossNNET_iKdUqLYUNrac<span class="hljs-number">2</span>r<span class="hljs-number">5</span>SYQ<span class="hljs-number">72</span>ia_qG<span class="hljs-number">4</span>inRA<br></code></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>使用Token登陆Dashboard</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/a4010b6b0b024cf59734eaded23817b5.png" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<ol start="6">
+<li>测试完成删除用户</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sh">kubectl -n kubernetes-dashboard delete serviceaccount admin-user<br></code></pre></td></tr></table></figure>
 
 
               
