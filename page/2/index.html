@@ -221,330 +221,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Jenkins/" target="_self">
-          Docker安装Jenkins
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Jenkins/" target="_self">
-        <div>
-          
-          服务器域名以 192.168.25.100 为例  安装 Jenkins 镜像拉取镜像 jenkinsci&#x2F;blueocean 官方推荐使用的镜像是jenkinsci&#x2F;blueocean，该镜像包含当前的长期支持 (LTS) 的 Jenkins 版本 (可以生产使用) ，并捆绑了所有 Blue Ocean 插件和功能。 1docker pull jenkinsci&#x2F;blueo
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-25 17:09" pubdate>
-              2022-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/pumpkin/categories/Docker/" class="category-chain-item">Docker</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Mysql/" target="_self">
-          Docker安装Mysql
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Mysql/" target="_self">
-        <div>
-          
-          1. 创建容器12345678910docker run -d --name mysql -e MYSQL_ROOT_PASSWORD&#x3D;root --net&#x3D;host \-v &#x2F;docker&#x2F;mysql&#x2F;data:&#x2F;mysql&#x2F;data \-v &#x2F;docker&#x2F;mysql&#x2F;logs&#x2F;errlog:&#x2F;mysql&#x2F;data&#x2F;discard&#x2F;errlog \-v &#x2F;docker&#x2F;mysql&#x2F;logs&#x2F;b
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-25 17:09" pubdate>
-              2022-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/pumpkin/categories/Docker/" class="category-chain-item">Docker</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Nginx/" target="_self">
-          Docker安装Nginx
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Nginx/" target="_self">
-        <div>
-          
-          1. 复制容器内的配置文件1.创建一个nginx容器 1docker run -d -p 80:80 --name nginx nginx:1.16.1 2.复制容器内的配置文件到当前目录 1docker container cp nginx:&#x2F;etc&#x2F;nginx . 3.改名并移动到~&#x2F;docker&#x2F;nginx&#x2F;conf目录 12mkdir -p ~&#x2F;docker&#x2F;nginxmv nginx ~
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-25 17:09" pubdate>
-              2022-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/pumpkin/categories/Docker/" class="category-chain-item">Docker</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Redis/" target="_self">
-          Docker安装Redis
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2022/05/25/Docker/Docker%E5%AE%89%E8%A3%85Redis/" target="_self">
-        <div>
-          
-          1. 创建配置文件1.1 创建目录1mkdir -p &#x2F;docker&#x2F;redis&#x2F;conf 1.2 将配置文件复制进去找一份配置文件将其复制进去修改以下参数 12345# 将其注释# bind 127.0.0.1# 将其注释，因为与docker的-d冲突# daemonize yes 2. 创建容器12345docker run -d -p 6379:6379 --name redis --pri
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-25 17:09" pubdate>
-              2022-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/pumpkin/categories/Docker/" class="category-chain-item">Docker</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2022/05/25/Docker/Docker%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" target="_self">
-          Docker基本操作
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2022/05/25/Docker/Docker%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/" target="_self">
-        <div>
-          
-          1. 镜像操作 检查linux版本，必须是3.10以上uname -r 安装dockeryum -y install docker  启动dockersystemctl start docker 停止dockersystemctl stop docker 设置开机启动systemctl enable docker 帮助命令docker –help 搜索镜像docker search mysql 拉
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-25 17:09" pubdate>
-              2022-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/pumpkin/categories/Docker/" class="category-chain-item">Docker</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2022/05/23/Java/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" target="_self">
-          Java位运算
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2022/05/23/Java/Java%E4%BD%8D%E8%BF%90%E7%AE%97/" target="_self">
-        <div>
-          
-          左移：低位补0 15 &lt;&lt; 2 &#x3D; 101 -&gt; 10100 &#x3D; 20  右移：高位补0 15 &gt;&gt; 2 &#x3D; 101 -&gt; 0001 &#x3D; 1  位与：两边同时为1才为1，否则为0 1235 &amp; 3 &#x3D; 101 &amp; 011 &#x3D; 001 &#x3D; 14 &amp; 1 &#x3D; 100 &amp; 001 &#x3D; 000 &#x3D; 05 &amp; 12 &#x3D; 0101 &amp;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-23 17:10" pubdate>
-              2022-05-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/pumpkin/categories/Java/" class="category-chain-item">Java</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/pumpkin/2022/05/20/Ohters/Kong/" target="_self">
           Kong
         </a>
@@ -599,15 +275,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/pumpkin/2022/05/20/Tools/Hexo/" target="_self">
-          Hexo
+        <a href="/pumpkin/2022/02/21/DevOps/Linux/Linux%20%E6%9D%83%E9%99%90/" target="_self">
+          
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/pumpkin/2022/05/20/Tools/Hexo/" target="_self">
+      <a class="index-excerpt" href="/pumpkin/2022/02/21/DevOps/Linux/Linux%20%E6%9D%83%E9%99%90/" target="_self">
         <div>
           
-          HexoHexo 搭建环境准备 Node.js Git  安装Hexo1npm install -g hexo-cli  启动本地项目123456# 初始化Hexo项目hexo init democd demonpm install# 启动本地Hexo项目hexo server  部署到Github 在Github上创建仓库 demo 安装插件  1npm install hexo-deploye
+          Linux 权限权限概述在 Linux 系统中，我们所有的操作实质都是在进行进程访问文件的操作。 我们访问文件需要先取得相应的访问权限，而访问权限是通过 Linux 系统中的安全模型获得的。 对于 Linux 系统中的安全模型，我们需要知道下面两点：  Linux 系统上最初的安全模型叫 DAC, 全称是 Discretionary Access Control ，翻译为自主访问控制。 后来又增加
         </div>
       </a>
 
@@ -615,32 +291,11 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-20 15:01" pubdate>
-              2022-05-20
+            <time datetime="2022-02-21 11:08" pubdate>
+              2022-02-21
             </time>
           </div>
         
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/pumpkin/categories/Tools/" class="category-chain-item">Tools</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
         
         
       </div>
@@ -653,12 +308,78 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/pumpkin/2021/11/30/Tools/Git/" target="_self">
+        <a href="/pumpkin/2022/01/13/Python/Selenium/" target="_self">
+          
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/pumpkin/2022/01/13/Python/Selenium/" target="_self">
+        <div>
+          
+          SeleniumSelenium控制已打开的Chrome (mac) 下载Webdriver放到&#x2F;user&#x2F;local&#x2F;bin目录下  添加环境变量   1export PATH&#x3D;&quot;&#x2F;Applications&#x2F;Google Chrome.app&#x2F;Contents&#x2F;MacOS:$PATH&quot;   命令打开Chrome  1Google\ Chrome --remote-debugg
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-13 16:11" pubdate>
+              2022-01-13
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pumpkin/2021/12/02/Ohters/Mac/" target="_self">
+          
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/pumpkin/2021/12/02/Ohters/Mac/" target="_self">
+        <div>
+          
+          Mac环境变量 profile 系统环境变量，对所有用户都生效 1&#x2F;etc&#x2F;profile  .bash_profile 用户级别环境变量，对单一用户生效 1~&#x2F;.bash_profile  .zshrc 用户级别环境变量，针对 zsh shell 1~&#x2F;.zshrc  光标快捷键12345678910111213141516Ctrl + h 退格删除一个字符，相当于通常的Backspace键Ct
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-02 11:05" pubdate>
+              2021-12-02
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pumpkin/2021/11/30/Ohters/Git/" target="_self">
           Git
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/pumpkin/2021/11/30/Tools/Git/" target="_self">
+      <a class="index-excerpt" href="/pumpkin/2021/11/30/Ohters/Git/" target="_self">
         <div>
           
           Git 仓库操作命令帮助 1git remote --help  查看远程仓库 1git remote -v  添加远程仓库 1git remote add origin https:&#x2F;&#x2F;gitee.com&#x2F;KeithRong&#x2F;demo.git  删除远程仓库 1git remote remove origin  Git 推送操作命令帮助 1234git fetch --helpgit add -
@@ -707,15 +428,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/pumpkin/2021/09/02/Ohters/Maven/" target="_self">
-          
+        <a href="/pumpkin/2021/10/18/Java/Spring/SpringWebFlux/" target="_self">
+          SpringWebFlux
         </a>
       </h1>
 
-      <a class="index-excerpt" href="/pumpkin/2021/09/02/Ohters/Maven/" target="_self">
+      <a class="index-excerpt" href="/pumpkin/2021/10/18/Java/Spring/SpringWebFlux/" target="_self">
         <div>
           
-          Maven1. Maven 加载顺序从左到右依次   项目中的pom.xml文件中的两种引用  123456789101112131415161718192021222324252627282930&lt;repositories&gt;  &lt;repository&gt;    &lt;id&gt;central&lt;&#x2F;id&gt;    &lt;url&gt;http:&#x2F;&#x2F;$&amp;#123;
+          Spring WebFlux开启线程会有1M栈内存的开销，栈内存使用超过1M会导致栈溢出 Tomcat有两个线程池：连接线程池、业务线程池  长轮询：客户端和服务器建立连接后不断开，等待服务端数据返回，默认90s，超出则续租。 响应式编程 (Reactor实现)  响应式编程操作中，Reactor是满足Reactive规范框架 Reactor有两个核心类，Mono和Flux，这两个类实现接口Pub
         </div>
       </a>
 
@@ -723,11 +444,248 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-02 14:05" pubdate>
-              2021-09-02
+            <time datetime="2021-10-18 14:00" pubdate>
+              2021-10-18
             </time>
           </div>
         
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/pumpkin/categories/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pumpkin/2021/10/18/Java/Spring/SpringMvc/" target="_self">
+          SpringMVC
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/pumpkin/2021/10/18/Java/Spring/SpringMvc/" target="_self">
+        <div>
+          
+          Spring MVCSpring MVC 基本配置web.xml 123456789101112131415161718192021222324252627&lt;?xml version&#x3D;&quot;1.0&quot; encoding&#x3D;&quot;UTF-8&quot;?&gt;&lt;web-app xmlns:xsi&#x3D;&quot;http:&#x2F;&#x2F;www.w3.org&#x2F;2001&#x2F;XMLSche
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-18 14:00" pubdate>
+              2021-10-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/pumpkin/categories/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pumpkin/2021/10/18/Java/Spring/SpringIoc/" target="_self">
+          SpringIOC
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/pumpkin/2021/10/18/Java/Spring/SpringIoc/" target="_self">
+        <div>
+          
+          Spring IOCSpring 容器Spring 容器 概述IoC也称为依赖注入（DI）。 在此过程中，对象仅通过构造函数参数，工厂方法的参数或在构造或从工厂方法返回后在对象实例上设置的属性来定义其依赖项 。 然后，容器在创建bean时注入那些依赖项。 此过程从根本上讲是通过使用类的直接构造或诸如服务定位器模式之类的控件来控制其依赖项的实例化或位置的bean本身的逆过程（因此称为Control的
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-18 14:00" pubdate>
+              2021-10-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/pumpkin/categories/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pumpkin/2021/10/18/Java/Spring/SpringCloud%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" target="_self">
+          SpringCloud 配置中心
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/pumpkin/2021/10/18/Java/Spring/SpringCloud%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" target="_self">
+        <div>
+          
+          Spring Cloud 配置中心Spring Cloud Config Center 新建一个Git配置仓库，配置文件命名规则如下  12345&#x2F;&amp;#123;application&amp;#125;&#x2F;&amp;#123;profile&amp;#125;[&#x2F;&amp;#123;label&amp;#125;]&#x2F;&amp;#123;application&amp;#125;-&amp;#123;profile&amp;#125;.yml&#x2F;&amp;#123;label&amp;#1
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-18 14:00" pubdate>
+              2021-10-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/pumpkin/categories/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/pumpkin/2021/10/18/Java/Spring/SpringCloud%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/" target="_self">
+          SpringCloud 链路追踪
+        </a>
+      </h1>
+
+      <a class="index-excerpt" href="/pumpkin/2021/10/18/Java/Spring/SpringCloud%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/" target="_self">
+        <div>
+          
+          Spring Cloud 链路追踪如果能跟踪每个请求，中间请求经过哪些微服务，请求耗时，网络延迟，业务逻辑耗时等。我们就能更好地分析系统瓶颈、解决系统问题。 链路追踪目的：解决错综复杂的服务调用中链路的查看。排查慢服务。 市面上链路追踪产品大部分都是基于google的Dapper论文 zipkin,twitter：开源的，是严格按照谷歌的Dapper论文来的 pinpoint：韩国的 Naver
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-18 14:00" pubdate>
+              2021-10-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/pumpkin/categories/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
         
         
       </div>
@@ -738,7 +696,7 @@
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/pumpkin/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/pumpkin/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/pumpkin/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/pumpkin/">1</a><span class="page-number current">2</span><a class="page-number" href="/pumpkin/page/3/#board">3</a><a class="page-number" href="/pumpkin/page/4/#board">4</a><span class="space">&hellip;</span><a class="page-number" href="/pumpkin/page/12/#board">12</a><a class="extend next" rel="next" href="/pumpkin/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

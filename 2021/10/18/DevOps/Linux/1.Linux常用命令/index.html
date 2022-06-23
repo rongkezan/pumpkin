@@ -1,0 +1,756 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pumpkin/img/fluid.png">
+  <link rel="icon" href="/pumpkin/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Keith">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Linux 命令常用命令ls1234567891011### lsls -a # 列出所有，包含隐藏ls -l # 列出详细信息ls -h # 配合-l显示文件大小# 通配符* 可以代表任意多个的字符? 代表任意一个字符[] 表示可以匹配字符组的任一个 例如 [abc] [a-d]示例：ls [abc]a.txt  cd12345cd 		# 切换到当前用户主目录cd ~	# 切换到当前用户主目录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pumpkin">
+<meta property="og:url" content="https://rongkezan.github.io/pumpkin/2021/10/18/DevOps/Linux/1.Linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Pumpkin">
+<meta property="og:description" content="Linux 命令常用命令ls1234567891011### lsls -a # 列出所有，包含隐藏ls -l # 列出详细信息ls -h # 配合-l显示文件大小# 通配符* 可以代表任意多个的字符? 代表任意一个字符[] 表示可以匹配字符组的任一个 例如 [abc] [a-d]示例：ls [abc]a.txt  cd12345cd 		# 切换到当前用户主目录cd ~	# 切换到当前用户主目录">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210406230655759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-10-18T06:00:05.929Z">
+<meta property="article:modified_time" content="2022-02-21T06:23:32.695Z">
+<meta property="article:author" content="Keith">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210406230655759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+  
+  
+  
+  <title>Pumpkin</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/pumpkin/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/pumpkin/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/pumpkin/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rongkezan.github.io","root":"/pumpkin/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/pumpkin/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/pumpkin/js/utils.js" ></script>
+  <script  src="/pumpkin/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/pumpkin/">
+      <strong>Pumpkin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/pumpkin/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-10-18 14:00" pubdate>
+          October 18, 2021 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.6k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          30 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Linux-命令"><a href="#Linux-命令" class="headerlink" title="Linux 命令"></a>Linux 命令</h1><h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment">## ls</span></span><br>ls -a # 列出所有，包含隐藏<br>ls -l # 列出详细信息<br>ls -h # 配合-l显示文件大小<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">通配符</span><br>* 可以代表任意多个的字符<br>? 代表任意一个字符<br>[] 表示可以匹配字符组的任一个 <br>例如 [abc] [a-d]<br>示例：ls [abc]a.txt<br></code></pre></td></tr></table></figure>
+
+<h3 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">cd 		# 切换到当前用户主目录<br>cd ~	# 切换到当前用户主目录<br>cd .	# 保持在当前目录<br>cd ..	# 返回上一级<br>cd -	# 在最近两次目录之间切换<br></code></pre></td></tr></table></figure>
+
+<h3 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">mkdir dir				# 创建目录<br>mkdir -p dir1/dir2		# 递归创建子目录<br></code></pre></td></tr></table></figure>
+
+<h3 id="rm-cp-mv"><a href="#rm-cp-mv" class="headerlink" title="rm cp mv"></a>rm cp mv</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">rm -r # 递归删除文件夹下的所有内容<br>rm -f # 强制删除，无需提示<br>cp -r # 复制目录文件，则递归复制子文件<br>mv		# 移动文件<br></code></pre></td></tr></table></figure>
+
+<h3 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">衔接：前一个命令的输出作为后一个命令的输入</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">管道会触发创建子进程</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">常用管道命令: more grep</span><br>ls -a | grep [keyword]<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">详细参数</span><br>-n 显示匹配行及行号<br>-v 显示不包含匹配文本的所有行(求反)<br>-i 忽略大小写<br>^a	行首，搜寻以a开头的行<br><span class="hljs-meta prompt_">ke$</span><span class="language-bash">	行尾，搜寻以ke结尾的行</span><br>示例：grep -nvi “hello world” 1.txt<br></code></pre></td></tr></table></figure>
+
+<h3 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">列出所有端口(包括监听和未监听的)</span><br>netstat -a<br><span class="hljs-meta prompt_"># </span><span class="language-bash">列出所有TCP端口</span><br>netstat -at<br><span class="hljs-meta prompt_"># </span><span class="language-bash">列出所有的UDP端口</span><br>netstat -au<br><span class="hljs-meta prompt_"># </span><span class="language-bash">列出所有监听状态下的端口</span><br>netstat -l<br><span class="hljs-meta prompt_"># </span><span class="language-bash">列出所有监听状态下的TCP端口</span><br>netstat -lt<br><span class="hljs-meta prompt_"># </span><span class="language-bash">列出所有监听状态下的UDP端口</span><br>netstat -lu<br><span class="hljs-meta prompt_"># </span><span class="language-bash">列出所有监听状态下的UNIX端口</span><br>netstat -lx<br><span class="hljs-meta prompt_"># </span><span class="language-bash">列出指定端口的进程</span><br>netstat -an | grep &#x27;:80&#x27;<br></code></pre></td></tr></table></figure>
+
+<h3 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs shell">独立命令(只能使用其中一个):<br>-c: 建立压缩档案<br>-x: 解压<br>-t: 查看内容<br>-r: 向压缩归档文件末尾追加文件<br>-u: 更新原压缩包中的文件<br><br>可选命令:<br>-z: 有gzip属性的<br>-j: 有bz2属性的<br>-Z: 有compress属性的<br>-v: 显示所有过程<br>-O: 将文件解开到标准输出<br><br>必需命令:<br>-f: 使用档案名字，切记，这个参数是最后一个参数，后面只能接档案名。<br><br>tar -xvf file.tar 			# 解压file.tar并展示过程<br>tar -xvzf file.tar.gz 	# 解压file.tar.gz并展示过程<br>tar -xjvf file.tar.bz2	# 解压file.tar.bz2并展示过程<br>tar -xZvf file.tar.Z		# 解压file.tar.Z并展示过程<br><br>tar -cvf all.tar * 					# 将目录里所有文件打包成all.tar<br>tar -czf jpg.tar.gz *.jpg   # 将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个名为jpg.tar.gz的压缩包<br>tar -cjf jpg.tar.bz2 *.jpg 	# 将目录里所有jpg文件打包成jpg.tar后，并且将其用bzip2压缩，生成一个名为jpg.tar.bz2的压缩包<br>tar -cZf jpg.tar.Z *.jpg    # 将目录里所有jpg文件打包成jpg.tar后，并且将其用compress压缩，生成一个jpg.tar.Z的压缩包<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">#</span><span class="language-bash"><span class="hljs-comment">## rar,zip</span></span><br>unrar e file.rar<br>unzip file.zip<br><br>rar a jpg.rar *.jpg # rar格式的压缩<br>zip jpg.zip *.jpg 	# zip格式的压缩<br></code></pre></td></tr></table></figure>
+
+<h3 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h3><p><strong>命令格式：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">tail [param] [doc]<br></code></pre></td></tr></table></figure>
+
+<p><strong>参数：</strong></p>
+<ul>
+<li>-f 循环读取</li>
+<li>-q 不显示处理信息</li>
+<li>-v 显示详细的处理信息</li>
+<li>-c&lt;数目&gt; 显示的字节数</li>
+<li>-n&lt;行数&gt; 显示文件的尾部 n 行内容</li>
+<li>–pid&#x3D;PID 与-f合用,表示在进程ID,PID死掉之后结束</li>
+<li>-q, –quiet, –silent 从不输出给出文件名的首部</li>
+<li>-s, –sleep-interval&#x3D;S 与-f合用,表示在每次反复的间隔休眠S秒</li>
+</ul>
+<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">echo<br>echo 1 &gt; 1.txt	# 将1输出到1.txt中<br>echo 1 &gt;&gt; 1.txt	# 将11追加到1.txt中<br></code></pre></td></tr></table></figure>
+
+<h3 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">cat			# 查看文件内容<br>cat -b	# 对非空输出行号<br>cat -n	# 对所有行输出行号<br>more		# 分屏查看文件内容<br></code></pre></td></tr></table></figure>
+
+<h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">find [路径] -name ”*.py“ # 查找指定路径下扩展名是.py的文件，包括子目录<br></code></pre></td></tr></table></figure>
+
+<h2 id="系统相关命令"><a href="#系统相关命令" class="headerlink" title="系统相关命令"></a>系统相关命令</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">查看系统时间</span><br>date<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看日历, -y 查看一年的日历</span><br>cal<br><span class="hljs-meta prompt_"># </span><span class="language-bash">显示磁盘剩余空间 -h:以人性化的方式显示</span><br>df -h<br><span class="hljs-meta prompt_"># </span><span class="language-bash">显示目录下的文件大小</span><br>du -h [目录名]<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看进程状态 a:显示所有进程 u:显示进程详细状态 x:显示没有控制终端的进程</span><br>ps aux<br><span class="hljs-meta prompt_"># </span><span class="language-bash">动态显示运行中的程序并排序</span><br>top<br><span class="hljs-meta prompt_"># </span><span class="language-bash">终止指定代号的进程，-9表示强行终止</span><br>kill [pid]<br>kill -9 [pid]<br><span class="hljs-meta prompt_"># </span><span class="language-bash">根据进程名查看运行进程</span><br>ps -ef | grep [进程名]<br></code></pre></td></tr></table></figure>
+
+<p>软链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">类似于windows的快捷方式，源文件要使用绝对路径，方便移动链接文件后还能使用</span><br>ln -s [source] [target]<br></code></pre></td></tr></table></figure>
+
+<p>硬链接</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">硬连接的源文件被删除，目标文件还是可以打开</span><br>ln [source] [target]<br></code></pre></td></tr></table></figure>
+
+<p>在 Linux 中，文件名和文件数据是分开存储的</p>
+<p>在 Linux 中，只有文件的硬链接数等于0才会被删除</p>
+<p>使用 ls -l 可以查看一个文件的硬链接数量</p>
+<p><img src="https://img-blog.csdnimg.cn/20210406230655759.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="Vi命令"><a href="#Vi命令" class="headerlink" title="Vi命令"></a>Vi命令</h2><ol>
+<li><p>命令行模式</p>
+<p>   按「ESC」键</p>
+</li>
+<li><p>插入模式</p>
+</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs css">「<span class="hljs-selector-tag">i</span>」：进入插入模式，从光标当前位置开始输入文件。<br>「<span class="hljs-selector-tag">a</span>」：进入插入模式，从目前光标所在位置的下一个位置开始输入文字。<br>「o」：进入插入模式，插入新的一行，从行首开始输入文字。<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>移动光标</li>
+</ol>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs elixir">「ctrl」+「b」：屏幕往<span class="hljs-string">&quot;后&quot;</span>移动一页。<br>「ctrl」+「f」：屏幕往<span class="hljs-string">&quot;前&quot;</span>移动一页。<br>「ctrl」+「u」：屏幕往<span class="hljs-string">&quot;后&quot;</span>移动半页。<br>「ctrl」+「d」：屏幕往<span class="hljs-string">&quot;前&quot;</span>移动半页。<br>「<span class="hljs-number">0</span>」：移到文章的开头。<br>「G」：移动到文章的最后。<br>「<span class="hljs-variable">$」</span>：移动到光标所在行的<span class="hljs-string">&quot;行尾&quot;</span>。<br>「^」：移动到光标所在行的<span class="hljs-string">&quot;行首&quot;</span><br>「w」：光标跳到下个字的开头<br>「e」：光标跳到下个字的字尾<br>「b」：光标回到上个字的开头<br></code></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>删除文字</li>
+</ol>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs clean">「x」：删除光标所在位置的<span class="hljs-string">&quot;后面&quot;</span><span class="hljs-number">1</span>个字符。<br>「#x」：删除光标所在位置的<span class="hljs-string">&quot;后面&quot;</span>#个字符。<br>「X」：删除光标所在位置的<span class="hljs-string">&quot;前面&quot;</span><span class="hljs-number">1</span>个字符。<br>「#X」：删除光标所在位置的<span class="hljs-string">&quot;前面&quot;</span>#个字符。<br>「dd」：删除光标所在行。<br>「#dd」：从光标所在行开始删除#行<br></code></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>复制文字</li>
+</ol>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs clean">「yw」：复制光标到行尾的字符。<br>「#yw」：复制#个字符。<br>「yy」：复制光标所在行。<br>「#yy」：复制包含光标所在行及后面的#行文字。<br>「p」：粘贴复制的文字到光标所在位置。<br></code></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>替换文字</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs powershell">「<span class="hljs-built_in">r</span>」：替换光标所在处的字符。<br>「<span class="hljs-built_in">R</span>」：替换光标所到之处的字符，直到按下「ESC」键为止。<br></code></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>返回上一次操作</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">按「u」键<br></code></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>更改</li>
+</ol>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean">「cw」：更改光标后到行尾的所有字符<br>「c#w」：更改光标后的#个字符<br></code></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>跳至指定的行</li>
+</ol>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean">「ctrl」+「g」：列出光标所在行的行号。<br>「#G」：移动光标至文章的第#行行首。<br></code></pre></td></tr></table></figure>
+
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>从指定url下载资源</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">yum install -y wget<br>wget http://download.redis.io/releases/redis-5.0.5.tar.gz<br></code></pre></td></tr></table></figure>
+
+<p>Linux开机启动项目录</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs powershell">/etc/init.d<br></code></pre></td></tr></table></figure>
+
+<p>Linux环境变量</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">修改环境变量</span><br>vi /etc/profile<br><span class="hljs-meta prompt_"># </span><span class="language-bash">重启环境变量</span><br>source /etc/profile<br></code></pre></td></tr></table></figure>
+
+<p>nc命令</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs powershell"><span class="hljs-comment"># 安装包</span><br>yum install <span class="hljs-literal">-y</span> nmap<span class="hljs-literal">-ncat</span><br><span class="hljs-comment"># 监听TCP/UDP端口</span><br>nc localhost <span class="hljs-number">6379</span><br></code></pre></td></tr></table></figure>
+
+<p>后台启动程序并输出日志</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell">nohup java -jar myproject.jar &gt;myproject.log 2&gt;&amp;1 &amp;<br><br>命令详解：<br>nohup：不挂断地运行命令，退出帐户之后继续运行相应的进程。<br><span class="hljs-meta prompt_">&gt;</span><span class="language-bash">myproject.log：控制台输出到myproject.log日志文件中。</span><br><span class="hljs-meta prompt_">2&gt;</span><span class="language-bash">&amp;1：标准错误重定向到标准输出。</span><br>最后的&amp;：让改作业在后台运行。<br></code></pre></td></tr></table></figure>
+
+<p>父子进程</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">/bin/bash 开启一个子进程<br>父子进程间数据是隔离的，但是父进程可以使用 <span class="hljs-built_in">export</span> 使子进程看到数据<br><span class="hljs-built_in">export</span> 的环境变量，子进程修改不会影响父进程，父进程修改也不会影响子进程<br></code></pre></td></tr></table></figure>
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>https://rongkezan.github.io/pumpkin/2021/10/18/DevOps/Linux/1.Linux常用命令/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Keith</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 18, 2021</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/pumpkin/2021/10/18/DevOps/Linux/2.IO%E6%A8%A1%E5%9E%8B/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/pumpkin/2021/10/18/DataSource/redis/redis%E8%BF%87%E6%9C%9F%E7%AD%96%E7%95%A5/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/pumpkin/js/events.js" ></script>
+<script  src="/pumpkin/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/pumpkin/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/pumpkin/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/pumpkin/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

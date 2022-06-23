@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pumpkin/img/fluid.png">
+  <link rel="icon" href="/pumpkin/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Keith">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="亿级流量多级缓存第一级缓存：DNS域名解析客户端访问一个域名的时候，会去DNS服务器上获取域名对应的IP并缓存到本地，一个域名可以对应多个IP  第二级缓存：Nginx缓存Nginx全局共享内存缓存 使用 lua 访问 nginx 的内存，线程越多，性能损耗越大 不是特别高并发的情况下可以用 shared_dict  1lua_shared_dict shared_data 1m;  123456">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pumpkin">
+<meta property="og:url" content="https://rongkezan.github.io/pumpkin/2021/09/02/DevOps/Addtional/%E4%BA%BF%E7%BA%A7%E6%B5%81%E9%87%8F%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98/index.html">
+<meta property="og:site_name" content="Pumpkin">
+<meta property="og:description" content="亿级流量多级缓存第一级缓存：DNS域名解析客户端访问一个域名的时候，会去DNS服务器上获取域名对应的IP并缓存到本地，一个域名可以对应多个IP  第二级缓存：Nginx缓存Nginx全局共享内存缓存 使用 lua 访问 nginx 的内存，线程越多，性能损耗越大 不是特别高并发的情况下可以用 shared_dict  1lua_shared_dict shared_data 1m;  123456">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210113220847835.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-09-02T06:05:08.225Z">
+<meta property="article:modified_time" content="2021-09-02T06:05:08.226Z">
+<meta property="article:author" content="Keith">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210113220847835.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+  
+  
+  
+  <title>Pumpkin</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/pumpkin/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/pumpkin/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/pumpkin/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rongkezan.github.io","root":"/pumpkin/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/pumpkin/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/pumpkin/js/utils.js" ></script>
+  <script  src="/pumpkin/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/pumpkin/">
+      <strong>Pumpkin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/pumpkin/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-09-02 14:05" pubdate>
+          September 2, 2021 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          45 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="亿级流量多级缓存"><a href="#亿级流量多级缓存" class="headerlink" title="亿级流量多级缓存"></a>亿级流量多级缓存</h1><h2 id="第一级缓存：DNS域名解析"><a href="#第一级缓存：DNS域名解析" class="headerlink" title="第一级缓存：DNS域名解析"></a>第一级缓存：DNS域名解析</h2><p>客户端访问一个域名的时候，会去DNS服务器上获取域名对应的IP并缓存到本地，一个域名可以对应多个IP</p>
+<p><img src="https://img-blog.csdnimg.cn/20210113220847835.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="第二级缓存：Nginx缓存"><a href="#第二级缓存：Nginx缓存" class="headerlink" title="第二级缓存：Nginx缓存"></a>第二级缓存：Nginx缓存</h2><h3 id="Nginx全局共享内存缓存"><a href="#Nginx全局共享内存缓存" class="headerlink" title="Nginx全局共享内存缓存"></a>Nginx全局共享内存缓存</h3><blockquote>
+<p>使用 lua 访问 nginx 的内存，线程越多，性能损耗越大</p>
+<p>不是特别高并发的情况下可以用 shared_dict</p>
+</blockquote>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">lua_shared_dict</span> shared_data <span class="hljs-number">1m</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> shared_data = ngx.shared.shared_data  <br><br><span class="hljs-keyword">local</span> i = shared_data:get(<span class="hljs-string">&quot;i&quot;</span>)  <br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> i <span class="hljs-keyword">then</span>  <br>    i = <span class="hljs-number">1</span>  <br>    shared_data:set(<span class="hljs-string">&quot;i&quot;</span>, i)  <br>    ngx.say(<span class="hljs-string">&quot;lazy set i &quot;</span>, i, <span class="hljs-string">&quot;&lt;br/&gt;&quot;</span>)  <br><span class="hljs-keyword">end</span>  <br>i = shared_data:incr(<span class="hljs-string">&quot;i&quot;</span>, <span class="hljs-number">1</span>)  <br>ngx.say(<span class="hljs-string">&quot;i=&quot;</span>, i, <span class="hljs-string">&quot;&lt;br/&gt;&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h3 id="lua-resty-lrucache"><a href="#lua-resty-lrucache" class="headerlink" title="lua-resty-lrucache"></a>lua-resty-lrucache</h3><p>Lua 实现的一个简单的 LRU 缓存，适合在 Lua 空间里直接缓存较为复杂的 Lua 数据结构：</p>
+<p>它相比 ngx_lua 共享内存字典可以省去较昂贵的序列化操作，相比 memcached 这样的外部服务又能省去较昂贵的 socket 操作</p>
+<p>lrucache 有两种实现</p>
+<ul>
+<li>resty.lrucache<ul>
+<li>适合用来缓存命中率高或读操作远远大于写操作的缓存业务</li>
+</ul>
+</li>
+<li>resty.lrucache.pureffi<ul>
+<li>适合用来缓存命中率低或需要对key进行频繁增、删操作的缓存业务</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs lua"><span class="hljs-keyword">local</span> lrucache = <span class="hljs-built_in">require</span> <span class="hljs-string">&quot;resty.lrucache&quot;</span><br><span class="hljs-keyword">local</span> c, err = lrucache.new(<span class="hljs-number">200</span>)<br>	c:set(<span class="hljs-string">&quot;dog&quot;</span>, <span class="hljs-number">32</span>)<br>    c:set(<span class="hljs-string">&quot;cat&quot;</span>, <span class="hljs-number">56</span>)<br>    ngx.say(<span class="hljs-string">&quot;dog: &quot;</span>, c:get(<span class="hljs-string">&quot;dog&quot;</span>))<br>    ngx.say(<span class="hljs-string">&quot;cat: &quot;</span>, c:get(<span class="hljs-string">&quot;cat&quot;</span>))<br><br>    c:set(<span class="hljs-string">&quot;dog&quot;</span>, &#123; age = <span class="hljs-number">10</span> &#125;, <span class="hljs-number">0.1</span>)  <span class="hljs-comment">-- expire in 0.1 sec</span><br>    c:delete(<span class="hljs-string">&quot;dog&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://github.com/openresty/lua-resty-lrucache#name">https://github.com/openresty/lua-resty-lrucache#name</a></p>
+<h3 id="URL一致性哈希负载均衡"><a href="#URL一致性哈希负载均衡" class="headerlink" title="URL一致性哈希负载均衡"></a>URL一致性哈希负载均衡</h3><p>nginx url_hash：Nginx第三方模块，在转发请求时如果后端服务器宕机，会导致503错误</p>
+<p>有针对性的对url进行一致性hash 定向负载到后端Nginx </p>
+<p>提高Nginx缓存系统命中率</p>
+<h3 id="Kong-基于Openresty的流量网关"><a href="#Kong-基于Openresty的流量网关" class="headerlink" title="Kong 基于Openresty的流量网关"></a>Kong 基于Openresty的流量网关</h3><p><a target="_blank" rel="noopener" href="https://konghq.com/">https://konghq.com/</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/kong/kong">https://github.com/kong/kong</a></p>
+<p>Kong 基于 OpenResty，是一个云原生、快速、可扩展、分布式的微服务抽象层（Microservice Abstraction Layer），也叫 API 网关（API Gateway），在 Service Mesh 里也叫 API 中间件（API Middleware）。</p>
+<p>Kong 开源于 2015 年，核心价值在于高性能和扩展性。从全球 5000 强的组织统计数据来看，Kong 是现在依然在维护的，在生产环境使用最广泛的 API 网关。</p>
+<p>Kong 宣称自己是世界上最流行的开源微服务 API 网关（The World’s Most Popular Open Source Microservice API Gateway）。</p>
+<p>核心优势：</p>
+<ul>
+<li><p>可扩展：可以方便的通过添加节点水平扩展，这意味着可以在很低的延迟下支持很大的系统负载。</p>
+</li>
+<li><p>模块化：可以通过添加新的插件来扩展 Kong 的能力，这些插件可以通过 RESTful Admin API 来安装和配置。</p>
+</li>
+<li><p>在任何基础架构上运行：Kong 可以在任何地方都能运行，比如在云或混合环境中部署 Kong，单个或全球的数据中心。</p>
+</li>
+</ul>
+<h2 id="客户端缓存"><a href="#客户端缓存" class="headerlink" title="客户端缓存"></a>客户端缓存</h2><h3 id="ETag"><a href="#ETag" class="headerlink" title="ETag"></a>ETag</h3><p>http1.1支持</p>
+<p>在HTTP协议中If-Modified-Since和If-None-Match分别对应Last-Modified和ETag</p>
+<p>Entity Tag 的缩写，中文译过来就是实体标签的意思.</p>
+<p>HTTP中并没有指定如何生成ETag，哈希是比较理想的选择。</p>
+<p>在计算Etag的时候，会产生CPU的耗费，所以也可以用时间戳，但这样直接使用Last-Modified即可。</p>
+<p>ETag 用来校验用户请求的资源是否有变化，作用和lastmodified很像，区别是lastmodified精确到秒，ETag可以用hash算法来生成更精确的比对内容。</p>
+<p>当用户首次请求资源的时候返回给用户数据和200状态码并生成ETag，再次请求的时候服务器比对ETag，没有发生变化的话返回304</p>
+<h3 id="Cache-Control、-Last-Modified-、Expires"><a href="#Cache-Control、-Last-Modified-、Expires" class="headerlink" title="Cache-Control、 Last-Modified 、Expires"></a>Cache-Control、 Last-Modified 、Expires</h3><p>Last-Modified : 表示文档最后修改时间，浏览器在访问重复资源的时候会发送IF-Modified-Since 携带此时间去服务器验证，如果时间匹配则返回304，浏览器加载本地资源</p>
+<p>Expires： 文档过期时间，在浏览器内可以通过这个时间来判断是否发送请求</p>
+<p>Cache-Control ：http1.1的规范，使用max-age表示文件可以在浏览器中缓存的时间以秒为单位</p>
+<p>Cache-Control：缓存头，分为响应头和请求头</p>
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>类型</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public</td>
+<td>响应头</td>
+<td>响应的数据可以被缓存，客户端和代理层都可以缓存</td>
+</tr>
+<tr>
+<td>private</td>
+<td>响应头</td>
+<td>可私有缓存，客户端可以缓存，代理层不能缓存（CDN，proxy_pass）</td>
+</tr>
+<tr>
+<td>no-cache</td>
+<td>请求头</td>
+<td>可以使用本地缓存，但是必须发送请求到服务器回源验证</td>
+</tr>
+<tr>
+<td>no-store</td>
+<td>请求和响应</td>
+<td>应禁用缓存</td>
+</tr>
+<tr>
+<td>max-age</td>
+<td>请求和响应</td>
+<td>文件可以在浏览器中缓存的时间以秒为单位</td>
+</tr>
+<tr>
+<td>s-maxage</td>
+<td>请求和响应</td>
+<td>用户代理层缓存，CDN下发，当客户端数据过期时会重新校验</td>
+</tr>
+<tr>
+<td>max-stale</td>
+<td>请求和响应</td>
+<td>缓存最大使用时间，如果缓存过期，但还在这个时间范围内则可以使用缓存数据</td>
+</tr>
+<tr>
+<td>min-fresh</td>
+<td>请求和响应</td>
+<td>缓存最小使用时间，</td>
+</tr>
+<tr>
+<td>must-revalidate</td>
+<td>请求和响应</td>
+<td>当缓存过期后，必须回源重新请求资源。比no-cache更严格。因为HTTP 规范是允许客户端在某些特殊情况下直接使用过期缓存的，比如校验请求发送失败的时候。那么带有must-revalidate的缓存必须校验，其他条件全部失效。</td>
+</tr>
+<tr>
+<td>proxy-revalidate</td>
+<td>请求和响应</td>
+<td>和must-revalidate类似，只对CDN这种代理服务器有效，客户端遇到此头，需要回源验证</td>
+</tr>
+<tr>
+<td>stale-while-revalidate</td>
+<td>响应</td>
+<td>表示在指定时间内可以先使用本地缓存，后台进行异步校验</td>
+</tr>
+<tr>
+<td>stale-if-error</td>
+<td>响应</td>
+<td>在指定时间内，重新验证时返回状态码为5XX的时候，可以用本地缓存</td>
+</tr>
+<tr>
+<td>only-if-cached</td>
+<td>响应</td>
+<td>那么只使用缓存内容，如果没有缓存 则504 getway timeout</td>
+</tr>
+</tbody></table>
+<p>在浏览器和服务器端验证文件是否过期的时候，浏览器在二次请求的时候会携带IF-Modified-Since属性</p>
+<h3 id="Cache-Control和ETag的区别"><a href="#Cache-Control和ETag的区别" class="headerlink" title="Cache-Control和ETag的区别"></a>Cache-Control和ETag的区别</h3><p>Cache-Control直接是通过不请求来实现，而ETag是会发请求的，只不过服务器根据请求的东西的内容有无变化来判断是否返回请求的资源</p>
+<p>java实现Cache-Control Last-Modified</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">CacheController</span> &#123;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">MyFile</span> <span class="hljs-variable">file</span> <span class="hljs-operator">=</span> MyFile.getInstance();<br>	<span class="hljs-meta">@RequestMapping(&quot;/&quot;)</span><br>	<span class="hljs-keyword">public</span> ResponseEntity&lt;String&gt; <span class="hljs-title function_">last</span><span class="hljs-params">(<span class="hljs-meta">@RequestHeader(value=&quot;IF-Modified-Since&quot;,required = false)</span> Date ifModifiedSince)</span> &#123;<br>		<span class="hljs-type">SimpleDateFormat</span> <span class="hljs-variable">simpleDateFormat</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SimpleDateFormat</span>(<span class="hljs-string">&quot;EEE, d MMM yyyy HH:mm:ss &#x27;GMT&#x27;&quot;</span>, Locale.US);<br>		<span class="hljs-type">long</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> System.currentTimeMillis();<br>		System.out.println(now);	<span class="hljs-comment">// 系统当前时间</span><br>		<span class="hljs-type">long</span> <span class="hljs-variable">maxAge</span> <span class="hljs-operator">=</span> <span class="hljs-number">20</span>;			<span class="hljs-comment">// 缓存时间</span><br>		<span class="hljs-type">HttpHeaders</span> <span class="hljs-variable">headers</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpHeaders</span>();<br>		<span class="hljs-keyword">if</span> (<span class="hljs-literal">null</span> != ifModifiedSince &amp;&amp; ifModifiedSince.getTime() == file.getLastModified() ) &#123;<br>			System.out.println(<span class="hljs-number">304</span>);<br>		&#125;<br>		headers.add(<span class="hljs-string">&quot;Date&quot;</span>, simpleDateFormat.format(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(now)));<br>		headers.add(<span class="hljs-string">&quot;Expires&quot;</span>, simpleDateFormat.format(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(now + maxAge * <span class="hljs-number">1000</span>)));<br>		headers.add(<span class="hljs-string">&quot;Cache-Control&quot;</span>, <span class="hljs-string">&quot;max-age=&quot;</span>+maxAge);<br>		headers.add(<span class="hljs-string">&quot;Last-Modified&quot;</span>, simpleDateFormat.format(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(file.getLastModified())));<br>		<span class="hljs-type">String</span> <span class="hljs-variable">body</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&lt;a href =&#x27;&#x27;&gt;hi点我&lt;/a&gt;&quot;</span>;<br>		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ResponseEntity</span>&lt;&gt;(body,headers,HttpStatus.OK);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyFile</span> &#123;<br>	<span class="hljs-keyword">private</span> String name;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">long</span> lastModified;<br>	<span class="hljs-keyword">private</span> <span class="hljs-type">long</span> expireTime;<br>	<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> MyFile file ;<br>	<br>	<span class="hljs-keyword">private</span> <span class="hljs-title function_">MyFile</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-built_in">this</span>.name = <span class="hljs-string">&quot;file...&quot;</span>;<br>		<span class="hljs-built_in">this</span>.lastModified = System.currentTimeMillis() /<span class="hljs-number">1000</span> * <span class="hljs-number">1000</span>;<br>		<span class="hljs-built_in">this</span>.expireTime = <span class="hljs-number">10</span> *<span class="hljs-number">1000</span>;<br>	&#125;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> MyFile <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-keyword">if</span>(file==<span class="hljs-literal">null</span>) &#123;<br>			file = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyFile</span>();<br>		&#125;<br>		<span class="hljs-keyword">return</span> file;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="强制刷新"><a href="#强制刷新" class="headerlink" title="强制刷新"></a>强制刷新</h3><p>在强制刷新的时候浏览器就不在发送<code>IF-Modified-Since</code>了，而会带上<code>from disk cache &amp; from memory cache</code></p>
+<p>可以验证请求是否使用了浏览器缓存和是否发送请求给服务器端。</p>
+<p>当点击链接、引入外部资源和浏览器的前进后退的时候。</p>
+<p>from memory cache：这个资源是直接从内存中拿到的，<strong>不会请求服务器</strong>一般已经加载过该资源且缓存在了内存当中，当关闭该页面时，此资源就被内存释放掉了，再次重新打开相同页面时不会出现from memory cache的情况</p>
+<p>from disk cache：是从磁盘当中取出的，也是在已经在之前的某个时间加载过该资源，<strong>不会请求服务器</strong>但是此资源不会随着该页面的关闭而释放掉，因为是存在硬盘当中的，下次打开仍会from disk cache</p>
+<p>Age：是CDN添加的属性表示在CDN中缓存了多少秒</p>
+<p>via：用来标识CDN缓存经历了哪些服务器，缓存是否命中，使用的协议</p>
+<h2 id="限流"><a href="#限流" class="headerlink" title="限流"></a>限流</h2><p>漏桶算法、令牌桶算法、计数器</p>
+<h3 id="Tomcat限流"><a href="#Tomcat限流" class="headerlink" title="Tomcat限流"></a>Tomcat限流</h3><p>server.xml 配置文件中的 Connector 节点</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">Connector</span> <span class="hljs-attr">port</span>=<span class="hljs-string">&quot;8080&quot;</span> <span class="hljs-attr">protocol</span>=<span class="hljs-string">&quot;HTTP/1.1&quot;</span> <span class="hljs-attr">connectionTimeout</span>=<span class="hljs-string">&quot;20000&quot;</span> <span class="hljs-attr">redirectPort</span>=<span class="hljs-string">&quot;8443&quot;</span> <span class="hljs-attr">maxConnections</span>=<span class="hljs-string">&quot;800&quot;</span> <span class="hljs-attr">acceptCount</span>=<span class="hljs-string">&quot;500&quot;</span> <span class="hljs-attr">maxThreads</span>=<span class="hljs-string">&quot;400&quot;</span> /&gt;</span><br><br>maxThreads：tomcat能并发处理的最大线程数<br>acceptCount：tomcat起动的线程数达到最大时，接受排队的请求个数，默认值为100 <br>maxConnections：瞬时最大连接数，超出会排队等待<br></code></pre></td></tr></table></figure>
+
+<h2 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h2><p>域名由两部分组成，name 和 domain，比如 baidu.com，baidu 是名，com是域</p>
+<p>二级域名：a.baidu.com</p>
+<p>三级域名：b.a.baidu.com</p>
+<p>以此类推</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>https://rongkezan.github.io/pumpkin/2021/09/02/DevOps/Addtional/亿级流量多级缓存/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Keith</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>September 2, 2021</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/pumpkin/2021/09/02/DevOps/Addtional/%E5%A4%A7%E5%9E%8B%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/pumpkin/2021/09/02/DevOps/Addtional/README/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/pumpkin/js/events.js" ></script>
+<script  src="/pumpkin/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/pumpkin/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/pumpkin/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/pumpkin/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

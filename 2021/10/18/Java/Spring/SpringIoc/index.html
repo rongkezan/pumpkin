@@ -1,0 +1,941 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pumpkin/img/fluid.png">
+  <link rel="icon" href="/pumpkin/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Keith">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Spring IOCSpring 容器Spring 容器 概述IoC也称为依赖注入（DI）。 在此过程中，对象仅通过构造函数参数，工厂方法的参数或在构造或从工厂方法返回后在对象实例上设置的属性来定义其依赖项 。 然后，容器在创建bean时注入那些依赖项。 此过程从根本上讲是通过使用类的直接构造或诸如服务定位器模式之类的控件来控制其依赖项的实例化或位置的bean本身的逆过程（因此称为Control的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringIOC">
+<meta property="og:url" content="https://rongkezan.github.io/pumpkin/2021/10/18/Java/Spring/SpringIoc/index.html">
+<meta property="og:site_name" content="Pumpkin">
+<meta property="og:description" content="Spring IOCSpring 容器Spring 容器 概述IoC也称为依赖注入（DI）。 在此过程中，对象仅通过构造函数参数，工厂方法的参数或在构造或从工厂方法返回后在对象实例上设置的属性来定义其依赖项 。 然后，容器在创建bean时注入那些依赖项。 此过程从根本上讲是通过使用类的直接构造或诸如服务定位器模式之类的控件来控制其依赖项的实例化或位置的bean本身的逆过程（因此称为Control的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210116230540355.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210116235007738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2020121916571615.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-10-18T06:00:05.942Z">
+<meta property="article:modified_time" content="2022-06-23T09:28:34.726Z">
+<meta property="article:author" content="Keith">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210116230540355.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+  
+  
+  
+  <title>SpringIOC - Pumpkin</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/pumpkin/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/pumpkin/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/pumpkin/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rongkezan.github.io","root":"/pumpkin/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/pumpkin/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/pumpkin/js/utils.js" ></script>
+  <script  src="/pumpkin/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/pumpkin/">
+      <strong>Pumpkin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/pumpkin/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SpringIOC"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-10-18 14:00" pubdate>
+          October 18, 2021 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          17k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          143 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SpringIOC</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Spring-IOC"><a href="#Spring-IOC" class="headerlink" title="Spring IOC"></a>Spring IOC</h1><h2 id="Spring-容器"><a href="#Spring-容器" class="headerlink" title="Spring 容器"></a>Spring 容器</h2><h3 id="Spring-容器-概述"><a href="#Spring-容器-概述" class="headerlink" title="Spring 容器 概述"></a>Spring 容器 概述</h3><p>IoC也称为依赖注入（DI）。 在此过程中，对象仅通过构造函数参数，工厂方法的参数或在构造或从工厂方法返回后在对象实例上设置的属性来定义其依赖项 。 然后，容器在创建bean时注入那些依赖项。 此过程从根本上讲是通过使用类的直接构造或诸如服务定位器模式之类的控件来控制其依赖项的实例化或位置的bean本身的逆过程（因此称为Control的倒置）。</p>
+<p>核心依赖包：<code>org.springframework.beans</code> <code>org.springframework.context</code></p>
+<p>BeanFacotory接口提供了能管理任何类型对象的配置机制，ApplicationContext是它的一个子接口，增加了如下机制：</p>
+<ul>
+<li>Spring AOP 特性的简单集成</li>
+<li>消息资源处理</li>
+<li>事件发布</li>
+<li>应用层面类似 <code>WebApplicationContext</code> 的上下文用于Web应用</li>
+</ul>
+<p>ApplicationContext接口代表Spring IoC容器，并负责实例化，配置和组装Bean</p>
+<p>容器通过读取配置元数据获取有关要实例化，配置和组装哪些对象的指令。</p>
+<p>配置元数据：XML，Java注解，Java代码</p>
+<p>ApplicationContext 常用的两种实现：ClassPathXmlApplicationContext, FileSystemXmlApplicationContext</p>
+<h3 id="Spring-容器整体视图"><a href="#Spring-容器整体视图" class="headerlink" title="Spring 容器整体视图"></a>Spring 容器整体视图</h3><p><img src="https://img-blog.csdnimg.cn/20210116230540355.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h3 id="Spring-接口"><a href="#Spring-接口" class="headerlink" title="Spring 接口"></a>Spring 接口</h3><p><img src="https://img-blog.csdnimg.cn/20210116235007738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h3 id="Spring-容器-实例化"><a href="#Spring-容器-实例化" class="headerlink" title="Spring 容器 实例化"></a>Spring 容器 实例化</h3><p>下面代码可以实例化一个Spring容器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// create and configure beans</span><br><span class="hljs-type">ApplicationContext</span> <span class="hljs-variable">context</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ClassPathXmlApplicationContext</span>(<span class="hljs-string">&quot;applicationContext.xml&quot;</span>);<br><br><span class="hljs-comment">// retrieve configured instance</span><br><span class="hljs-type">PetStoreService</span> <span class="hljs-variable">service</span> <span class="hljs-operator">=</span> context.getBean(<span class="hljs-string">&quot;petStore&quot;</span>, PetStoreService.class);<br><br><span class="hljs-comment">// use configured instance</span><br>List&lt;String&gt; userList = service.getUsernameList();<br></code></pre></td></tr></table></figure>
+
+<p>更灵活的变体是使用 GenericApplicationContext 结合读取委托器使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">GenericApplicationContext</span> <span class="hljs-variable">context</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GenericApplicationContext</span>();<br><span class="hljs-keyword">new</span> <span class="hljs-title class_">XmlBeanDefinitionReader</span>(context).loadBeanDefinitions(<span class="hljs-string">&quot;applicationContext.xml&quot;</span>);<br>context.refresh();<br></code></pre></td></tr></table></figure>
+
+<p>实现ApplicationContextAware接口得到ApplicationContext</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyApplicationContext</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ApplicationContextAware</span> &#123;<br><br>    <span class="hljs-keyword">private</span> ApplicationContext applicationContext;<br>    <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setApplicationContext</span><span class="hljs-params">(ApplicationContext applicationContext)</span> <span class="hljs-keyword">throws</span> BeansException &#123;<br>        <span class="hljs-built_in">this</span>.applicationContext = applicationContext;    <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>applicationContext.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="hljs-tag">    <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://www.springframework.org/schema/beans</span></span><br><span class="hljs-string"><span class="hljs-tag">        https://www.springframework.org/schema/beans/spring-beans.xsd&quot;</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- services --&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;petStore&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.springframework.samples.jpetstore.services.PetStoreServiceImpl&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;accountDao&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;accountDao&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;itemDao&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;itemDao&quot;</span>/&gt;</span><br>        <span class="hljs-comment">&lt;!-- additional collaborators and configuration for this bean go here --&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br><br>    <span class="hljs-comment">&lt;!-- more bean definitions for services go here --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Spring-容器-核心流程"><a href="#Spring-容器-核心流程" class="headerlink" title="Spring 容器 核心流程"></a>Spring 容器 核心流程</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// There has a method named &quot;loadBeanDefinitions&quot; attampt to resolve resources like xml, annotation, groovy.</span><br><span class="hljs-comment">// These sources will be resolved to &quot;BeanDefinition&quot; through &quot;BeanDefinitionReader&quot;. </span><br><span class="hljs-type">ConfigurableListableBeanFactory</span> <span class="hljs-variable">beanFactory</span> <span class="hljs-operator">=</span> obtainFreshBeanFactory();<br><br><span class="hljs-comment">// Invoke factory processors registered as beans in the context.</span><br><span class="hljs-comment">// First, invoke the BeanFactoryPostProcessors that implement PriorityOrdered.</span><br><span class="hljs-comment">// Next, invoke the BeanFactoryPostProcessors that implement Ordered.</span><br><span class="hljs-comment">// Finally, invoke all other BeanFactoryPostProcessors.</span><br>invokeBeanFactoryPostProcessors(beanFactory);<br><br><span class="hljs-comment">// Register bean processors that intercept bean creation.</span><br><span class="hljs-comment">// add &quot;BeanPostProcessor&quot; to a CopyOnWriteArrayList named &quot;beanPostProcessors&quot;</span><br>registerBeanPostProcessors(beanFactory);<br><br><span class="hljs-comment">// Add beans that implement ApplicationListener as listeners.</span><br>registerListeners();<br><br><span class="hljs-comment">// Instantiate all remaining (non-lazy-init) singletons.</span><br><span class="hljs-comment">// First, it will merge beans with same beanName, there has a &quot;applyMergedBeanDefinitionPostProcessors&quot; to handle these merged beans.</span><br><span class="hljs-comment">// Next, it will find from cache whether bean exists, if the bean is not exists, it will create by &quot;ObjectFactory&quot;.</span><br><span class="hljs-comment">// Finally, put this bean into cache and return this bean.</span><br>finishBeanFactoryInitialization(beanFactory);<br><br><span class="hljs-comment">// Last step: publish corresponding event, Observer pattern.</span><br>finishRefresh();<br></code></pre></td></tr></table></figure>
+
+<h3 id="Spring-父子容器"><a href="#Spring-父子容器" class="headerlink" title="Spring 父子容器"></a>Spring 父子容器</h3><p>寻找Bean的时候，先从子容器里拿，拿不到再从父容器中拿</p>
+<p>父容器不能访问子容器，子容器可以访问父容器，原因是父容器没有子容器的引用。</p>
+<p>HierarchicalBeanFactory 中只有得到父容器的方法 getParentBeanFactory</p>
+<p>如果在父容器中对Bean进行了增强，而这个Bean定义在了子容器中，那就不会把子容器中的Bean进行增强</p>
+<h2 id="Spring-Bean"><a href="#Spring-Bean" class="headerlink" title="Spring Bean"></a>Spring Bean</h2><p>Spring IoC容器管理一个或多个Bean。这些Bean是使用您提供给容器的配置元数据创建的（例如，以XML<code>&lt;bean/&gt;</code>定义的形式 ）。</p>
+<p>在容器本身内，这些bean定义表示为<code>BeanDefinition</code> 对象，其中包含以下元数据：</p>
+<ul>
+<li>包限定的类名：通常，定义了Bean的实际实现类。</li>
+<li>Bean行为配置元素，用于声明Bean在容器中的行为（作用域，生命周期回调等）。</li>
+<li>引用该bean完成其工作所需的其他bean。这些引用也称为协作者或依赖项。</li>
+<li>要在新创建的对象中设置的其他配置设置。例如，池的大小限制。</li>
+</ul>
+<p>依赖注入的三种方式：构造函数注入、setter注入、接口注入</p>
+<h3 id="Spring-Bean-创建"><a href="#Spring-Bean-创建" class="headerlink" title="Spring Bean 创建"></a>Spring Bean 创建</h3><p><strong>Bean创建流程</strong></p>
+<p>BeanDefinitionReader 通过 xml&#x2F;annotation 获得 Bean 的源信息，Bean 被实例化之后通过一系列的 Processor 最终完成Bean的创建</p>
+<h4 id="1-包扫描注解-组件注解"><a href="#1-包扫描注解-组件注解" class="headerlink" title="1. 包扫描注解  +  组件注解"></a>1. 包扫描注解  +  组件注解</h4><p>@ComponentScan + @Controller @Service @Component …</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.demo.controller;<br><span class="hljs-meta">@Controller</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestController</span> &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@ComponentScan(value = &quot;com.demo&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringConfig</span> &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>ComponentScan 使用 Filter 排除某一种类型的 Bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 例: 排除了Contrller注解的Bean</span><br><span class="hljs-meta">@ComponentScan(value = &quot;com.demo&quot;,</span><br><span class="hljs-meta">        excludeFilters = &#123;@ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Controller.class)&#125;)</span><br></code></pre></td></tr></table></figure>
+
+<p>FilterType种类</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">ANNOTATION:</span> 注解<br><span class="hljs-symbol">ASSIGNABLE_TYPE:</span> 类型<br><span class="hljs-symbol">ASPECTJ:</span> 使用ASPECTJ表达式<br><span class="hljs-symbol">REGEX:</span> 使用正则表达式<br><span class="hljs-symbol">CUSTOM:</span> 自定义规则(TypeFilter的实现类)<br></code></pre></td></tr></table></figure>
+
+<h4 id="2-Bean"><a href="#2-Bean" class="headerlink" title="2. @Bean"></a>2. @Bean</h4><p>通常用于导入第三方包里面的组件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringConfig</span> &#123;<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> User <span class="hljs-title function_">user</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="3-Import"><a href="#3-Import" class="headerlink" title="3. @Import"></a>3. @Import</h4><p>​	@Import直接注入</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs less"><span class="hljs-variable">@Configuration</span><br><span class="hljs-variable">@Import</span>(User.class)<br>public class SpringConfig &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​	ImportSelector：使用Import给容器中导入多个组件</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@Import(MyImportSelector.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringConfig</span> &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyImportSelector</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ImportSelector</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String[] selectImports(AnnotationMetadata annotationMetadata) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[]&#123;User.class.getName()&#125;;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>​	ImportBeanDefinitionRegistrar：手动注册Bean到容器中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@Import(MyImportBeanDefinitionRegistrar.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringConfig</span> &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyImportBeanDefinitionRegistrar</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ImportBeanDefinitionRegistrar</span> &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">registerBeanDefinitions</span><span class="hljs-params">(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry)</span> &#123;<br>        <span class="hljs-type">BeanDefinition</span> <span class="hljs-variable">beanDefinition</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RootBeanDefinition</span>(User.class);<br>        registry.registerBeanDefinition(<span class="hljs-string">&quot;user&quot;</span>, beanDefinition);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h4 id="4-FactoryBean"><a href="#4-FactoryBean" class="headerlink" title="4. FactoryBean"></a>4. FactoryBean</h4><p>可用于自定义实例化逻辑</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserFactoryBean</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">FactoryBean</span>&lt;User&gt; &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> User <span class="hljs-title function_">getObject</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Class&lt;?&gt; getObjectType() &#123;<br>        <span class="hljs-keyword">return</span> User.class;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">isSingleton</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringConfig</span> &#123;<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> UserFactoryBean <span class="hljs-title function_">userFactoryBean</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserFactoryBean</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 返回的是User对象</span><br><span class="hljs-type">User</span> <span class="hljs-variable">user</span> <span class="hljs-operator">=</span> (User) applicationContext.getBean(<span class="hljs-string">&quot;userFactoryBean&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<h3 id="Spring-Bean-Scope"><a href="#Spring-Bean-Scope" class="headerlink" title="Spring Bean Scope"></a>Spring Bean Scope</h3><ol>
+<li><p>singleton：每个IOC容器仅有一个单实例，容器创建时创建Bean</p>
+<p>使用 <code>@Lazy</code> 注解懒加载Bean，即获取时加载</p>
+</li>
+<li><p>prototype：每次请求产生一个新实例，请求时创建Bean</p>
+</li>
+<li><p>request：每次Http请求产生一个新实例</p>
+</li>
+<li><p>session：每次Http请求产生一个新的Bean，仅在当前Http Session内有效</p>
+</li>
+<li><p>application：类似标准HttpSession作用域</p>
+</li>
+</ol>
+<h3 id="Spring-Bean-生命周期"><a href="#Spring-Bean-生命周期" class="headerlink" title="Spring Bean 生命周期"></a>Spring Bean 生命周期</h3><h4 id="Spring-Bean-生命周期流程"><a href="#Spring-Bean-生命周期流程" class="headerlink" title="Spring Bean 生命周期流程"></a>Spring Bean 生命周期流程</h4><ol>
+<li>BeanPostProcessor Before Initialization</li>
+<li>InitializingBean</li>
+<li>init-method</li>
+<li>BeanPostProcessor After Initialization</li>
+<li>Disposable Bean</li>
+<li>destory-method</li>
+</ol>
+<h4 id="Spring-Bean-创建流程"><a href="#Spring-Bean-创建流程" class="headerlink" title="Spring Bean 创建流程"></a>Spring Bean 创建流程</h4><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">refresh<span class="hljs-literal">()</span>;<br>finish<span class="hljs-constructor">BeanFactoryInitialization(<span class="hljs-params">beanFactory</span>)</span>;<br>beanFactory.pre<span class="hljs-constructor">InstantiateSingletons()</span>;<br>get<span class="hljs-constructor">Bean(<span class="hljs-params">beanName</span>)</span>;<br><span class="hljs-keyword">do</span><span class="hljs-constructor">GetBean(<span class="hljs-params">name</span>, <span class="hljs-params">null</span>, <span class="hljs-params">null</span>, <span class="hljs-params">false</span>)</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 从缓存中检查是否有这个Bean</span><br><span class="hljs-type">Object</span> <span class="hljs-variable">sharedInstance</span> <span class="hljs-operator">=</span> getSingleton(beanName);<br><span class="hljs-comment">// 如果没有，就实例化一个Bean</span><br><span class="hljs-keyword">if</span> (sharedInstance != <span class="hljs-literal">null</span> &amp;&amp; args == <span class="hljs-literal">null</span>) &#123;<br>    bean = getObjectForBeanInstance(sharedInstance, name, beanName, <span class="hljs-literal">null</span>);<br>&#125;<br><span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">final</span> <span class="hljs-type">RootBeanDefinition</span> <span class="hljs-variable">mbd</span> <span class="hljs-operator">=</span> getMergedLocalBeanDefinition(beanName);<br>    <span class="hljs-comment">// 取得依赖的Bean，即创建当前Bean之前需要提前创建的Bean</span><br>    String[] dependsOn = mbd.getDependsOn();<br>    <span class="hljs-keyword">if</span> (dependsOn != <span class="hljs-literal">null</span>) &#123;<br>        <span class="hljs-keyword">for</span> (String dep : dependsOn) &#123;<br>            registerDependentBean(dep, beanName);<br>            getBean(dep);<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">// 创建Bean实例</span><br>    <span class="hljs-keyword">if</span> (mbd.isSingleton()) &#123;<br>        sharedInstance = getSingleton(beanName, () -&gt; createBean(beanName, mbd, args));<br>        bean = getObjectForBeanInstance(sharedInstance, name, beanName, mbd);<br>    &#125;<br>&#125;<br><span class="hljs-keyword">return</span> (T) bean;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">getSingleton(beanName, () -&gt; createBean(beanName, mbd, args));<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 先从Map中拿</span><br><span class="hljs-type">Object</span> <span class="hljs-variable">singletonObject</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.singletonObjects.get(beanName);<br><span class="hljs-comment">// 没有的话再创建</span><br>singletonObject = singletonFactory.getObject();<br><span class="hljs-comment">// 加到Map中</span><br>addSingleton(beanName, singletonObject);<br></code></pre></td></tr></table></figure>
+
+<p> IOC容器之一：保存单实例Bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Map&lt;String, Object&gt; singletonObjects = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ConcurrentHashMap</span>&lt;&gt;(<span class="hljs-number">256</span>);<br></code></pre></td></tr></table></figure>
+
+<p>BeanFactory：负责创建bean实例，容器里保存的所有单例Bean其实是一个map</p>
+<p>ApplicationContext：BeanFactory的子接口，基于BeanFactory创建的对象之上完成容器的功能实现</p>
+<p><img src="https://img-blog.csdnimg.cn/2020121916571615.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h4 id="Spring-Bean-生命周期回调"><a href="#Spring-Bean-生命周期回调" class="headerlink" title="Spring Bean 生命周期回调"></a>Spring Bean 生命周期回调</h4><blockquote>
+<p>只有单实例Bean才会被容器管理，多实例Bean不会被容器管理</p>
+</blockquote>
+<p>调用顺序</p>
+<ul>
+<li>初始化：对象创建完成，并赋值好，调用初始化方法</li>
+<li>销毁：容器关闭时</li>
+</ul>
+<p>控制 Bean 生命周期行为的三个选项：</p>
+<ul>
+<li>@PostConstruct 和@PreDestroy 注解（推荐）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoBean</span> &#123;<br><br>    <span class="hljs-meta">@PostConstruct</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">init</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">// init method</span><br>    &#125;<br><br>    <span class="hljs-meta">@PreDestroy</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destory</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">// destory method</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>自定义 init() 和 destroy() 方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean(initMethod = &quot;init&quot;, destroyMethod = &quot;destroy&quot;)</span><br><span class="hljs-keyword">public</span> User <span class="hljs-title function_">user</span><span class="hljs-params">()</span>&#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>实现InitializingBean和DisposableBean接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DemoBean</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">InitializingBean</span>, DisposableBean &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">afterPropertiesSet</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// init method</span><br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">destroy</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        <span class="hljs-comment">// destroy method</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>BeanPostProcessor：Bean的后置处理器</strong></p>
+<p>Spring底层对BeanPostProcessor的使用：Bean赋值，组件的注入，生命周期注解</p>
+<ul>
+<li>postProcessBeforeInitialization：在初始化（例如 @PostConstruct）之前工作</li>
+<li>postProcessAfterInitialization：在初始化之后工作</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyBeanPostProcessor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">BeanPostProcessor</span> &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">postProcessBeforeInitialization</span><span class="hljs-params">(Object bean, String beanName)</span> <span class="hljs-keyword">throws</span> BeansException &#123;<br>        System.out.println(<span class="hljs-string">&quot;postProcessBeforeInitialization&quot;</span>);<br>        <span class="hljs-keyword">return</span> bean;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">postProcessAfterInitialization</span><span class="hljs-params">(Object bean, String beanName)</span> <span class="hljs-keyword">throws</span> BeansException &#123;<br>        System.out.println(<span class="hljs-string">&quot;postProcessAfterInitialization&quot;</span>);<br>        <span class="hljs-keyword">return</span> bean;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Spring-Bean-属性赋值"><a href="#Spring-Bean-属性赋值" class="headerlink" title="Spring Bean 属性赋值"></a>Spring Bean 属性赋值</h3><p>@Value</p>
+<ol>
+<li>基本数值</li>
+<li>SPEL表达式：#{}</li>
+<li>取出配置文件的值：${}</li>
+</ol>
+<p>配合 <code>@PropertySource</code> 使用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> &#123;<br>    <span class="hljs-meta">@Value(&quot;$&#123;user.nick.name&#125;&quot;)</span><br>    <span class="hljs-keyword">private</span> String nickname;<br>    <span class="hljs-keyword">private</span> Integer age;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@PropertySource(value = &quot;classpath:user.properties&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringConfig</span> &#123;<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> User <span class="hljs-title function_">user</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>user.properties</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">user.nick.name</span>=<span class="hljs-string">keith</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="Spring-Bean-自动装配"><a href="#Spring-Bean-自动装配" class="headerlink" title="Spring Bean 自动装配"></a>Spring Bean 自动装配</h3><ol>
+<li><p>@Autowired 根据类型注入，找不到再根据名称注入</p>
+</li>
+<li><p>@Qualifier 根据名称注入，@Primary 根据类型优先注入当前Bean</p>
+</li>
+<li><p>@Resource 根据名称注入，找不到再根据类型注入</p>
+</li>
+<li><p>构造方法注入：默认加载IOC容器中的组件，容器启动会调用无参构造器创建对象，再进行初始化赋值等操作</p>
+</li>
+</ol>
+<p>后置处理器 <code>AutowiredAnnotationBeanPostProcessor</code> 用于解析自动装配</p>
+<h3 id="Spring-Bean-Post-Processor"><a href="#Spring-Bean-Post-Processor" class="headerlink" title="Spring Bean Post Processor"></a>Spring Bean Post Processor</h3><ol>
+<li><p>BeanPostPorcessor：Bean后置处理器，Bean创建对象初始化前后进行拦截工作</p>
+</li>
+<li><p>BeanFactoryPostProcessor：BeanFactory后置处理器，</p>
+<p>BeanFactory标准初始化所有Bean定义已经保存到加载到BeanFactory，但是Bean实例还未创建</p>
+<p>原理：IOC容器加载时调用 refresh() -&gt; invokeBeanFactoryPostProcessors()调用所有的Processor</p>
+<p>实现 <code>BeanFactoryPostProcessor</code> 接口即可拿到容器的BeanFactory</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyBeanFactoryPostProcessor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">BeanFactoryPostProcessor</span> &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">postProcessBeanFactory</span><span class="hljs-params">(ConfigurableListableBeanFactory beanFactory)</span> <span class="hljs-keyword">throws</span> BeansException &#123;<br>        System.out.println(<span class="hljs-string">&quot;My Bean Factory&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>BeanDefinitionRegistry：在所有Bean将要被加载，而Bean实例还未创建</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyBeanDefinitionRegistryPostProcessor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">BeanDefinitionRegistryPostProcessor</span> &#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">postProcessBeanDefinitionRegistry</span><span class="hljs-params">(BeanDefinitionRegistry registry)</span> <span class="hljs-keyword">throws</span> BeansException &#123;<br>        <span class="hljs-comment">// 该方法后执行</span><br>        System.out.println(<span class="hljs-string">&quot;My Registry&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">postProcessBeanFactory</span><span class="hljs-params">(ConfigurableListableBeanFactory beanFactory)</span> <span class="hljs-keyword">throws</span> BeansException &#123;<br>        <span class="hljs-comment">// 该方法先执行</span><br>        System.out.println(<span class="hljs-string">&quot;My Factory&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Spring-Profile"><a href="#Spring-Profile" class="headerlink" title="Spring Profile"></a>Spring Profile</h2><p>指定组件在哪个环境的情况下才能注册到容器中，不指定任何环境都能注册</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@PropertySource(value = &quot;classpath:user.properties&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringConfig</span> &#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@Profile(&quot;test&quot;)</span><br>    <span class="hljs-keyword">public</span> User <span class="hljs-title function_">userTest</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;This is test environment&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-meta">@Profile(&quot;prod&quot;)</span><br>    <span class="hljs-keyword">public</span> User <span class="hljs-title function_">userProd</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;This is prod environment&quot;</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在 properties 配置文件中可以根据文件名配置不同的环境</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-built_in">application</span>.properties<br><span class="hljs-built_in">application</span>-dev.properties<br><span class="hljs-built_in">application</span>-test.properties<br></code></pre></td></tr></table></figure>
+
+<p>在 yml 配置文件中可以使用 <code>---</code> 分隔配置不同的环境</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">profiles:</span><br>    <span class="hljs-attr">active:</span> <span class="hljs-string">dev</span><br><span class="hljs-meta">---</span><br><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">8001</span><br><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">profiles:</span> <span class="hljs-string">dev</span><br><span class="hljs-meta">---</span><br><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">8002</span><br><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">profiles:</span> <span class="hljs-string">test</span><br></code></pre></td></tr></table></figure>
+
+<p>在 VM options 中加入以下参数表示目前的环境为 test</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">-Dspring.profiles.active</span>=<span class="hljs-string">test</span><br><span class="hljs-comment">## 使用java -jar启动</span><br><span class="hljs-attr">java</span> <span class="hljs-string">-jar -Dspring.profiles.active=test app.jar </span><br></code></pre></td></tr></table></figure>
+
+<p>在 Environment variables 中加入以下参数表示目前环境为 test</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">--spring.profiles.active</span>=<span class="hljs-string">test</span><br><span class="hljs-comment">## 使用java -jar启动</span><br><span class="hljs-attr">java</span> <span class="hljs-string">-jar app.jar --spring.profiles.active=test</span><br></code></pre></td></tr></table></figure>
+
+<p>加载配置文件关键源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Spring 启动时 run 方法中准备环境</span><br><span class="hljs-type">ConfigurableEnvironment</span> <span class="hljs-variable">environment</span> <span class="hljs-operator">=</span> prepareEnvironment(listeners, applicationArguments);<br><span class="hljs-comment">// 进入之后调用了ConfigFileApplicationListener.Loader#load</span><br><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addPropertySources</span><span class="hljs-params">(ConfigurableEnvironment environment, ResourceLoader resourceLoader)</span> &#123;<br>    RandomValuePropertySource.addToEnvironment(environment);<br>    <span class="hljs-keyword">new</span> <span class="hljs-title class_">Loader</span>(environment, resourceLoader).load();<br>&#125;<br><span class="hljs-comment">// 追溯到 ConfigFileApplicationListener#loadForFileExtension 根据文件后缀遍历加载</span><br><span class="hljs-keyword">for</span> (PropertySourceLoader loader : <span class="hljs-built_in">this</span>.propertySourceLoaders) &#123;<br>    <span class="hljs-keyword">for</span> (String fileExtension : loader.getFileExtensions()) &#123;<br>        <span class="hljs-keyword">if</span> (processed.add(fileExtension)) &#123;<br>            loadForFileExtension(loader, location + name, <span class="hljs-string">&quot;.&quot;</span> + fileExtension, profile, filterFactory,<br>                                 consumer);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于 yml 和 properties 文件的解释</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42103026/article/details/112846171">https://blog.csdn.net/weixin_42103026/article/details/112846171</a></p>
+<h2 id="Spring-事件监听器"><a href="#Spring-事件监听器" class="headerlink" title="Spring 事件监听器"></a>Spring 事件监听器</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>ApplicationListener：监听容器中的事件，事件驱动模型开发。</p>
+<ol>
+<li><p>写一个监听器（实现 <code>ApplicationListener</code>）来监听某个事件（ <code>ApplicationEvent</code> 及其子类）</p>
+</li>
+<li><p>将监听器加入容器中</p>
+</li>
+<li><p>只要容器中有相关事件发布，我们就能监听到这个事件</p>
+<p>例：ContextRefreshedEvent：容器刷新完成（所有Bean都完全创建）会发布这个事件</p>
+</li>
+<li><p>发布一个事件 applicationContext.publishEvent()</p>
+</li>
+</ol>
+<p><strong>实现 <code>ApplicationListener</code> 接口实现</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/* 事件对象 */</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyApplicationEvent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">ApplicationEvent</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-title function_">MyApplicationEvent</span><span class="hljs-params">(Object source)</span> &#123;<br>        <span class="hljs-built_in">super</span>(source);<br>        System.out.println(<span class="hljs-string">&quot;发送事件:&quot;</span> + <span class="hljs-built_in">super</span>.getTimestamp());<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/* 事件监听器 */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyApplicationListener</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ApplicationListener</span>&lt;MyApplicationEvent&gt; &#123;<br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 当容器中发布事件 MyApplicationEvent 以后，方法触发</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onApplicationEvent</span><span class="hljs-params">(MyApplicationEvent event)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;接收事件:&quot;</span> + event.getTimestamp());<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">/* 发布事件 */</span><br><span class="hljs-meta">@SpringBootTest</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SpringDemoApplicationTests</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ApplicationContextAware</span> &#123;<br><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ApplicationContext applicationContext;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setApplicationContext</span><span class="hljs-params">(ApplicationContext applicationContext)</span> <span class="hljs-keyword">throws</span> BeansException &#123;<br>        <span class="hljs-built_in">this</span>.applicationContext = applicationContext;<br>    &#125;<br><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">contextLoads</span><span class="hljs-params">()</span> &#123;<br>        applicationContext.publishEvent(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyApplicationEvent</span>(<span class="hljs-built_in">this</span>));<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>使用注解 <code>@EventListener</code> 实现</strong></p>
+<p>可以使用该注解实现与上面 <code>MyApplicationListener</code> 一样的效果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyService</span> &#123;<br><br>    <span class="hljs-meta">@EventListener</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">listen</span><span class="hljs-params">(MyApplicationEvent event)</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;接收事件:&quot;</span> + event.getTimestamp());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><blockquote>
+<p>Observer模式，优势在于发布一个事件后可以有多个监听器对其作出反应，对其进行处理</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 1.发布事件</span><br>applicationContext.publishEvent(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MyApplicationEvent</span>(<span class="hljs-built_in">this</span>));<br><span class="hljs-comment">// 2.广播这个事件</span><br>getApplicationEventMulticaster().multicastEvent(applicationEvent, eventType);<br><span class="hljs-comment">// 3.获取线程池，后续如果有线程池则异步执行，如果没有则同步执行</span><br><span class="hljs-type">Executor</span> <span class="hljs-variable">executor</span> <span class="hljs-operator">=</span> getTaskExecutor();<br><span class="hljs-comment">// 4.根据事件和事件类型获取Listeners</span><br>getApplicationListeners(event, type);<br><span class="hljs-comment">// 4.1.cacheKey = 事件类型+事件源类型</span><br><span class="hljs-type">ListenerCacheKey</span> <span class="hljs-variable">cacheKey</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ListenerCacheKey</span>(eventType, sourceType);<br><span class="hljs-comment">// 4.2.通过cacheKey查retrieverCache</span><br><span class="hljs-type">CachedListenerRetriever</span> <span class="hljs-variable">existingRetriever</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">this</span>.retrieverCache.get(cacheKey);<br><span class="hljs-comment">// 4.2.1.如果查不到CachedListenerRetriever则就新建并填充，然后put到retrieverCache</span><br><span class="hljs-type">CachedListenerRetriever</span> <span class="hljs-variable">newRetriever</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">CachedListenerRetriever</span>();<br>retriever.applicationListeners = filteredListeners;<br>retriever.applicationListenerBeans = filteredListenerBeans;<br><span class="hljs-comment">// 4.3.最终返回符合条件的Listeners</span><br><span class="hljs-keyword">return</span> retrieveApplicationListeners(eventType, sourceType, newRetriever);<br><span class="hljs-comment">// 5.遍历这些Listeners，调用每个Listener</span><br><span class="hljs-keyword">for</span> (ApplicationListener&lt;?&gt; listener : getApplicationListeners(event, type))<br></code></pre></td></tr></table></figure>
+
+<h2 id="Spring-循环依赖"><a href="#Spring-循环依赖" class="headerlink" title="Spring 循环依赖"></a>Spring 循环依赖</h2><p>循环依赖异常：BeanCurrentlyInCreationException</p>
+<p>循环依赖指的是 默认的单例Bean中，属性互相引用的场景。在Spring中如果使用构造方法注入，或是实例化Bean的时候指定Scope为prototype等情况，就会可能出现循环依赖的问题。</p>
+<p>Spring容器内部是通过3级缓存来解决循环依赖 – <code>DefaultSingletonBeanRegistry</code></p>
+<p>一级缓存（singletonObjects）：存放已经经历了完整生命周期的Bean对象</p>
+<p>二级缓存（earlySingtonObjects）：存放早期暴露出来的Bean对象（Bean的属性还未赋值）</p>
+<p>三级缓存（singletonFacoties）：存放可以生成Bean的工厂</p>
+<p>只有单例的Bean会通过三级缓存提前暴露来解决循环依赖的问题，而非单例的Bean，每次从容器中获取的都是一个新的对象，都会重新创建，所有非单例的Bean是没有缓存的，不会将其放到三级缓存中。</p>
+<p>过程：</p>
+<ol>
+<li>A创建的过程中需要B，于是A将自己放到三级缓存里面，去实例化B	</li>
+<li>B实例化的时候发现需要A，于是B先查一级缓存，没有再查二级缓存，还是没有再查三级缓存，找到A然后把三级缓存里面的A放到二级缓存里面，并删除三级缓存里的A</li>
+<li>B顺利初始化完毕，将自己放到一级缓存里面（此时B里面的A依然是创建中状态），然后回来接着创建A，此时B已经创建结束，直接从一级缓存里面拿到B，然后完成创建，并将A自己放到一级缓存里面。</li>
+</ol>
+<p>总结：Spring解决循环依赖依靠的是Bean的”中间态”的概念，”中间态”指的是已经实例化但还没初始化的状态。</p>
+<p><strong>源码说明</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">addSingleton</span><span class="hljs-params">(String beanName, Object singletonObject)</span> &#123;<br>    <span class="hljs-keyword">synchronized</span> (<span class="hljs-built_in">this</span>.singletonObjects) &#123;<br>        <span class="hljs-comment">// 加入到单例缓存池中</span><br>        <span class="hljs-built_in">this</span>.singletonObjects.put(beanName, singletonObject);<br>        <span class="hljs-comment">// 从三级缓存中移除（针对不处理循环依赖的Bean）</span><br>        <span class="hljs-built_in">this</span>.singletonFactories.remove(beanName);<br>        <span class="hljs-comment">// 从二级缓存中移除（针对循环依赖的Bean）</span><br>        <span class="hljs-built_in">this</span>.earlySingletonObjects.remove(beanName);<br>        <span class="hljs-comment">// 用来记录已经处理的Bean</span><br>        <span class="hljs-built_in">this</span>.registeredSingletons.add(beanName);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Spring-IOC-附录"><a href="#Spring-IOC-附录" class="headerlink" title="Spring IOC 附录"></a>Spring IOC 附录</h2><p><strong>@Conditional：根据条件加载Bean</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-meta">@Conditional(MyCondition.class)</span><br><span class="hljs-keyword">public</span> User <span class="hljs-title function_">user</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyCondition</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Condition</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">matches</span><span class="hljs-params">(ConditionContext context, AnnotatedTypeMetadata metadata)</span> &#123;<br>        <span class="hljs-comment">// 做一些判断逻辑，true表示加载bean，false表示不加载bean</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>@DependsOn</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建B时会先去创建A</span><br><span class="hljs-meta">@Bean</span><br><span class="hljs-meta">@DependsOn(&quot;a&quot;)</span><br><span class="hljs-keyword">public</span> B <span class="hljs-title function_">b</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><strong>Filter和Interceptor的区别</strong></p>
+<ul>
+<li>Filter是基于函数回调的，而Interceptor则是基于Java反射的。</li>
+<li>Filter依赖于Servlet容器，而Interceptor不依赖于Servlet容器。</li>
+<li>Filter对几乎所有的请求起作用，而Interceptor只能对action请求起作用。</li>
+<li>Interceptor可以访问Action的上下文，值栈里的对象，而Filter不能。</li>
+<li>在action的生命周期里，Interceptor可以被多次调用，而Filter只能在容器初始化时调用一次，</li>
+</ul>
+<p><strong>Filter生命周期方法</strong></p>
+<ol>
+<li>init : 服务器启动后创建Filter对象，然后调用init方法，只执行一次</li>
+<li>doFilter : 每一次请求被拦截资源时，会执行，执行多次</li>
+<li>destroy : 在服务器关闭后，Filter对象被销毁，若服务器正常关闭会执行destroy方法用于释放资源</li>
+</ol>
+<p>配置拦截路径 <code>@WebFilter(&quot;/*&quot;)</code></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/pumpkin/categories/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SpringIOC</div>
+      <div>https://rongkezan.github.io/pumpkin/2021/10/18/Java/Spring/SpringIoc/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Keith</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 18, 2021</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/pumpkin/2021/10/18/Java/Spring/SpringMvc/" title="SpringMVC">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SpringMVC</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/pumpkin/2021/10/18/Java/Spring/SpringCloud%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/" title="SpringCloud 配置中心">
+                        <span class="hidden-mobile">SpringCloud 配置中心</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/pumpkin/js/events.js" ></script>
+<script  src="/pumpkin/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/pumpkin/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/pumpkin/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/pumpkin/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

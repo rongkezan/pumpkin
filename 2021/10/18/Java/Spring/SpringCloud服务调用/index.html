@@ -1,0 +1,851 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/pumpkin/img/fluid.png">
+  <link rel="icon" href="/pumpkin/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Keith">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Spring Cloud 服务调用RestTemplate springframework:spring-web 包下  使用 RestTemplate 需要将其加入到容器 1234567@Configurationpublic class RestTemplateConfigurer &amp;#123;    @Bean    public RestTemplate restTemplate()&amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud 服务调用">
+<meta property="og:url" content="https://rongkezan.github.io/pumpkin/2021/10/18/Java/Spring/SpringCloud%E6%9C%8D%E5%8A%A1%E8%B0%83%E7%94%A8/index.html">
+<meta property="og:site_name" content="Pumpkin">
+<meta property="og:description" content="Spring Cloud 服务调用RestTemplate springframework:spring-web 包下  使用 RestTemplate 需要将其加入到容器 1234567@Configurationpublic class RestTemplateConfigurer &amp;#123;    @Bean    public RestTemplate restTemplate()&amp;#1">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210211094241995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210211095141129.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-10-18T06:00:05.940Z">
+<meta property="article:modified_time" content="2022-06-23T09:33:40.855Z">
+<meta property="article:author" content="Keith">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210211094241995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+  
+  
+  
+  <title>SpringCloud 服务调用 - Pumpkin</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/pumpkin/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/pumpkin/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/pumpkin/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rongkezan.github.io","root":"/pumpkin/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/pumpkin/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/pumpkin/js/utils.js" ></script>
+  <script  src="/pumpkin/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/pumpkin/">
+      <strong>Pumpkin</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/pumpkin/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/pumpkin/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="SpringCloud 服务调用"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2021-10-18 14:00" pubdate>
+          October 18, 2021 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          13k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          107 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SpringCloud 服务调用</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Spring-Cloud-服务调用"><a href="#Spring-Cloud-服务调用" class="headerlink" title="Spring Cloud 服务调用"></a>Spring Cloud 服务调用</h1><h2 id="RestTemplate"><a href="#RestTemplate" class="headerlink" title="RestTemplate"></a>RestTemplate</h2><blockquote>
+<p>springframework:spring-web 包下</p>
+</blockquote>
+<p>使用 RestTemplate 需要将其加入到容器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RestTemplateConfigurer</span> &#123;<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> RestTemplate <span class="hljs-title function_">restTemplate</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">restTemplate</span>();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="1-直接调用"><a href="#1-直接调用" class="headerlink" title="1. 直接调用"></a>1. 直接调用</h3><p>实体类</p>
+<p>服务端和客户端的实体类可以不是同一个，如果客户端实体类使用@Builder接收会失败</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Data</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Cookbook</span> &#123;<br>    <span class="hljs-keyword">private</span> Long id;<br><br>    <span class="hljs-keyword">private</span> String bookName;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>消费端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;consumer&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ConsumerController</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RestTemplate restTemplate;<br><br>    <span class="hljs-meta">@GetMapping(&quot;get&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">hello</span><span class="hljs-params">(String name)</span>&#123;<br>        <span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://127.0.0.1:8001/provider/hello?name=&#123;1&#125;&quot;</span>;<br>        ResponseEntity&lt;String&gt; helloResponse = restTemplate.getForEntity(url, String.class, name);<br>        System.out.println(<span class="hljs-string">&quot;Hello: &quot;</span> + helloResponse.getBody());<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">url2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://127.0.0.1:8001/provider/cookbook?name=&#123;1&#125;&quot;</span>;<br>        ResponseEntity&lt;Cookbook&gt; cookBookResponse = restTemplate.getForEntity(url2, Cookbook.class, name);<br>        System.out.println(<span class="hljs-string">&quot;CookBook: &quot;</span> + cookBookResponse.getBody());<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">url3</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://127.0.0.1:8001/provider/list/cookbook&quot;</span>;<br>        List&lt;Cookbook&gt; list = restTemplate.getForObject(url3, List.class);<br>        System.out.println(<span class="hljs-string">&quot;CookBook List: &quot;</span> + list);<br><br>        <span class="hljs-type">String</span> <span class="hljs-variable">url4</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://127.0.0.1:8001/provider/cookbook&quot;</span>;<br>        <span class="hljs-type">Student</span> <span class="hljs-variable">student</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Student</span>();<br>        student.setName(<span class="hljs-string">&quot;张三&quot;</span>);<br>        ResponseEntity&lt;Cookbook&gt; postCookbook = restTemplate.postForEntity(url4, student, Cookbook.class);<br>        System.out.println(<span class="hljs-string">&quot;Post CookBook: &quot;</span> + postCookbook.getBody());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>服务端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;provider&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProviderController</span> &#123;<br><br>    <span class="hljs-meta">@GetMapping(&quot;hello&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">hello</span><span class="hljs-params">(String name)</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello &quot;</span> + name;<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(&quot;cookbook&quot;)</span><br>    <span class="hljs-keyword">public</span> Cookbook <span class="hljs-title function_">cookbook</span><span class="hljs-params">(String name)</span>&#123;<br>        <span class="hljs-keyword">return</span> Cookbook.builder().id(<span class="hljs-number">1L</span>).bookName(name).build();<br>    &#125;<br><br>    <span class="hljs-meta">@GetMapping(&quot;list/cookbook&quot;)</span><br>    <span class="hljs-keyword">public</span> List&lt;Cookbook&gt; <span class="hljs-title function_">listCookbook</span><span class="hljs-params">()</span>&#123;<br>        List&lt;Cookbook&gt; list = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        list.add(Cookbook.builder().id(<span class="hljs-number">1L</span>).bookName(<span class="hljs-string">&quot;盐酥鸡&quot;</span>).build());<br>        list.add(Cookbook.builder().id(<span class="hljs-number">2L</span>).bookName(<span class="hljs-string">&quot;酱鸭&quot;</span>).build());<br>        <span class="hljs-keyword">return</span> list;<br>    &#125;<br><br>    <span class="hljs-meta">@PostMapping(&quot;cookbook&quot;)</span><br>    <span class="hljs-keyword">public</span> Cookbook <span class="hljs-title function_">postCookbook</span><span class="hljs-params">(<span class="hljs-meta">@RequestBody</span> Student student)</span>&#123;<br>        <span class="hljs-keyword">return</span> Cookbook.builder().bookName(student.getName()).build();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-注册到同一个-eureka"><a href="#2-注册到同一个-eureka" class="headerlink" title="2. 注册到同一个 eureka"></a>2. 注册到同一个 eureka</h3><p>消费端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;consumer&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ConsumerController</span> &#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RestTemplate restTemplate;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> DiscoveryClient discoveryClient;<br><br>    <span class="hljs-meta">@GetMapping(&quot;hello&quot;)</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">hello</span><span class="hljs-params">(String name)</span>&#123;<br>        <span class="hljs-comment">//拿到服务提供商</span><br>        List&lt;ServiceInstance&gt; list = discoveryClient.getInstances(<span class="hljs-string">&quot;sardine-cookbook&quot;</span>);<br>        <span class="hljs-comment">//拿到第一个实例</span><br>        <span class="hljs-type">ServiceInstance</span> <span class="hljs-variable">instance</span> <span class="hljs-operator">=</span> list.get(<span class="hljs-number">0</span>);<br>        <span class="hljs-comment">//得到主机号</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">host</span> <span class="hljs-operator">=</span> instance.getHost();<br>        <span class="hljs-comment">//得到端口号</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">port</span> <span class="hljs-operator">=</span> instance.getPort();<br>        <span class="hljs-comment">//拼接完整的请求url</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://&quot;</span> + host + <span class="hljs-string">&quot;:&quot;</span> + port + <span class="hljs-string">&quot;/test/hello?name=&#123;1&#125;&quot;</span>;<br>        <span class="hljs-comment">//restTemple 实际返回的是一个ResponseEntity 的实例</span><br>        ResponseEntity&lt;String&gt; responseEntity = restTemplate.getForEntity(url, String.class, name);<br>        System.out.println(responseEntity.getBody());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>服务端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-meta">@RequestMapping(&quot;provider&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProviderController</span> &#123;<br><br>    <span class="hljs-meta">@GetMapping(&quot;hello&quot;)</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">hello</span><span class="hljs-params">(String name)</span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello &quot;</span> + name;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-客户端拦截器"><a href="#3-客户端拦截器" class="headerlink" title="3. 客户端拦截器"></a>3. 客户端拦截器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">LoggingClientHttpRequestInterceptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ClientHttpRequestInterceptor</span> &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> ClientHttpResponse <span class="hljs-title function_">intercept</span><span class="hljs-params">(HttpRequest request, <span class="hljs-type">byte</span>[] body, ClientHttpRequestExecution execution)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行了拦截器&quot;</span>);<br>        System.out.println(request.getURI());<br>        <span class="hljs-type">ClientHttpResponse</span> <span class="hljs-variable">response</span> <span class="hljs-operator">=</span> execution.execute(request, body);<br>        <span class="hljs-keyword">return</span> response;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在 restTemplate 配置中增加拦截器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">RestTemplateConfigurer</span> &#123;<br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-keyword">public</span> RestTemplate <span class="hljs-title function_">restTemplate</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">RestTemplate</span> <span class="hljs-variable">restTemplate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RestTemplate</span>();<br>        restTemplate.getInterceptors().add(<span class="hljs-keyword">new</span> <span class="hljs-title class_">LoggingClientHttpRequestInterceptor</span>());<br>        <span class="hljs-keyword">return</span> restTemplate;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Ribbon"><a href="#Ribbon" class="headerlink" title="Ribbon"></a>Ribbon</h2><blockquote>
+<p>客户端的负载均衡</p>
+</blockquote>
+<p>Ribbon是Netflix开发的客户端负载均衡器，为Ribbon配置<strong>服务提供者地址列表</strong>后，Ribbon就可以基于某种<strong>负载均衡策略算法</strong>，自动地帮助服务消费者去请求提供者。Ribbon默认为我们提供了很多负载均衡算法，例如轮询、随机等。我们也可以实现自定义负载均衡算法。</p>
+<h3 id="1-负载均衡算法"><a href="#1-负载均衡算法" class="headerlink" title="1. 负载均衡算法"></a>1. 负载均衡算法</h3><ul>
+<li><p><strong>ZoneAvoidanceRule（默认）：区域权衡策略</strong></p>
+<p>复合判断Server所在区域的性能和Server的可用性，轮询选择服务器。</p>
+</li>
+<li><p><strong>BestAvailableRule：最低并发策略</strong></p>
+<p>会先过滤掉由于多次访问故障而处于断路器跳闸状态的服务，然后选择一个并发量最小的服务。逐个找服务，如果断路器打开，则忽略。</p>
+</li>
+<li><p><strong>RoundRobinRule：轮询策略</strong></p>
+<p>以简单轮询选择一个服务器，按顺序循环选择一个server。</p>
+</li>
+<li><p><strong>RandomRule：随机策略</strong></p>
+<p>随机选择一个服务器。</p>
+</li>
+<li><p><strong>AvailabilityFilteringRule：可用过滤策略</strong></p>
+<p>会先过滤掉多次访问故障而处于断路器跳闸状态的服务和过滤并发的连接数量超过阀值得服务，然后对剩余的服务列表安装轮询策略进行访问</p>
+</li>
+<li><p><strong>WeightedResponseTimeRule：响应时间加权策略</strong></p>
+<p>据平均响应时间计算所有的服务的权重，响应时间越快服务权重越大，容易被选中的概率就越高。刚启动时，如果统计信息不中，则使用RoundRobinRule(轮询)策略，等统计的信息足够了会自动的切换到WeightedResponseTimeRule。响应时间长，权重低，被选择的概率低。反之，同样道理。此策略综合了各种因素（网络，磁盘，IO等），这些因素直接影响响应时间。</p>
+</li>
+<li><p><strong>RetryRule：重试策略</strong></p>
+<p>先按照RoundRobinRule(轮询)的策略获取服务，如果获取的服务失败则在指定的时间会进行重试，进行获取可用的服务。如多次获取某个服务失败，就不会再次获取该服务。主要是在一个时间段内，如果选择一个服务不成功，就继续找可用的服务，直到超时。</p>
+</li>
+</ul>
+<p>开启负载均衡</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-meta">@LoadBalanced</span><br>RestTemplate <span class="hljs-title function_">restTemplate</span><span class="hljs-params">()</span> &#123;<br>	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RestTemplate</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>切换策略</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-keyword">public</span> IRule <span class="hljs-title function_">myRule</span><span class="hljs-params">()</span> &#123;<br>    <span class="hljs-comment">//return new RoundRobinRule();</span><br>    <span class="hljs-comment">//return new RandomRule();</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RetryRule</span>();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>消费端：注意要使用应用名替代域名，且要在同一个注册中心，否则会报错</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&quot;balance&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">balance</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://sardine-cookbook/provider/balance&quot;</span>;<br>    ResponseEntity&lt;String&gt; response = restTemplate.getForEntity(url, String.class);<br>    System.out.println(response.getBody());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>服务端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@GetMapping(&quot;balance&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">balance</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello World&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-配置"><a href="#2-配置" class="headerlink" title="2. 配置"></a>2. 配置</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># 请求连接的超时时间</span><br><span class="hljs-attr">ribbon.ConnectTimeout</span>=<span class="hljs-string">2000</span><br><span class="hljs-comment"># 请求处理的超时时间</span><br><span class="hljs-attr">ribbon.ReadTimeout</span>=<span class="hljs-string">5000</span><br><span class="hljs-comment"># 也可以为每个Ribbon客户端设置不同的超时时间, 通过服务名称进行指定：</span><br><span class="hljs-attr">ribbon-config-demo.ribbon.ConnectTimeout</span>=<span class="hljs-string">2000</span><br><span class="hljs-attr">ribbon-config-demo.ribbon.ReadTimeout</span>=<span class="hljs-string">5000</span><br><span class="hljs-comment"># 最大连接数</span><br><span class="hljs-attr">ribbon.MaxTotalConnections</span>=<span class="hljs-string">500</span><br><span class="hljs-comment"># 每个host最大连接数</span><br><span class="hljs-attr">ribbon.MaxConnectionsPerHost</span>=<span class="hljs-string">500</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>ribbon脱离eureka配置</strong></p>
+<p>可以在配置文件中使用listOfServers字段来设置服务端地址，只要客户端拥有服务器列表，就可以使用ribbon做负载均衡。</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">ribbon.eureka.enabled</span>=<span class="hljs-string">false</span><br><span class="hljs-attr">ribbon.listOfServers</span>=<span class="hljs-string">localhost:8001,localhost:8002</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h2><blockquote>
+<p>声明式、模板化的HTTP请求客户端</p>
+</blockquote>
+<p>主要构建微服务消费端。只要使用OpenFeign提供的注解修饰定义网络请求的接口类，就可以使用该接口的实例发送 Restful 的网络请求。还可以集成Ribbon和Hystrix，提供负载均衡和断路器。</p>
+<p><strong>实现</strong></p>
+<p>pom</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>        <br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>            <br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>            <br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>服务端暴露接口到 <code>sardine-user-api</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FeignClient(&quot;sardine-user&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">UserClient</span> &#123;<br>    <span class="hljs-meta">@PostMapping(&quot;identify&quot;)</span><br>    CommonResult&lt;UserDto&gt; <span class="hljs-title function_">identify</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam</span> String token)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@PostMapping(&quot;identify&quot;)</span><br><span class="hljs-keyword">public</span> CommonResult&lt;UserDto&gt; <span class="hljs-title function_">identify</span><span class="hljs-params">(<span class="hljs-meta">@RequestParam(value = &quot;token&quot;, required = false)</span> String token)</span> &#123;<br>    <span class="hljs-type">UserDto</span> <span class="hljs-variable">userInfo</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">UserInfo</span>(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;张三&quot;</span>);<br>    <span class="hljs-keyword">return</span> CommonResult.success(userInfo);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>客户端引入 api 依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- user api --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.sardine<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>sardine-user-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>启动类加上注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@EnableFeignClients</span><br></code></pre></td></tr></table></figure>
+
+<p>客户端使用 UserClient</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> UserClient userClient;<br><br><span class="hljs-meta">@GetMapping(&quot;call&quot;)</span><br><span class="hljs-keyword">public</span> CommonResult&lt;UserDto&gt; <span class="hljs-title function_">call</span><span class="hljs-params">()</span>&#123;<br>    <span class="hljs-keyword">return</span> userClient.identify(token).getData();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h2><blockquote>
+<p>容错组件 实现了超时机制和断路器模式</p>
+</blockquote>
+<h3 id="1-主要功能"><a href="#1-主要功能" class="headerlink" title="1. 主要功能"></a>1. 主要功能</h3><ol>
+<li>为系统提供保护机制。在依赖的服务出现高延迟或失败时，为系统提供保护和控制。</li>
+<li>防止雪崩。</li>
+<li>包裹请求：使用HystrixCommand（或HystrixObservableCommand）包裹对依赖的调用逻辑，每个命令在独立线程中运行。</li>
+<li>跳闸机制：当某服务失败率达到一定的阈值时，Hystrix可以自动跳闸，停止请求该服务一段时间。</li>
+<li>资源隔离：Hystrix为每个请求都的依赖都维护了一个小型线程池，如果该线程池已满，发往该依赖的请求就被立即拒绝，而不是排队等候，从而加速失败判定。防止级联失败。</li>
+<li>快速失败：Fail Fast。同时能快速恢复。侧重点是：（不去真正的请求服务，发生异常再返回），而是直接失败。</li>
+<li>监控：Hystrix可以实时监控运行指标和配置的变化，提供近实时的监控、报警、运维控制。</li>
+<li>回退机制：fallback，当请求失败、超时、被拒绝，或当断路器被打开时，执行回退逻辑。回退逻辑我们自定义，提供优雅的服务降级。</li>
+<li>自我修复：断路器打开一段时间后，会自动进入“半开”状态，可以进行打开，关闭，半开状态的转换。前面有介绍。</li>
+</ol>
+<h3 id="2-独立使用"><a href="#2-独立使用" class="headerlink" title="2. 独立使用"></a>2. 独立使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HystrixTestService</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">HystrixCommand</span>&lt;String&gt; &#123;<br><br>    <span class="hljs-keyword">protected</span> <span class="hljs-title function_">HystrixTestService</span><span class="hljs-params">(HystrixCommandGroupKey group)</span> &#123;<br>        <span class="hljs-built_in">super</span>(group);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> String <span class="hljs-title function_">run</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception &#123;<br>        System.out.println(<span class="hljs-string">&quot;执行逻辑&quot;</span>);<br>        <span class="hljs-comment">// 当执行 1/0 后抛出异常会执行 Fallback 逻辑，否则执行正常逻辑</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span> / <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ok&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">protected</span> String <span class="hljs-title function_">getFallback</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Fallback Function&quot;</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        Future&lt;String&gt; futureResult = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HystrixTestService</span>(HystrixCommandGroupKey.Factory.asKey(<span class="hljs-string">&quot;ext&quot;</span>)).queue();<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> futureResult.get();<br>            System.out.println(<span class="hljs-string">&quot;程序结果：&quot;</span>+result);<br>        &#125; <span class="hljs-keyword">catch</span> (InterruptedException | ExecutionException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-整合-RestTemplate"><a href="#3-整合-RestTemplate" class="headerlink" title="3. 整合 RestTemplate"></a>3. 整合 RestTemplate</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 启动类增加注解 @EnableCircuitBreaker</span><br><span class="hljs-meta">@EnableCircuitBreaker</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">UserApplication</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        SpringApplication.run(UserApplication.class, args);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@HystrixCommand(fallbackMethod = &quot;fallback&quot;)</span><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">alive</span><span class="hljs-params">()</span> &#123;<br>	<span class="hljs-comment">// 自动处理URL</span><br>	<span class="hljs-type">RestTemplate</span> <span class="hljs-variable">restTemplate</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RestTemplate</span>();<br>	<span class="hljs-type">String</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span><span class="hljs-string">&quot;http://user-provider/User/alive&quot;</span>;<br>	<span class="hljs-type">String</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> restTemplate.getForObject(url, String.class);<br>	<span class="hljs-keyword">return</span> result;<br>&#125;<br><br><span class="hljs-keyword">public</span> String <span class="hljs-title function_">fallback</span><span class="hljs-params">()</span> &#123;	<br>	<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Fallback Function&quot;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-整合-Fegin"><a href="#4-整合-Fegin" class="headerlink" title="4. 整合 Fegin"></a>4. 整合 Fegin</h3><figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># 配置开启 Hystrix</span><br><span class="hljs-attr">feign.hystrix.enabled</span>=<span class="hljs-string">true</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@FeignClient(name = &quot;user-provider&quot;,fallback = AliveBack.class)</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">ConsumerApi</span> &#123;<br><br>	<span class="hljs-meta">@GetMapping(value = &quot;/user/alive&quot;)</span><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">alive</span><span class="hljs-params">()</span>;<br>	<br>	<span class="hljs-meta">@GetMapping(value = &quot;/user/getById&quot;)</span><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">getById</span><span class="hljs-params">(Integer id)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">AliveBack</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">ConsumerApi</span>&#123;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">alive</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-string">&quot;call exception&quot;</span>;<br>	&#125;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> String <span class="hljs-title function_">getById</span><span class="hljs-params">(Integer id)</span> &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="5-Hystrix-Dashboard"><a href="#5-Hystrix-Dashboard" class="headerlink" title="5. Hystrix Dashboard"></a>5. Hystrix Dashboard</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- Spring Boot Actuator --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>        <br><span class="hljs-comment">&lt;!-- Spring Cloud Hystrix Dashboard --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-hystrix-dashboard<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 启动类增加注解</span><br><span class="hljs-meta">@EnableHystrixDashboard</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># 增加配置</span><br><span class="hljs-attr">management.endpoints.web.exposure.include</span>=<span class="hljs-string">*</span><br><span class="hljs-attr">hystrix.dashboard.proxy-stream-allow-list</span>=<span class="hljs-string">*</span><br></code></pre></td></tr></table></figure>
+
+<p>访问 <a target="_blank" rel="noopener" href="http://localhost:8001/actuator/hystrix.stream">http://localhost:8001/actuator/hystrix.stream</a> 查看请求信息</p>
+<p>访问 <a target="_blank" rel="noopener" href="http://localhost:8001/hystrix">http://localhost:8001/hystrix</a> 输入上面的url可以可视化地观察请求信息</p>
+<h3 id="6-隔离策略"><a href="#6-隔离策略" class="headerlink" title="6. 隔离策略"></a>6. 隔离策略</h3><p>隔离策略：信号量、线程池，默认使用线程池</p>
+<p><strong>线程池隔离</strong></p>
+<p>概念：有1000个商品服务信息的并发请求，但是商品服务线程池中只有10个线程，那么最多只会用这10个线程去处理，不会将Tomcat中的所有线程都耗尽。</p>
+<p>适用场景：耗时长的请求</p>
+<p><strong>信号量隔离</strong></p>
+<p>概念：每次请求通过计数信号进行限制，当信号大于请求数时，调用Fallback接口快速返回。获取到信号的线程继续访问，访问完成后归还信号，信号获取失败直接Fallback。</p>
+<p>适用场景：耗时短的请求</p>
+<table>
+<thead>
+<tr>
+<th align="left">隔离方式</th>
+<th align="left">是否支持超时</th>
+<th align="left">是否支持熔断</th>
+<th align="left">隔离原理</th>
+<th align="left">是否是异步调用</th>
+<th align="left">资源消耗</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">线程池隔离</td>
+<td align="left">支持,可直接返回</td>
+<td align="left">支持,当线程池到达maxSize后,再请求会触发fallback接口进行熔断</td>
+<td align="left">每个服务单独用线程池</td>
+<td align="left">可以是异步,也可以是同步。看调用的方法</td>
+<td align="left">大,大量线程的上下文切换，容易造成机器负载高</td>
+</tr>
+<tr>
+<td align="left">信号量隔离</td>
+<td align="left">不支持,如果阻塞，只能通过调用协议（如:socket超时才能返回）</td>
+<td align="left">支持，当信号量达到maxConcurrentRequests后。再请求会触发fallback</td>
+<td align="left">通过信号量的计数器</td>
+<td align="left">同步调用,不支持异步</td>
+<td align="left">小,只是个计数器</td>
+</tr>
+</tbody></table>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-comment"># 修改隔离策略为信号量</span><br><span class="hljs-attr">hystrix.command.default.execution.isolation.strategy</span>=<span class="hljs-string">SEMAPHORE</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h2><h3 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h3><p>pom</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependencyManagement</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-alibaba-dependencies<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.2.5.RC2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">type</span>&gt;</span>pom<span class="hljs-tag">&lt;/<span class="hljs-name">type</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>import<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependencyManagement</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependencies</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.alibaba.cloud<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-sentinel<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependencies</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SardineAlibabaSamplesApplication</span> &#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        initSentinelRules();<br>        SpringApplication.run(SardineAlibabaSamplesApplication.class, args);<br>    &#125;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">initSentinelRules</span><span class="hljs-params">()</span>&#123;<br>        List&lt;FlowRule&gt; rules = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();<br>        <span class="hljs-type">FlowRule</span> <span class="hljs-variable">rule</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FlowRule</span>();<br>        rule.setResource(<span class="hljs-string">&quot;resource&quot;</span>);<br>        <span class="hljs-comment">// set limit qps to 2</span><br>        rule.setCount(<span class="hljs-number">2</span>);<br>        rule.setGrade(RuleConstant.FLOW_GRADE_QPS);<br>        rule.setLimitApp(<span class="hljs-string">&quot;default&quot;</span>);<br>        rules.add(rule);<br>        FlowRuleManager.loadRules(rules);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TestController</span> &#123;<br><br>   <span class="hljs-meta">@GetMapping(&quot;hello&quot;)</span><br>   <span class="hljs-meta">@SentinelResource(value = &quot;resource&quot;, blockHandler = &quot;fallback&quot;)</span><br>   <span class="hljs-keyword">public</span> String <span class="hljs-title function_">hello</span><span class="hljs-params">()</span> &#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello&quot;</span>;<br>   &#125;<br><br>   <span class="hljs-keyword">public</span> String <span class="hljs-title function_">fallback</span><span class="hljs-params">(BlockException e)</span>&#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;降级了&quot;</span>;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>调用 hello 接口，若qps大于2的时候会执行降级方法。</p>
+<h3 id="整合-Sentinel-Dashboard"><a href="#整合-Sentinel-Dashboard" class="headerlink" title="整合 Sentinel Dashboard"></a>整合 Sentinel Dashboard</h3><p><a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel/wiki/Dashboard">https://github.com/alibaba/Sentinel/wiki/Dashboard</a></p>
+<p>启动 Sentinel Dashboard，登录控制台，默认账号密码都是 sentinel</p>
+<p><strong>在服务中增加以下配置以注册到Dashboard</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">server.port</span>=<span class="hljs-string">8000</span><br><span class="hljs-attr">spring.cloud.sentinel.transport.dashboard</span>=<span class="hljs-string">localhost:8080</span><br><span class="hljs-comment"># 服务启动后就注册到 Dashboard</span><br><span class="hljs-attr">spring.cloud.sentinel.eager</span>=<span class="hljs-string">true</span><br><span class="hljs-attr">spring.application.name</span>=<span class="hljs-string">stn</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20210211094241995.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>新增一条流控规则</p>
+<p><img src="https://img-blog.csdnimg.cn/20210211095141129.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/pumpkin/categories/Spring/" class="category-chain-item">Spring</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>SpringCloud 服务调用</div>
+      <div>https://rongkezan.github.io/pumpkin/2021/10/18/Java/Spring/SpringCloud服务调用/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Keith</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>October 18, 2021</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/pumpkin/2021/10/18/Java/Spring/SpringCloud%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/" title="SpringCloud 链路追踪">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SpringCloud 链路追踪</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/pumpkin/2021/10/18/Java/Spring/SpringCloud%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/" title="SpringCloud 注册中心">
+                        <span class="hidden-mobile">SpringCloud 注册中心</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/pumpkin/js/events.js" ></script>
+<script  src="/pumpkin/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/pumpkin/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/pumpkin/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/pumpkin/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
