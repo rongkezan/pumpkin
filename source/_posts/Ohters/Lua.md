@@ -1,3 +1,10 @@
+---
+title: Lua
+date: {{ date }}
+categories:
+- Others
+---
+
 # Lua
 
 ## Lua 程序设计

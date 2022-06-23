@@ -1,3 +1,10 @@
+---
+title: Maven
+date: {{ date }}
+categories:
+- Others
+---
+
 # Maven
 
 ## Maven 加载顺序

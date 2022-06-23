@@ -1,3 +1,10 @@
+---
+title: Openresty
+date: {{ date }}
+categories:
+- Others
+---
+
 # Openresty
 
 Nginx是一个主进程配合多个工作进程的工作模式，每个进程由单个线程来处理多个连接。

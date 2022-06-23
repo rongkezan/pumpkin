@@ -1,3 +1,10 @@
+---
+title: IO 模型
+date: {{ date }}
+categories:
+- Linux
+---
+
 # IO模型
 
 ## 基本概念说明

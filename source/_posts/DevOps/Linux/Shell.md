@@ -1,3 +1,10 @@
+---
+title: Shell
+date: {{ date }}
+categories:
+- Linux
+---
+
 # Shell
 
 ## Shell Hello World

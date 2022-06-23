@@ -1,3 +1,10 @@
+---
+title: Linux 权限
+date: {{ date }}
+categories:
+- Linux
+---
+
 # Linux 权限
 
 ## 权限概述

@@ -1,4 +1,11 @@
-# Linux 命令
+---
+title: Linux 命令
+date: {{ date }}
+categories:
+- Linux
+---
+
+# Linux命令
 
 ## 常用命令
 
