@@ -1,676 +1,296 @@
-
-
-<!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/pumpkin/img/fluid.png">
-  <link rel="icon" href="/pumpkin/img/fluid.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Keith">
-  <meta name="keywords" content="">
-  
-    <meta property="og:type" content="website">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Pumpkin - Pumpkin Notebook</title><meta name="author" content="Keith"><meta name="copyright" content="Keith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Pumpkin">
 <meta property="og:url" content="https://rongkezan.github.io/pumpkin/page/5/index.html">
 <meta property="og:site_name" content="Pumpkin">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
 <meta property="article:author" content="Keith">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>Pumpkin</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/pumpkin/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/pumpkin/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/pumpkin/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"rongkezan.github.io","root":"/pumpkin/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/pumpkin/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/pumpkin/img/favicon.png"><link rel="canonical" href="https://rongkezan.github.io/pumpkin/page/5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/pumpkin/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/pumpkin/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
     }
-  </script>
-  <script  src="/pumpkin/js/utils.js" ></script>
-  <script  src="/pumpkin/js/color-schema.js" ></script>
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Pumpkin',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2022-06-24 16:35:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
-  
-<meta name="generator" content="Hexo 6.2.0"></head>
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
 
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
 
-<body>
-  
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
 
-  <header>
-    
-
-<div class="header-inner" style="height: 100vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/pumpkin/">
-      <strong>Pumpkin</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/">
-                <i class="iconfont icon-home-fill"></i>
-                Home
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                Archives
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                Categories
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                Tags
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/about/">
-                <i class="iconfont icon-user-fill"></i>
-                About
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/pumpkin/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="Pumpkin Notebook"></span>
-          
-        </div>
-
-        
-      </div>
-
-      
-        <div class="scroll-down-bar">
-          <i class="iconfont icon-arrowdown"></i>
-        </div>
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      <div class="container nopadding-x-md">
-        <div id="board"
-          style="margin-top: 0">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/DataSource/mysql/7.%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/DataSource/mysql/7.%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/" target="_self">
-        <div>
-          
-          6.分库分表分表方式垂直分表：根据业务分表 水平分表：根据数据分表 分库分表的问题 跨节点连接查询问题（分页、排序）：两张表存在不同的库中，需要进行多次查询。 多数据源管理问题：一个服务中可能包含多个数据源。  MycatMyCat技术原理中最重要的一个动词是“拦截”，它拦截了用户发送过来的SQL语句，首先对SQL语句做了一些特定的分析：如分片分析、路由分析、读写分离分析、缓存分析等，然后将此SQ
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/DataSource/mysql/8.%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%82%E6%95%B0/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/DataSource/mysql/8.%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%82%E6%95%B0/" target="_self">
-        <div>
-          
-          8.服务器参数general123456789101112# 数据文件存放的目录datadir&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql# mysql.socket表示server和client在同一台服务器，并且使用localhost进行连接，就会使用socket进行连接socket&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;mysql.sock# 存储mysql的pidpid_file&#x3D;&#x2F;var&#x2F;lib&#x2F;mysql&#x2F;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/DataSource/mysql/6.%E5%88%86%E5%8C%BA%E8%A1%A8/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/DataSource/mysql/6.%E5%88%86%E5%8C%BA%E8%A1%A8/" target="_self">
-        <div>
-          
-          6.分区表分区表的应用场景如果需要从非常大的表中查询出某一段时间的记录，而这张表中包含很多年的历史数据，数据是按照时间排序的，此时应该如何查询数据呢？ 因为数据量巨大，肯定不能在每次查询的时候都扫描全表。考虑到索引在空间和维护上的消耗，也不希望使用索引，即使使用索引，会发现会产生大量的碎片，还会产生大量的随机IO，但是当数据量超大的时候，索引也就无法起作用了，此时可以考虑使用分区来进行解决。  表
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/DataSource/mysql/1.%E5%9F%BA%E7%A1%80/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/DataSource/mysql/1.%E5%9F%BA%E7%A1%80/" target="_self">
-        <div>
-          
-          1.基础官方案例库导入mysql官方案例数据库 https:&#x2F;&#x2F;dev.mysql.com&#x2F;doc&#x2F;index-other.html  1234mysql -u root -pmysql&gt;source &#x2F;sakila-db&#x2F;sakila-schema.sqlmysql&gt;source &#x2F;sakila-db&#x2F;sakila-data.sql  查询普通查询12345678-- 去重查询sel
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/DataSource/mysql/10.SQL%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/DataSource/mysql/10.SQL%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" target="_self">
-        <div>
-          
-          10.SQL执行原理SQL Server组成部分1.关系引擎：主要作用是优化和执行查询。包含三大组件： （1）命令解析器：检查语法和转换查询树。 （2）查询执行器：优化查询。 （3）查询优化器：负责执行查询。 2.存储引擎：管理所有数据及涉及的IO包含三大组件： （1）事务管理器：通过锁来管理数据及维持事务的ACID属性。 （2）数据访问方法：处理对行、索引、页、行版本、空间分配等的I&#x2F;
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/Mq/RocketMQ/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/Mq/RocketMQ/" target="_self">
-        <div>
-          
-          RocketMQ http:&#x2F;&#x2F;rocketmq.apache.org  安装Server下载最新的 binary release，修改配置（原因是默认配置消耗太多内存） 12345vi runserver.shJAVA_OPT&#x3D;&quot;$&amp;#123;JAVA_OPT&amp;#125; -server -Xms1g -Xmx1g -Xmn256m -XX:MetaspaceSize&#x3D;128m -XX
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/Mq/RabbitMQ%E9%AB%98%E7%BA%A7/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/Mq/RabbitMQ%E9%AB%98%E7%BA%A7/" target="_self">
-        <div>
-          
-          RabbitMQ高级过期队列概念过期时间TTL表示可以对消息设置预期的时间，在这个时间内都可以被消费者接收，过了之后消息自动删除。 设置消息和队列的两种方式  通过队列属性设置，队列中所有消息都有相同的过期时间 对消息单独设置，每条消息的TTL可以不同  以上两种方法如果同时使用，则消息的过期时间以两者之间TTL较小的为准。消息在队列的生存时间一旦超过设置的TTL值，就称为dead message
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/Mq/RabbitMQ%E5%9F%BA%E7%A1%80/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/Mq/RabbitMQ%E5%9F%BA%E7%A1%80/" target="_self">
-        <div>
-          
-          RabbitMQ基础MQ种类   特性 RabbitMQ RocketMQ kafka    开发语言 erlang java scala   单机吞吐量 万级 10万级 10万级   时效性 us级 ms级 ms级以内   可用性 高(主从架构) 非常高(分布式架构) 非常高(分布式架构)   功能特性 基于erlang开发，所以并发能力很强，性能极其好，延时很低;管理界面较丰富 MQ功能比较完
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/Mq/RabbitMQ%E5%BA%94%E7%94%A8/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/Mq/RabbitMQ%E5%BA%94%E7%94%A8/" target="_self">
-        <div>
-          
-          RabbitMQ应用消息堆积当生产者生产的速度长时间远远大于消费的速度时，就会造成消息堆积。  消息堆积的影响 可能导致新消息无法进入队列 可以导致旧消息无法丢失 消息等待的消费时间过长，超出了业务容忍范围   产生堆积的情况 生产者突然大量发布消息 消费者消费失败 消费者出现性能瓶颈   解决办法 排查消费者的性能瓶颈 增加消费者的多线程处理 部署多个消费者    消息已经堆积如何解决 消息队列
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/pumpkin/2021/10/18/Mq/Kafka/" target="_self">
-          
-        </a>
-      </h1>
-
-      <a class="index-excerpt" href="/pumpkin/2021/10/18/Mq/Kafka/" target="_self">
-        <div>
-          
-          KafkaKafka配置文件 server.properties 1234broker.id&#x3D;0listeners&#x3D;PLAINTEXT:&#x2F;&#x2F;node01:9092log.dirs&#x3D;&#x2F;var&#x2F;kafka_datazookeeper.connect&#x3D;node02:2181,node03:2181,node04:2181&#x2F;kafka
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-18 14:00" pubdate>
-              2021-10-18
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/pumpkin/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/pumpkin/">1</a><span class="space">&hellip;</span><a class="page-number" href="/pumpkin/page/3/#board">3</a><a class="page-number" href="/pumpkin/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/pumpkin/page/6/#board">6</a><a class="page-number" href="/pumpkin/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/pumpkin/page/12/#board">12</a><a class="extend next" rel="next" href="/pumpkin/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/pumpkin/js/events.js" ></script>
-<script  src="/pumpkin/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
       }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
+    }
   
-    <script  src="/pumpkin/js/img-lazyload.js" ></script>
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/pumpkin/archives/"><div class="headline">Articles</div><div class="length-num">108</div></a><a href="/pumpkin/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/pumpkin/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr/></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/pumpkin/">Pumpkin</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Pumpkin</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left"><a href="/pumpkin/2021/10/18/DataSource/mysql/8.%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%82%E6%95%B0/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/DataSource/mysql/8.%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%82%E6%95%B0/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.925Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">8.服务器参数general123456789101112# 数据文件存放的目录datadir=/var/lib/mysql# mysql.socket表示server和client在同一台服务器，并且使用localhost进行连接，就会使用socket进行连接socket=/var/lib/mysql/mysql.sock# 存储mysql的pidpid_file=/var/lib/mysql/mysql.pid# mysql服务的端口号port=3306# mysql存储引擎default_storage_engine=InnoDB# 当忘记mysql的用户名密码的时候，可以在mysql配置文件中配置该参数，跳过权限表验证，不需要密码即可登录mysqlskip-grant-tables
+
+character12345678910# 客户端数据的字符集character_set_client# mysql处理客户端发来的信息时，会把这些数据转换成连接的字符集格式character_set_connection# mysql发送给客户端的结果集所用的字符集character_set_r ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/pumpkin/2021/10/18/DataSource/mysql/7.%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/DataSource/mysql/7.%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.925Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">6.分库分表分表方式垂直分表：根据业务分表
+水平分表：根据数据分表
+分库分表的问题
+跨节点连接查询问题（分页、排序）：两张表存在不同的库中，需要进行多次查询。
+多数据源管理问题：一个服务中可能包含多个数据源。
+
+MycatMyCat技术原理中最重要的一个动词是“拦截”，它拦截了用户发送过来的SQL语句，首先对SQL语句做了一些特定的分析：如分片分析、路由分析、读写分离分析、缓存分析等，然后将此SQL发往后端的真实数据库，并将返回的结果做适当的处理，最终再返回给用户。
+
+Sharding JDBC
+轻量级的 Java 框架，增强版的 JDBC
+
+1234567891011121314151617spring.shardingsphere.datasource.names=dsspring.shardingsphere.datasource.ds.type=com.alibaba.druid.pool.DruidDataSourcespring.shardingsphere.datasource.ds.driver-class-name=com.mysql.cj.jdbc.Driversp ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/pumpkin/2021/10/18/DataSource/mysql/6.%E5%88%86%E5%8C%BA%E8%A1%A8/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/DataSource/mysql/6.%E5%88%86%E5%8C%BA%E8%A1%A8/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.924Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">6.分区表分区表的应用场景如果需要从非常大的表中查询出某一段时间的记录，而这张表中包含很多年的历史数据，数据是按照时间排序的，此时应该如何查询数据呢？
+因为数据量巨大，肯定不能在每次查询的时候都扫描全表。考虑到索引在空间和维护上的消耗，也不希望使用索引，即使使用索引，会发现会产生大量的碎片，还会产生大量的随机IO，但是当数据量超大的时候，索引也就无法起作用了，此时可以考虑使用分区来进行解决。
+
+表非常大以至于无法全部都放在内存中，或者只在表的最后部分有热点数据，其他均是历史数据
+
+分区表的数据更容易维护
+
+批量删除大量数据可以使用清除整个分区的方式
+
+对一个独立分区进行优化、检查、修复等操作
+
+
+
+分区表的数据可以分布在不同的物理设备上，从而高效地利用多个硬件设备
+
+可以使用分区表来避免某些特殊的瓶颈：innodb的单个索引的互斥访问、ext3文件系统的inode锁竞争
+
+可以备份和恢复独立的分区
 
 
 
 
-  <script  src="/pumpkin/js/local-search.js" ></script>
+分区表的限制
+一个表最多只能有1024个分区，在5.7版本的时候可以支持8196个分区
+
+在早期的mysql中，分区表达式必须是整数或者是返回整数的表达式，在mysql5.5中，某些 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/pumpkin/2021/10/18/DataSource/mysql/10.SQL%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/DataSource/mysql/10.SQL%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.922Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">10.SQL执行原理SQL Server组成部分1.关系引擎：主要作用是优化和执行查询。包含三大组件：
+（1）命令解析器：检查语法和转换查询树。
+（2）查询执行器：优化查询。
+（3）查询优化器：负责执行查询。
+2.存储引擎：管理所有数据及涉及的IO包含三大组件：
+（1）事务管理器：通过锁来管理数据及维持事务的ACID属性。
+（2）数据访问方法：处理对行、索引、页、行版本、空间分配等的I&#x2F;O请求。
+（3）缓冲区管理器：管理SQL Server的主要内存消耗组件Buffer Pool。
+3.Buffer Pool包含SQL Server的所有缓存。如计划缓存和数据缓存。
+4.事务日志记录事务的所有更改。保证事务ACID属性的重要组件。
+5.数据文件数据库的物理存储文件。
+6.SQL Server网络接口建立在客户端和服务器之间的网络连接的协议层
+查询的底层原理1.当客户端执行一条T-SQL语句给SQL Server服务器时，会首先到达服务器的网络接口，网络接口和客户端之间有协议层。
+2.客户端和网络接口之间建立连接。使用称为“表格格式数据流”(TDS) 数据包的 Microsof ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/pumpkin/2021/10/18/DataSource/mysql/1.%E5%9F%BA%E7%A1%80/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/DataSource/mysql/1.%E5%9F%BA%E7%A1%80/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.922Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">1.基础官方案例库导入mysql官方案例数据库 https://dev.mysql.com/doc/index-other.html 
+1234mysql -u root -pmysql&gt;source /sakila-db/sakila-schema.sqlmysql&gt;source /sakila-db/sakila-data.sql
+
+查询普通查询12345678-- 去重查询select distinct country_id from city;-- 分页查询: 从第10条记录开始查询5条记录select * from city limit 10,5;-- 查询前5条记录select * from city limit 5;-- 筛选分组后的各组数据 havingselect customer_id, sum(amount) from payment group by customer_id having sum(amount) &gt; 200
+
+Join 查询1. 笛卡尔积(没有加筛选条件的内连接)两表关联，把左表的列和右表的列通过笛卡尔积的形式表达出来
+1234 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/pumpkin/2021/10/18/Mq/RocketMQ/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/Mq/RocketMQ/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.921Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">RocketMQ
+http://rocketmq.apache.org
+
+安装Server下载最新的 binary release，修改配置（原因是默认配置消耗太多内存）
+12345vi runserver.shJAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms1g -Xmx1g -Xmn256m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;vi runbroker.shJAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms512m -Xmx512m -Xmn128m&quot;
+
+启动&#x2F;关闭 RocketMQ
+123456789# Start Name Servernohup sh bin/mqnamesrv &amp;# Start Brokernohup sh bin/mqbroker -n localhost:9876 &amp;# Shutdown Name Serversh bin/mqshutdown nam ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/pumpkin/2021/10/18/Mq/RabbitMQ%E9%AB%98%E7%BA%A7/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/Mq/RabbitMQ%E9%AB%98%E7%BA%A7/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.920Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">RabbitMQ高级过期队列概念过期时间TTL表示可以对消息设置预期的时间，在这个时间内都可以被消费者接收，过了之后消息自动删除。
+设置消息和队列的两种方式
+
+通过队列属性设置，队列中所有消息都有相同的过期时间
+对消息单独设置，每条消息的TTL可以不同
+
+以上两种方法如果同时使用，则消息的过期时间以两者之间TTL较小的为准。消息在队列的生存时间一旦超过设置的TTL值，就称为dead message 被投递到死信队列，消费者无法再收到该消息。
+Spring Boot 配置xml 配置1234567891011121314&lt;!-- 定义过期队列及属性 不存在则自动创建 --&gt;&lt;rabbit:queue id=&quot;myTtlQueue&quot; name=&quot;my.ttl.queue&quot; auto-declare=&quot;true&quot;&gt;    &lt;rabbit:queue-arguments&gt;        &lt;!-- 投递到该队列的消息如果没有消费将在6秒后被删除 --&gt;        &lt;entry k ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/pumpkin/2021/10/18/Mq/RabbitMQ%E5%9F%BA%E7%A1%80/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/Mq/RabbitMQ%E5%9F%BA%E7%A1%80/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.919Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">RabbitMQ基础MQ种类
+
+
+特性
+RabbitMQ
+RocketMQ
+kafka
 
 
 
+开发语言
+erlang
+java
+scala
 
 
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/pumpkin/js/boot.js" ></script>
+单机吞吐量
+万级
+10万级
+10万级
 
 
-  
+时效性
+us级
+ms级
+ms级以内
 
-  <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
-  </noscript>
-</body>
-</html>
+
+可用性
+高(主从架构)
+非常高(分布式架构)
+非常高(分布式架构)
+
+
+功能特性
+基于erlang开发，所以并发能力很强，性能极其好，延时很低;管理界面较丰富
+MQ功能比较完备，扩展性佳
+只支持主要的MQ功能，像一些消息查询，消息回溯等功能没有提供，毕竟是为大数据准备的，在大数据领域应用广。
+
+
+RabbitMQ工作模型
+工作流程：
+生产者发送消息给交换机，交换机根据路由规则将消息分发到各个队列中，消费者监听队列，当发现有消息的时候将消息取走。
+Channel：信道，多路复用连接中的一条独立的双向数据流通道。信道是建立在真实的TCP连接内的虚拟连接，AMQP命令都是通过信道发送出去的，不管是发布消息、订阅队列还是接收消息，这些动作都是通过信道完成。因为对于操作系统来说建立和销毁TCP都是非常昂贵的开销，所以引入了信道的概念，以复用一条TCP连接。
+VHost：虚拟 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/pumpkin/2021/10/18/Mq/RabbitMQ%E5%BA%94%E7%94%A8/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/Mq/RabbitMQ%E5%BA%94%E7%94%A8/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.919Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">RabbitMQ应用消息堆积当生产者生产的速度长时间远远大于消费的速度时，就会造成消息堆积。
+
+消息堆积的影响
+可能导致新消息无法进入队列
+可以导致旧消息无法丢失
+消息等待的消费时间过长，超出了业务容忍范围
+
+
+产生堆积的情况
+生产者突然大量发布消息
+消费者消费失败
+消费者出现性能瓶颈
+
+
+解决办法
+排查消费者的性能瓶颈
+增加消费者的多线程处理
+部署多个消费者
+
+
+
+消息已经堆积如何解决
+消息队列堆积，想办法把消息转移到一个新的队列，增加服务器来慢慢消费。
+消息丢失消息生产者发送消息成功，但是MQ没有收到消息，消息在从生产者传输到MQ的过程中丢失，一般是由于网络不稳定等原因。
+解决方案
+
+采用RabbitMQ的消息确认机制，当消息成功被MQ接收到时，会给生产者发送一个确认消息表示接收成功。
+RabbitMQ发送方消息确认模式有三种：普通确认模式，批量确认模式，异步监听确认模式。
+异步监听确认模式：边发送消息边进行确认，不影响主线程任务进行。
+
+RabbitMQ持久化交换机、队列、消息，确保MQ服务重启时能从磁盘恢复对应的交换机、队列和消息。
+Spring整合后默认开启了交换机、队列、消 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/pumpkin/2021/10/18/Mq/Kafka/" title="No title"><img class="post_bg" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"></a></div><div class="recent-post-info"><a class="article-title" href="/pumpkin/2021/10/18/Mq/Kafka/" title="No title">No title</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-10-18T06:00:05.918Z" title="Created 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="content">KafkaKafka配置文件 server.properties
+1234broker.id=0listeners=PLAINTEXT://node01:9092log.dirs=/var/kafka_datazookeeper.connect=node02:2181,node03:2181,node04:2181/kafka
+
+</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/pumpkin/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/pumpkin/">1</a><span class="space">&hellip;</span><a class="page-number" href="/pumpkin/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/pumpkin/page/6/#content-inner">6</a><span class="space">&hellip;</span><a class="page-number" href="/pumpkin/page/11/#content-inner">11</a><a class="extend next" rel="next" href="/pumpkin/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/pumpkin/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Keith</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/pumpkin/archives/"><div class="headline">Articles</div><div class="length-num">108</div></a><a href="/pumpkin/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/pumpkin/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/26/DevOps/Docker/Docker%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F/" title="Docker自定义镜像"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="Docker自定义镜像"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/26/DevOps/Docker/Docker%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F/" title="Docker自定义镜像">Docker自定义镜像</a><time datetime="2022-05-26T08:27:59.318Z" title="Created 2022-05-26 16:27:59">2022-05-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/25/DevOps/Docker/README/" title="No title"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/25/DevOps/Docker/README/" title="No title">No title</a><time datetime="2022-05-25T09:09:28.474Z" title="Created 2022-05-25 17:09:28">2022-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/25/DevOps/Docker/Kubernetes/" title="Kubernetes"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="Kubernetes"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/25/DevOps/Docker/Kubernetes/" title="Kubernetes">Kubernetes</a><time datetime="2022-05-25T09:09:28.473Z" title="Created 2022-05-25 17:09:28">2022-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/25/DevOps/Docker/Docker%E5%AE%89%E8%A3%85RabbitMq/" title="Docker安装RabbitMq"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="Docker安装RabbitMq"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/25/DevOps/Docker/Docker%E5%AE%89%E8%A3%85RabbitMq/" title="Docker安装RabbitMq">Docker安装RabbitMq</a><time datetime="2022-05-25T09:09:28.471Z" title="Created 2022-05-25 17:09:28">2022-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/25/DevOps/Docker/Docker%E5%AE%89%E8%A3%85Jenkins/" title="Docker安装Jenkins"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="Docker安装Jenkins"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/25/DevOps/Docker/Docker%E5%AE%89%E8%A3%85Jenkins/" title="Docker安装Jenkins">Docker安装Jenkins</a><time datetime="2022-05-25T09:09:28.470Z" title="Created 2022-05-25 17:09:28">2022-05-25</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/pumpkin/categories/Docker/"><span class="card-category-list-name">Docker</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/pumpkin/categories/Java/"><span class="card-category-list-name">Java</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/pumpkin/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/pumpkin/categories/Others/"><span class="card-category-list-name">Others</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/pumpkin/categories/Spring/"><span class="card-category-list-name">Spring</span><span class="card-category-list-count">12</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/pumpkin/categories/Tools/"><span class="card-category-list-name">Tools</span><span class="card-category-list-count">2</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/pumpkin/tags/Java/" style="font-size: 1.1em; color: #999">Java</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/pumpkin/archives/2022/05/"><span class="card-archive-list-date">May 2022</span><span class="card-archive-list-count">11</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/pumpkin/archives/2022/02/"><span class="card-archive-list-date">February 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/pumpkin/archives/2022/01/"><span class="card-archive-list-date">January 2022</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/pumpkin/archives/2021/11/"><span class="card-archive-list-date">November 2021</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/pumpkin/archives/2021/10/"><span class="card-archive-list-date">October 2021</span><span class="card-archive-list-count">36</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/pumpkin/archives/2021/09/"><span class="card-archive-list-date">September 2021</span><span class="card-archive-list-count">58</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">108</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastPushDate="2022-06-24T08:35:04.490Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Keith</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/pumpkin/js/utils.js"></script><script src="/pumpkin/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

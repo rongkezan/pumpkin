@@ -1,305 +1,172 @@
-
-
-<!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
-
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/pumpkin/img/fluid.png">
-  <link rel="icon" href="/pumpkin/img/fluid.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Keith">
-  <meta name="keywords" content="">
-  
-    <meta name="description" content="RocketMQ http:&#x2F;&#x2F;rocketmq.apache.org  安装Server下载最新的 binary release，修改配置（原因是默认配置消耗太多内存） 12345vi runserver.shJAVA_OPT&#x3D;&quot;$&amp;#123;JAVA_OPT&amp;#125; -server -Xms1g -Xmx1g -Xmn256m -XX:MetaspaceSize&#x3D;128m -XX">
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Pumpkin | Pumpkin</title><meta name="author" content="Keith"><meta name="copyright" content="Keith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="RocketMQ http:&#x2F;&#x2F;rocketmq.apache.org  安装Server下载最新的 binary release，修改配置（原因是默认配置消耗太多内存） 12345vi runserver.shJAVA_OPT&#x3D;&quot;$&amp;#123;JAVA_OPT&amp;#125; -server -Xms1g -Xmx1g -Xmn256m -XX:MetaspaceSize&#x3D;128m -XX">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Pumpkin">
 <meta property="og:url" content="https://rongkezan.github.io/pumpkin/2021/10/18/Mq/RocketMQ/index.html">
 <meta property="og:site_name" content="Pumpkin">
 <meta property="og:description" content="RocketMQ http:&#x2F;&#x2F;rocketmq.apache.org  安装Server下载最新的 binary release，修改配置（原因是默认配置消耗太多内存） 12345vi runserver.shJAVA_OPT&#x3D;&quot;$&amp;#123;JAVA_OPT&amp;#125; -server -Xms1g -Xmx1g -Xmn256m -XX:MetaspaceSize&#x3D;128m -XX">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210301111718407.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2021030118144581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210302171804846.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20210303135132451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 <meta property="article:published_time" content="2021-10-18T06:00:05.921Z">
 <meta property="article:modified_time" content="2021-10-18T06:00:05.921Z">
 <meta property="article:author" content="Keith">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210301111718407.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70">
-  
-  
-  
-  <title>Pumpkin</title>
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/pumpkin/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/pumpkin/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/pumpkin/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"rongkezan.github.io","root":"/pumpkin/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/pumpkin/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><link rel="shortcut icon" href="/pumpkin/img/favicon.png"><link rel="canonical" href="https://rongkezan.github.io/pumpkin/2021/10/18/Mq/RocketMQ/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/pumpkin/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/pumpkin/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
     }
-  </script>
-  <script  src="/pumpkin/js/utils.js" ></script>
-  <script  src="/pumpkin/js/color-schema.js" ></script>
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Pumpkin',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-10-18 14:00:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
 
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
   
-<meta name="generator" content="Hexo 6.2.0"></head>
-
-
-<body>
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
   
-
-  <header>
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
     
-
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/pumpkin/">
-      <strong>Pumpkin</strong>
-    </a>
-
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/">
-                <i class="iconfont icon-home-fill"></i>
-                Home
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                Archives
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                Categories
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                Tags
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/pumpkin/about/">
-                <i class="iconfont icon-user-fill"></i>
-                About
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/pumpkin/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text=""></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
     
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2021-10-18 14:00" pubdate>
-          October 18, 2021 pm
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          8.5k words
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          71 mins
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none"></h1>
-            
-            <div class="markdown-body">
-              
-              <h1 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h1><blockquote>
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.2.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/pumpkin/archives/"><div class="headline">Articles</div><div class="length-num">108</div></a><a href="/pumpkin/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/pumpkin/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><hr/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/pumpkin/">Pumpkin</a></span><div id="menus"><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">No title</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-10-18T06:00:05.921Z" title="Created 2021-10-18 14:00:05">2021-10-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-10-18T06:00:05.921Z" title="Updated 2021-10-18 14:00:05">2021-10-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="RocketMQ"><a href="#RocketMQ" class="headerlink" title="RocketMQ"></a>RocketMQ</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="http://rocketmq.apache.org/">http://rocketmq.apache.org</a></p>
 </blockquote>
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="Server"><a href="#Server" class="headerlink" title="Server"></a>Server</h3><p>下载最新的 binary release，修改配置（原因是默认配置消耗太多内存）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell">vi runserver.sh<br>JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms1g -Xmx1g -Xmn256m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;<br><br>vi runbroker.sh<br>JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms512m -Xmx512m -Xmn128m&quot;<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi runserver.sh</span><br><span class="line">JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms1g -Xmx1g -Xmn256m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;</span><br><span class="line"></span><br><span class="line">vi runbroker.sh</span><br><span class="line">JAVA_OPT=&quot;$&#123;JAVA_OPT&#125; -server -Xms512m -Xmx512m -Xmn128m&quot;</span><br></pre></td></tr></table></figure>
 
 <p>启动&#x2F;关闭 RocketMQ</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">Start Name Server</span><br>nohup sh bin/mqnamesrv &amp;<br><span class="hljs-meta prompt_"># </span><span class="language-bash">Start Broker</span><br>nohup sh bin/mqbroker -n localhost:9876 &amp;<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">Shutdown Name Server</span><br>sh bin/mqshutdown namesrv<br><span class="hljs-meta prompt_"># </span><span class="language-bash">Shutdown Broker</span><br>sh bin/mqshutdown broker<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start Name Server</span></span><br><span class="line">nohup sh bin/mqnamesrv &amp;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Start Broker</span></span><br><span class="line">nohup sh bin/mqbroker -n localhost:9876 &amp;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Shutdown Name Server</span></span><br><span class="line">sh bin/mqshutdown namesrv</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Shutdown Broker</span></span><br><span class="line">sh bin/mqshutdown broker</span><br></pre></td></tr></table></figure>
 
 <p>查看启动日志</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sh"><span class="hljs-comment"># 查看 namesrv 的启动日志</span><br><span class="hljs-built_in">tail</span> -f ~/logs/rocketmqlogs/namesrv.log<br><span class="hljs-comment"># 查看 broker 的启动日志</span><br><span class="hljs-built_in">tail</span> -f ~/logs/rocketmqlogs/broker.log<br></code></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看 namesrv 的启动日志</span></span><br><span class="line"><span class="built_in">tail</span> -f ~/logs/rocketmqlogs/namesrv.log</span><br><span class="line"><span class="comment"># 查看 broker 的启动日志</span></span><br><span class="line"><span class="built_in">tail</span> -f ~/logs/rocketmqlogs/broker.log</span><br></pre></td></tr></table></figure>
 
 <p>测试</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">消费端</span><br>export NAMESRV_ADDR=localhost:9876<br>sh bin/tools.sh org.apache.rocketmq.example.quickstart.Producer<br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">服务端</span><br>export NAMESRV_ADDR=localhost:9876<br>sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">消费端</span></span><br><span class="line">export NAMESRV_ADDR=localhost:9876</span><br><span class="line">sh bin/tools.sh org.apache.rocketmq.example.quickstart.Producer</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">服务端</span></span><br><span class="line">export NAMESRV_ADDR=localhost:9876</span><br><span class="line">sh bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer</span><br></pre></td></tr></table></figure>
 
 <h3 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h3><p>下载 rocketmq-externals：<a target="_blank" rel="noopener" href="https://github.com/apache/rocketmq-externals">https://github.com/apache/rocketmq-externals</a></p>
 <p>解压后修改 rocketmq-console 模块中的 application.properties</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs properties"><span class="hljs-attr">rocketmq.config.namesrvAddr</span>=<span class="hljs-string">localhost:9876</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rocketmq.config.namesrvAddr</span>=<span class="string">localhost:9876</span></span><br></pre></td></tr></table></figure>
 
 <p>在 rocketmq-console 目录下编译</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">mvn clean package -Dmaven.test.skip=true<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean package -Dmaven.test.skip=true</span><br></pre></td></tr></table></figure>
 
 <p>运行编译完的 jar 包</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">java -jar rocketmq-console-ng-1.0.0.jar --server.port=12581<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar rocketmq-console-ng-1.0.0.jar --server.port=12581</span><br></pre></td></tr></table></figure>
 
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h3><p><img src="https://img-blog.csdnimg.cn/20210301111718407.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h3><p><img src="https://img-blog.csdnimg.cn/20210301111718407.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h4 id="Broker"><a href="#Broker" class="headerlink" title="Broker"></a>Broker</h4><ul>
 <li>Broker 面向 Producer 和 Consumer 接受和发送消息</li>
 <li>向 Nameserver 提交自己的信息</li>
@@ -333,47 +200,47 @@
 <p><strong>nameserver内存式存储</strong>，nameserver中的broker、topic等信息默认不会持久化</p>
 <p><strong>为什么不用zookeeper？</strong>：rocketmq希望为了提高性能，CAP定理，客户端负载均衡</p>
 <h3 id="Topic"><a href="#Topic" class="headerlink" title="Topic"></a>Topic</h3><p>Topic是一个逻辑上的概念，实际上Message是在每个Broker上以Queue的形式记录。</p>
-<p><img src="https://img-blog.csdnimg.cn/2021030118144581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/2021030118144581.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <h2 id="Demo-Code"><a href="#Demo-Code" class="headerlink" title="Demo Code"></a>Demo Code</h2><blockquote>
 <p>消息的发送和接收</p>
 </blockquote>
 <h3 id="同步发送接收消息"><a href="#同步发送接收消息" class="headerlink" title="同步发送接收消息"></a>同步发送接收消息</h3><p>生产者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Producer</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> MQClientException, RemotingException, InterruptedException, MQBrokerException &#123;<br>        <span class="hljs-type">DefaultMQProducer</span> <span class="hljs-variable">producer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DefaultMQProducer</span>(<span class="hljs-string">&quot;MyGroup&quot;</span>);<br>        <span class="hljs-comment">// Set nameServer address</span><br>        producer.setNamesrvAddr(<span class="hljs-string">&quot;192.168.25.101:9876&quot;</span>);<br>        producer.start();<br>        producer.setSendMsgTimeout(<span class="hljs-number">6000</span>);<br>        <span class="hljs-comment">// Topic: The address to which message will be sent</span><br>        <span class="hljs-comment">// Body: The real message</span><br>        <span class="hljs-type">Message</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Message</span>(<span class="hljs-string">&quot;myTopic&quot;</span>, <span class="hljs-string">&quot;myMessage&quot;</span>.getBytes());<br>        <span class="hljs-comment">// Synchronized send, it will blocking, slow but don&#x27;t lose message</span><br>        <span class="hljs-type">SendResult</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> producer.send(message);<br>        <span class="hljs-comment">// Get consumer&#x27;s fallback</span><br>        System.out.println(result);<br>        producer.shutdown();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Producer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> MQClientException, RemotingException, InterruptedException, MQBrokerException &#123;</span><br><span class="line">        <span class="type">DefaultMQProducer</span> <span class="variable">producer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultMQProducer</span>(<span class="string">&quot;MyGroup&quot;</span>);</span><br><span class="line">        <span class="comment">// Set nameServer address</span></span><br><span class="line">        producer.setNamesrvAddr(<span class="string">&quot;192.168.25.101:9876&quot;</span>);</span><br><span class="line">        producer.start();</span><br><span class="line">        producer.setSendMsgTimeout(<span class="number">6000</span>);</span><br><span class="line">        <span class="comment">// Topic: The address to which message will be sent</span></span><br><span class="line">        <span class="comment">// Body: The real message</span></span><br><span class="line">        <span class="type">Message</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Message</span>(<span class="string">&quot;myTopic&quot;</span>, <span class="string">&quot;myMessage&quot;</span>.getBytes());</span><br><span class="line">        <span class="comment">// Synchronized send, it will blocking, slow but don&#x27;t lose message</span></span><br><span class="line">        <span class="type">SendResult</span> <span class="variable">result</span> <span class="operator">=</span> producer.send(message);</span><br><span class="line">        <span class="comment">// Get consumer&#x27;s fallback</span></span><br><span class="line">        System.out.println(result);</span><br><span class="line">        producer.shutdown();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>消费者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Consumer</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> MQClientException &#123;<br>        <span class="hljs-type">DefaultMQPushConsumer</span> <span class="hljs-variable">consumer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">DefaultMQPushConsumer</span>(<span class="hljs-string">&quot;MyConsumer&quot;</span>);<br>        consumer.setNamesrvAddr(<span class="hljs-string">&quot;192.168.25.101:9876&quot;</span>);<br>        <span class="hljs-comment">// Each consumer just focus one topic</span><br>        <span class="hljs-comment">// Topic: the address to which message will be sent</span><br>        <span class="hljs-comment">// Filter: * refers to not filter</span><br>        consumer.subscribe(<span class="hljs-string">&quot;myTopic&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>);<br>        consumer.registerMessageListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">MessageListenerConcurrently</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> ConsumeConcurrentlyStatus <span class="hljs-title function_">consumeMessage</span><span class="hljs-params">(List&lt;MessageExt&gt; msgs, ConsumeConcurrentlyContext context)</span> &#123;<br>                <span class="hljs-keyword">for</span> (MessageExt msg : msgs) &#123;<br>                    <span class="hljs-type">String</span> <span class="hljs-variable">msgStr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(msg.getBody());<br>                    System.out.println(msgStr);<br>                &#125;<br>                <span class="hljs-comment">// This message will be consumed by one consumer in default situation, point to point.</span><br>                <span class="hljs-comment">// On the other hand, consumer can update status of message, ack</span><br>                <span class="hljs-keyword">return</span> ConsumeConcurrentlyStatus.CONSUME_SUCCESS;<br>            &#125;<br>        &#125;);<br>        consumer.start();<br>        System.out.println(<span class="hljs-string">&quot;Consumer started.&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Consumer</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> MQClientException &#123;</span><br><span class="line">        <span class="type">DefaultMQPushConsumer</span> <span class="variable">consumer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">DefaultMQPushConsumer</span>(<span class="string">&quot;MyConsumer&quot;</span>);</span><br><span class="line">        consumer.setNamesrvAddr(<span class="string">&quot;192.168.25.101:9876&quot;</span>);</span><br><span class="line">        <span class="comment">// Each consumer just focus one topic</span></span><br><span class="line">        <span class="comment">// Topic: the address to which message will be sent</span></span><br><span class="line">        <span class="comment">// Filter: * refers to not filter</span></span><br><span class="line">        consumer.subscribe(<span class="string">&quot;myTopic&quot;</span>, <span class="string">&quot;*&quot;</span>);</span><br><span class="line">        consumer.registerMessageListener(<span class="keyword">new</span> <span class="title class_">MessageListenerConcurrently</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> ConsumeConcurrentlyStatus <span class="title function_">consumeMessage</span><span class="params">(List&lt;MessageExt&gt; msgs, ConsumeConcurrentlyContext context)</span> &#123;</span><br><span class="line">                <span class="keyword">for</span> (MessageExt msg : msgs) &#123;</span><br><span class="line">                    <span class="type">String</span> <span class="variable">msgStr</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(msg.getBody());</span><br><span class="line">                    System.out.println(msgStr);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// This message will be consumed by one consumer in default situation, point to point.</span></span><br><span class="line">                <span class="comment">// On the other hand, consumer can update status of message, ack</span></span><br><span class="line">                <span class="keyword">return</span> ConsumeConcurrentlyStatus.CONSUME_SUCCESS;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        consumer.start();</span><br><span class="line">        System.out.println(<span class="string">&quot;Consumer started.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="生产者常用的发送模式"><a href="#生产者常用的发送模式" class="headerlink" title="生产者常用的发送模式"></a>生产者常用的发送模式</h3><ol>
 <li>只发送消息，不考虑消息是否成功消费、</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Message</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Message</span>(<span class="hljs-string">&quot;myTopic&quot;</span>, <span class="hljs-string">&quot;myOnewayMessage&quot;</span>.getBytes());<br>producer.sendOneway(message);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Message</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Message</span>(<span class="string">&quot;myTopic&quot;</span>, <span class="string">&quot;myOnewayMessage&quot;</span>.getBytes());</span><br><span class="line">producer.sendOneway(message);</span><br></pre></td></tr></table></figure>
 
 <ol start="2">
 <li>同步发送消息，可靠，阻塞</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Message</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Message</span>(<span class="hljs-string">&quot;myTopic&quot;</span>, <span class="hljs-string">&quot;myMessage&quot;</span>.getBytes());<br><span class="hljs-type">SendResult</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> producer.send(message);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Message</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Message</span>(<span class="string">&quot;myTopic&quot;</span>, <span class="string">&quot;myMessage&quot;</span>.getBytes());</span><br><span class="line"><span class="type">SendResult</span> <span class="variable">result</span> <span class="operator">=</span> producer.send(message);</span><br></pre></td></tr></table></figure>
 
 <ol start="3">
 <li>异步发送消息，可靠，不阻塞</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Message</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Message</span>(<span class="hljs-string">&quot;myTopic&quot;</span>, <span class="hljs-string">&quot;myAsyncMessage&quot;</span>.getBytes());<br>producer.send(message, <span class="hljs-keyword">new</span> <span class="hljs-title class_">SendCallback</span>() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onSuccess</span><span class="hljs-params">(SendResult sendResult)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;Send message success, sendResult:&quot;</span> + sendResult);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">onException</span><span class="hljs-params">(Throwable e)</span> &#123;<br>        <span class="hljs-comment">// You can catch this exception, do some compensation, retry maybe.</span><br>        System.out.println(<span class="hljs-string">&quot;Send message exception, e:&quot;</span> + e.getMessage());<br>    &#125;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Message</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Message</span>(<span class="string">&quot;myTopic&quot;</span>, <span class="string">&quot;myAsyncMessage&quot;</span>.getBytes());</span><br><span class="line">producer.send(message, <span class="keyword">new</span> <span class="title class_">SendCallback</span>() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onSuccess</span><span class="params">(SendResult sendResult)</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Send message success, sendResult:&quot;</span> + sendResult);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onException</span><span class="params">(Throwable e)</span> &#123;</span><br><span class="line">        <span class="comment">// You can catch this exception, do some compensation, retry maybe.</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Send message exception, e:&quot;</span> + e.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
 <li>发送带有 TAG、KEY 的消息</li>
 </ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">Message</span> <span class="hljs-variable">message</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Message</span>(<span class="hljs-string">&quot;myTopic&quot;</span>, <span class="hljs-string">&quot;MyTag&quot;</span>, <span class="hljs-string">&quot;MyKey&quot;</span>, <span class="hljs-string">&quot;myMessage&quot;</span>.getBytes());<br><span class="hljs-type">SendResult</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> producer.send(message);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Message</span> <span class="variable">message</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Message</span>(<span class="string">&quot;myTopic&quot;</span>, <span class="string">&quot;MyTag&quot;</span>, <span class="string">&quot;MyKey&quot;</span>, <span class="string">&quot;myMessage&quot;</span>.getBytes());</span><br><span class="line"><span class="type">SendResult</span> <span class="variable">result</span> <span class="operator">=</span> producer.send(message);</span><br></pre></td></tr></table></figure>
 
 <h2 id="SQL-表达式过滤"><a href="#SQL-表达式过滤" class="headerlink" title="SQL 表达式过滤"></a>SQL 表达式过滤</h2><p>消费者将收到包含TAGA或TAGB或TAGB的消息. 但限制是一条消息只能有一个标签，而这对于复杂的情况可能无效。 在这种情况下，您可以使用SQL表达式筛选出消息.</p>
 <p>在<code>broker.conf </code>中添加配置</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">enablePropertyFilter=true<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enablePropertyFilter=true</span><br></pre></td></tr></table></figure>
 
 <p>启动 broker 加载指定配置文件</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">../bin/mqbroker -n 192.168.150.113:9876 -c broker.conf <br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">../bin/mqbroker -n 192.168.150.113:9876 -c broker.conf </span><br></pre></td></tr></table></figure>
 
 <p>随后在集群配置中可以看到</p>
-<p><img src="https://img-blog.csdnimg.cn/20210302171804846.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210302171804846.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 <p>代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">MessageSelector</span> <span class="hljs-variable">selector</span> <span class="hljs-operator">=</span> MessageSelector.bySql(<span class="hljs-string">&quot;order &gt; 5&quot;</span>);<br>consumer.subscribe(<span class="hljs-string">&quot;myTopic&quot;</span>, selector);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">MessageSelector</span> <span class="variable">selector</span> <span class="operator">=</span> MessageSelector.bySql(<span class="string">&quot;order &gt; 5&quot;</span>);</span><br><span class="line">consumer.subscribe(<span class="string">&quot;myTopic&quot;</span>, selector);</span><br></pre></td></tr></table></figure>
 
 <h2 id="事务消息"><a href="#事务消息" class="headerlink" title="事务消息"></a>事务消息</h2><ol>
 <li><p>Half Message：预处理消息，当broker收到此类消息后，会存储到 RMQ_SYS_TRANS_HALF_TOPIC 的消息消费队列中</p>
@@ -383,24 +250,24 @@
 <li><p>超时：如果超过回查次数，默认回滚消息</p>
 </li>
 </ol>
-<p><img src="https://img-blog.csdnimg.cn/20210303135132451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" srcset="/pumpkin/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProducerTransaction</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> MQClientException &#123;<br>        <span class="hljs-type">TransactionMQProducer</span> <span class="hljs-variable">producer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TransactionMQProducer</span>(<span class="hljs-string">&quot;MyTransactionGroup&quot;</span>);<br>        producer.setNamesrvAddr(<span class="hljs-string">&quot;192.168.25.101:9876&quot;</span>);<br>        producer.setSendMsgTimeout(<span class="hljs-number">6000</span>);<br>        producer.setTransactionListener(<span class="hljs-keyword">new</span> <span class="hljs-title class_">TransactionListener</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> LocalTransactionState <span class="hljs-title function_">executeLocalTransaction</span><span class="hljs-params">(Message msg, Object arg)</span> &#123;<br>                <span class="hljs-comment">// Execute local transaction</span><br>                <span class="hljs-keyword">try</span> &#123;<br>                    System.out.println(<span class="hljs-string">&quot;--- Execute ---&quot;</span>);<br>                    System.out.println(<span class="hljs-string">&quot;msg: &quot;</span> + <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(msg.getBody()));<br>                    System.out.println(<span class="hljs-string">&quot;msg: &quot;</span> + msg.getTransactionId());<br>                    <span class="hljs-keyword">return</span> LocalTransactionState.COMMIT_MESSAGE;<br>                &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>                    <span class="hljs-keyword">return</span> LocalTransactionState.ROLLBACK_MESSAGE;<br>                &#125;<br>            &#125;<br><br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> LocalTransactionState <span class="hljs-title function_">checkLocalTransaction</span><span class="hljs-params">(MessageExt msg)</span> &#123;<br>                <span class="hljs-comment">// When no response to half message, this method will be invoked.</span><br>                System.out.println(<span class="hljs-string">&quot;--- Check ---&quot;</span>);<br>                System.out.println(<span class="hljs-string">&quot;msg: &quot;</span> + <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(msg.getBody()));<br>                System.out.println(<span class="hljs-string">&quot;msg: &quot;</span> + msg.getTransactionId());<br>                <span class="hljs-keyword">return</span> LocalTransactionState.UNKNOW;<br>            &#125;<br>        &#125;);<br>        producer.start();<br>        producer.sendMessageInTransaction(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Message</span>(<span class="hljs-string">&quot;myTopic&quot;</span>, <span class="hljs-string">&quot;Test Transaction Message&quot;</span>.getBytes()), <span class="hljs-literal">null</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20210303135132451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjEwMzAyNg==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProducerTransaction</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> MQClientException &#123;</span><br><span class="line">        <span class="type">TransactionMQProducer</span> <span class="variable">producer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TransactionMQProducer</span>(<span class="string">&quot;MyTransactionGroup&quot;</span>);</span><br><span class="line">        producer.setNamesrvAddr(<span class="string">&quot;192.168.25.101:9876&quot;</span>);</span><br><span class="line">        producer.setSendMsgTimeout(<span class="number">6000</span>);</span><br><span class="line">        producer.setTransactionListener(<span class="keyword">new</span> <span class="title class_">TransactionListener</span>() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> LocalTransactionState <span class="title function_">executeLocalTransaction</span><span class="params">(Message msg, Object arg)</span> &#123;</span><br><span class="line">                <span class="comment">// Execute local transaction</span></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    System.out.println(<span class="string">&quot;--- Execute ---&quot;</span>);</span><br><span class="line">                    System.out.println(<span class="string">&quot;msg: &quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(msg.getBody()));</span><br><span class="line">                    System.out.println(<span class="string">&quot;msg: &quot;</span> + msg.getTransactionId());</span><br><span class="line">                    <span class="keyword">return</span> LocalTransactionState.COMMIT_MESSAGE;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                    <span class="keyword">return</span> LocalTransactionState.ROLLBACK_MESSAGE;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> LocalTransactionState <span class="title function_">checkLocalTransaction</span><span class="params">(MessageExt msg)</span> &#123;</span><br><span class="line">                <span class="comment">// When no response to half message, this method will be invoked.</span></span><br><span class="line">                System.out.println(<span class="string">&quot;--- Check ---&quot;</span>);</span><br><span class="line">                System.out.println(<span class="string">&quot;msg: &quot;</span> + <span class="keyword">new</span> <span class="title class_">String</span>(msg.getBody()));</span><br><span class="line">                System.out.println(<span class="string">&quot;msg: &quot;</span> + msg.getTransactionId());</span><br><span class="line">                <span class="keyword">return</span> LocalTransactionState.UNKNOW;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        producer.start();</span><br><span class="line">        producer.sendMessageInTransaction(<span class="keyword">new</span> <span class="title class_">Message</span>(<span class="string">&quot;myTopic&quot;</span>, <span class="string">&quot;Test Transaction Message&quot;</span>.getBytes()), <span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>本地事务执行状态</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 执行事务成功，确认提交</span><br>LocalTransactionState.COMMIT_MESSAGE;<br><span class="hljs-comment">// 回滚消息，broker端会删除半消息</span><br>LocalTransactionState.ROLLBACK_MESSAGE;<br><span class="hljs-comment">// 暂时为未知状态，等待broker回查</span><br>LocalTransactionState.UNKNOW;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 执行事务成功，确认提交</span></span><br><span class="line">LocalTransactionState.COMMIT_MESSAGE;</span><br><span class="line"><span class="comment">// 回滚消息，broker端会删除半消息</span></span><br><span class="line">LocalTransactionState.ROLLBACK_MESSAGE;</span><br><span class="line"><span class="comment">// 暂时为未知状态，等待broker回查</span></span><br><span class="line">LocalTransactionState.UNKNOW;</span><br></pre></td></tr></table></figure>
 
 <h2 id="重试机制"><a href="#重试机制" class="headerlink" title="重试机制"></a>重试机制</h2><p>生产者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 异步发送时 重试次数，默认 2</span><br>producer.setRetryTimesWhenSendAsyncFailed(<span class="hljs-number">1</span>);<br><span class="hljs-comment">// 同步发送时 重试次数，默认 2</span><br>producer.setRetryTimesWhenSendFailed(<span class="hljs-number">1</span>);	<br><span class="hljs-comment">// 是否向其他broker发送请求 默认false</span><br>producer.setRetryAnotherBrokerWhenNotStoreOK(<span class="hljs-literal">true</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 异步发送时 重试次数，默认 2</span></span><br><span class="line">producer.setRetryTimesWhenSendAsyncFailed(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 同步发送时 重试次数，默认 2</span></span><br><span class="line">producer.setRetryTimesWhenSendFailed(<span class="number">1</span>);	</span><br><span class="line"><span class="comment">// 是否向其他broker发送请求 默认false</span></span><br><span class="line">producer.setRetryAnotherBrokerWhenNotStoreOK(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
 <p>消费者</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// set consume timeout (minute)</span><br>consumer.setConsumeTimeout(<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// set consume timeout (minute)</span></span><br><span class="line">consumer.setConsumeTimeout(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -&gt; &#123;<br>	<span class="hljs-comment">// return status &#x27;RECONSUME_LATER&#x27;,it will retry to consume this message.</span><br>    <span class="hljs-keyword">return</span> ConsumeConcurrentlyStatus.RECONSUME_LATER;<br>&#125;);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -&gt; &#123;</span><br><span class="line">	<span class="comment">// return status &#x27;RECONSUME_LATER&#x27;,it will retry to consume this message.</span></span><br><span class="line">    <span class="keyword">return</span> ConsumeConcurrentlyStatus.RECONSUME_LATER;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p><strong>Broker投递</strong></p>
 <p>只有在消息模式为集群模式（MessageModel.CLUSTERING）时，Broker才会自动进行重试，广播消息不重试</p>
 <p>重投使用<code>messageDelayLevel</code></p>
 <p>默认值</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">messageDelayLevel</span> <span class="hljs-number">1</span>s <span class="hljs-number">5</span>s <span class="hljs-number">10</span>s <span class="hljs-number">30</span>s <span class="hljs-number">1</span>m <span class="hljs-number">2</span>m <span class="hljs-number">3</span>m <span class="hljs-number">4</span>m <span class="hljs-number">5</span>m <span class="hljs-number">6</span>m <span class="hljs-number">7</span>m <span class="hljs-number">8</span>m <span class="hljs-number">9</span>m <span class="hljs-number">10</span>m <span class="hljs-number">20</span>m <span class="hljs-number">30</span>m <span class="hljs-number">1</span>h <span class="hljs-number">2</span>h<br></code></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">messageDelayLevel 1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m 10m 20m 30m 1h 2h</span><br></pre></td></tr></table></figure>
 
 <h2 id="消息重复消费"><a href="#消息重复消费" class="headerlink" title="消息重复消费"></a>消息重复消费</h2><p><strong>引起重复消费的原因</strong></p>
 <p>ACK：正常情况下 Consumer 消费完消息之后会发送 ACK 通知 Broker，Broker 从队列中剔除这条消息，当 ACK 因为网络原因无法发送到 Broker，Broker 会认为该消息没有被消费，消息重投机制会把消息再次投递。</p>
@@ -411,386 +278,12 @@
 <p>Redis：分布式锁</p>
 <h2 id="顺序消费"><a href="#顺序消费" class="headerlink" title="顺序消费"></a>顺序消费</h2><p><strong>生产者</strong></p>
 <p>使用 MessageQueueSelector 的实现</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">MessageQueueSelector</span> &#123;<br>    MessageQueue <span class="hljs-title function_">select</span><span class="hljs-params">(<span class="hljs-keyword">final</span> List&lt;MessageQueue&gt; mqs, <span class="hljs-keyword">final</span> Message msg, <span class="hljs-keyword">final</span> Object arg)</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">MessageQueueSelector</span> &#123;</span><br><span class="line">    MessageQueue <span class="title function_">select</span><span class="params">(<span class="keyword">final</span> List&lt;MessageQueue&gt; mqs, <span class="keyword">final</span> Message msg, <span class="keyword">final</span> Object arg)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>SelectMessageQueueByHash：通过第三个参数判断发送到哪个队列</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// Same arg message will send to same queue.</span><br>producer.send(message, <span class="hljs-keyword">new</span> <span class="hljs-title class_">SelectMessageQueueByHash</span>(), <span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Same arg message will send to same queue.</span></span><br><span class="line">producer.send(message, <span class="keyword">new</span> <span class="title class_">SelectMessageQueueByHash</span>(), <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 
 <p><strong>消费者</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// MessageListenerConcurrently: 并发消费，会开启多个线程</span><br>consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) <br>                                 -&gt; ConsumeConcurrentlyStatus.CONSUME_SUCCESS);<br><span class="hljs-comment">// MessageListenerOrderly: 顺序消费，一个队列开启一个线程</span><br>consumer.registerMessageListener((MessageListenerOrderly) (msgs, context) <br>                                 -&gt; ConsumeOrderlyStatus.SUCCESS);<br><span class="hljs-comment">// 设置最大线程数</span><br>consumer.setConsumeThreadMax(<span class="hljs-number">1</span>);<br><span class="hljs-comment">// 设置最小线程数</span><br>consumer.setConsumeThreadMin(<span class="hljs-number">1</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MessageListenerConcurrently: 并发消费，会开启多个线程</span></span><br><span class="line">consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) </span><br><span class="line">                                 -&gt; ConsumeConcurrentlyStatus.CONSUME_SUCCESS);</span><br><span class="line"><span class="comment">// MessageListenerOrderly: 顺序消费，一个队列开启一个线程</span></span><br><span class="line">consumer.registerMessageListener((MessageListenerOrderly) (msgs, context) </span><br><span class="line">                                 -&gt; ConsumeOrderlyStatus.SUCCESS);</span><br><span class="line"><span class="comment">// 设置最大线程数</span></span><br><span class="line">consumer.setConsumeThreadMax(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 设置最小线程数</span></span><br><span class="line">consumer.setConsumeThreadMin(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 
-
-              
-            </div>
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div></div>
-      <div>https://rongkezan.github.io/pumpkin/2021/10/18/Mq/RocketMQ/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>Author</div>
-          <div>Keith</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
-          <div>October 18, 2021</div>
-        </div>
-      
-      
-      <div class="license-meta-item">
-        <div>Licensed under</div>
-        <div>
-          
-            
-            
-              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
-                <i class="iconfont icon-by"></i>
-              </span>
-              </a>
-            
-          
-        </div>
-      </div>
-    </div>
-    <div class="license-icon iconfont"></div>
-  </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/pumpkin/2021/10/18/DataSource/mysql/10.SQL%E6%89%A7%E8%A1%8C%E5%8E%9F%E7%90%86/" title="">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/pumpkin/2021/10/18/Mq/RabbitMQ%E9%AB%98%E7%BA%A7/" title="">
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">Next</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
-  </div>
-</div>
-
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
-
-  </footer>
-
-  <!-- Scripts -->
-  
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
-
-
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/pumpkin/js/events.js" ></script>
-<script  src="/pumpkin/js/plugins.js" ></script>
-
-
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
-
-
-
-
-
-
-  
-    <script  src="/pumpkin/js/img-lazyload.js" ></script>
-  
-
-
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      collapseDepth   : CONFIG.toc.collapseDepth || 0,
-      scrollSmooth    : true,
-      headingsOffset  : -boardTop
-    });
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-  });
-</script>
-
-
-  <script>
-  (function() {
-    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
-    var enableCopy = CONFIG.copy_btn;
-    if (!enableLang && !enableCopy) {
-      return;
-    }
-
-    function getBgClass(ele) {
-      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
-    }
-
-    var copyTmpl = '';
-    copyTmpl += '<div class="code-widget">';
-    copyTmpl += 'LANG';
-    copyTmpl += '</div>';
-    jQuery('.markdown-body pre').each(function() {
-      var $pre = jQuery(this);
-      if ($pre.find('code.mermaid').length > 0) {
-        return;
-      }
-      if ($pre.find('span.line').length > 0) {
-        return;
-      }
-
-      var lang = '';
-
-      if (enableLang) {
-        lang = CONFIG.code_language.default;
-        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
-          lang = $pre[0].children[0].classList[1];
-        } else if ($pre[0].getAttribute('data-language')) {
-          lang = $pre[0].getAttribute('data-language');
-        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
-          lang = $pre[0].children[0].classList[1];
-          $pre.parent().addClass('code-wrapper');
-        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
-          $pre.wrap('<div class="code-wrapper"></div>');
-        }
-        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
-      }
-      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
-        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
-
-      if (enableCopy) {
-        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
-          var clipboard = new window.ClipboardJS('.copy-btn', {
-            target: function(trigger) {
-              var nodes = trigger.parentNode.childNodes;
-              for (var i = 0; i < nodes.length; i++) {
-                if (nodes[i].tagName === 'CODE') {
-                  return nodes[i];
-                }
-              }
-            }
-          });
-          clipboard.on('success', function(e) {
-            e.clearSelection();
-            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
-            setTimeout(function() {
-              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
-            }, 2000);
-          });
-        });
-      }
-    });
-  })();
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/pumpkin/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/pumpkin/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
-  </noscript>
-</body>
-</html>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="https://rongkezan.github.io/pumpkin">Keith</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://rongkezan.github.io/pumpkin/2021/10/18/Mq/RocketMQ/">https://rongkezan.github.io/pumpkin/2021/10/18/Mq/RocketMQ/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/pumpkin/2021/10/18/DataSource/mysql/1.%E5%9F%BA%E7%A1%80/"><img class="prev-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/pumpkin/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info"></div></div></a></div><div class="next-post pull-right"><a href="/pumpkin/2021/10/18/Mq/RabbitMQ%E9%AB%98%E7%BA%A7/"><img class="next-cover" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="onerror=null;src='/pumpkin/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info"></div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/pumpkin/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Keith</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/pumpkin/archives/"><div class="headline">Articles</div><div class="length-num">108</div></a><a href="/pumpkin/tags/"><div class="headline">Tags</div><div class="length-num">1</div></a><a href="/pumpkin/categories/"><div class="headline">Categories</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#RocketMQ"><span class="toc-number">1.</span> <span class="toc-text">RocketMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.1.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Server"><span class="toc-number">1.1.1.</span> <span class="toc-text">Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Console"><span class="toc-number">1.1.2.</span> <span class="toc-text">Console</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%92%E8%89%B2"><span class="toc-number">1.2.1.</span> <span class="toc-text">角色</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Broker"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Broker</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Group"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Group</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Producer"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Producer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Consumer"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">Consumer</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Nameserver"><span class="toc-number">1.2.1.5.</span> <span class="toc-text">Nameserver</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Topic"><span class="toc-number">1.2.2.</span> <span class="toc-text">Topic</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Demo-Code"><span class="toc-number">1.3.</span> <span class="toc-text">Demo Code</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E5%8F%91%E9%80%81%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF"><span class="toc-number">1.3.1.</span> <span class="toc-text">同步发送接收消息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8F%91%E9%80%81%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.3.2.</span> <span class="toc-text">生产者常用的发送模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%87%E6%BB%A4"><span class="toc-number">1.4.</span> <span class="toc-text">SQL 表达式过滤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E6%B6%88%E6%81%AF"><span class="toc-number">1.5.</span> <span class="toc-text">事务消息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6"><span class="toc-number">1.6.</span> <span class="toc-text">重试机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9"><span class="toc-number">1.7.</span> <span class="toc-text">消息重复消费</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9"><span class="toc-number">1.8.</span> <span class="toc-text">顺序消费</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/26/DevOps/Docker/Docker%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F/" title="Docker自定义镜像"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="Docker自定义镜像"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/26/DevOps/Docker/Docker%E8%87%AA%E5%AE%9A%E4%B9%89%E9%95%9C%E5%83%8F/" title="Docker自定义镜像">Docker自定义镜像</a><time datetime="2022-05-26T08:27:59.318Z" title="Created 2022-05-26 16:27:59">2022-05-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/25/DevOps/Docker/README/" title="No title"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="No title"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/25/DevOps/Docker/README/" title="No title">No title</a><time datetime="2022-05-25T09:09:28.474Z" title="Created 2022-05-25 17:09:28">2022-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/25/DevOps/Docker/Kubernetes/" title="Kubernetes"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="Kubernetes"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/25/DevOps/Docker/Kubernetes/" title="Kubernetes">Kubernetes</a><time datetime="2022-05-25T09:09:28.473Z" title="Created 2022-05-25 17:09:28">2022-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/25/DevOps/Docker/Docker%E5%AE%89%E8%A3%85RabbitMq/" title="Docker安装RabbitMq"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="Docker安装RabbitMq"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/25/DevOps/Docker/Docker%E5%AE%89%E8%A3%85RabbitMq/" title="Docker安装RabbitMq">Docker安装RabbitMq</a><time datetime="2022-05-25T09:09:28.471Z" title="Created 2022-05-25 17:09:28">2022-05-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/pumpkin/2022/05/25/DevOps/Docker/Docker%E5%AE%89%E8%A3%85Jenkins/" title="Docker安装Jenkins"><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null;this.src='/pumpkin/img/404.jpg'" alt="Docker安装Jenkins"/></a><div class="content"><a class="title" href="/pumpkin/2022/05/25/DevOps/Docker/Docker%E5%AE%89%E8%A3%85Jenkins/" title="Docker安装Jenkins">Docker安装Jenkins</a><time datetime="2022-05-25T09:09:28.470Z" title="Created 2022-05-25 17:09:28">2022-05-25</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Keith</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/pumpkin/js/utils.js"></script><script src="/pumpkin/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
